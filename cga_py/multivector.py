@@ -98,8 +98,29 @@ class cga_object:
             cof[i] = other*self.coeff[i]
         return cga_object(cof)
 
+    def __pos__(self):
+        """TODO: Docstring for __NEG__.
 
-    def pprint(self):
+        Args:
+            other (TODO): TODO
+
+        Returns: TODO
+
+        """
+        return cga_object(self.coeff)
+
+    def __neg__(self):
+        """TODO: Docstring for __NEG__.
+
+        Args:
+            other (TODO): TODO
+
+        Returns: TODO
+
+        """
+        return cga_object(-self.coeff)
+
+    def __str__(self):
         out = ""
         is_first = True
         for i in range(self.dim):
@@ -109,7 +130,9 @@ class cga_object:
                     is_first = False
                 else:
                     out += " + "+str(self.coeff[i])+self.coeff_names[i]
-        print(out)
+        return out
+
+
 
 ########################################
 # Base Objects
@@ -146,7 +169,6 @@ e_12io  = cga_object(np.eye(32)[:,28])
 e_13io  = cga_object(np.eye(32)[:,29])
 e_23io  = cga_object(np.eye(32)[:,30])
 e_123io = cga_object(np.eye(32)[:,31])
-
 
 ########################################
 # Testing
