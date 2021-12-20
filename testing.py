@@ -1,3 +1,4 @@
 from cga_py import *
 
-d = cga_object(e_12+3*e_1o)
+a = e_12 + 3*e_1o
+b = e_1 + e_12

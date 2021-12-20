@@ -1,4 +1,4 @@
-from .multivector import *
+from .base_objects import *
 
 # Permutations of order 2 elements
 e_12 =  e_12; e_13 =  e_13; e_1i =  e_1i; e_1o =  e_1o; e_23 =  e_23; e_2i =  e_2i; e_2o =  e_2o; e_3i =  e_3i; e_3o =  e_3o; e_io =  e_io

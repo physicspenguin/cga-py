@@ -43,6 +43,10 @@ class cga_object:
                    "e_23io",
                    "e_123io"]
 
+    even_mask = [1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0,
+                 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0]
+
+
     def __init__(self, gen):
         if isinstance(gen,cga_object):
             cof = gen.coeff
@@ -50,8 +54,13 @@ class cga_object:
             cof = gen
         ## Version if list is given
         self.coeff = np.zeros(self.dim)
+        self.even_coeff = []
         for i in range(len(cof)):
             self.coeff[i] = cof[i]
+
+        for i in range(self.dim):
+            if self.even_mask[i] == 1:
+                self.even_coeff.append(self.coeff[i])
 
     def __add__(self, other):
         """Addition of cga_object
@@ -67,19 +76,23 @@ class cga_object:
         try:
             coefficients = self.coeff + other.coeff
         except:
-            coefficients = (other + self).coeff
+            coefficients = (cga_object([other])+self).coeff
         return cga_object(coefficients)
 
-    def __radd__(self, other):
-        """Addition of cga_object
+    __radd__ = __add__
+
+    def __sub__(self, other):
+        """TODO: Docstring for __sub__.
 
         Args:
-            other (float): object to add to self
+            other (TODO): TODO
 
-        Returns: addition of cga_object with scalar object
+        Returns: TODO
 
         """
-        return cga_object((cga_object([other])+self).coeff)
+        return self + (-other)
+
+    __rsub__ = __sub__
 
     def __mul__(self, other):
         """CGA multiplication of two cga_object
@@ -528,13 +541,31 @@ class cga_object:
             ]
             return cga_object(out)
         except:
-            return other*self
+            cof = np.zeros(self.dim)
+            for i in range(self.dim):
+                cof[i] = other*self.coeff[i]
+            return cga_object(cof)
 
-    def __rmul__(self,other):
-        cof = np.zeros(self.dim)
-        for i in range(self.dim):
-            cof[i] = other*self.coeff[i]
-        return cga_object(cof)
+    __rmul__ = __mul__
+
+    def __div__(self, other):
+        """division by non cga_objects
+
+        Args:
+            other (TODO): TODO
+
+        Returns: TODO
+
+        """
+        if isinstance(other,cga_object):
+            print("Division of cga_objects not allowed")
+        else:
+            cof = np.zeros(self.dim)
+            for i in range(self.dim):
+                cof[i] = self.coeff[i]/other
+            return cga_object(cof)
+
+    __rdiv__ = __div__
 
     def __xor__(self, other):
         """outer / wedge product
@@ -1096,47 +1127,12 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
             return "0"
         return out
 
+    def make_even(self):
+        """generates cga_object of even grade with coefficients of self
+
+        Returns: (cga_object) even graded version of self
+        """
+        return cga_object([self.coeff[i]*self.even_mask[i] for i in range(self.dim)])
 
 
-########################################
-# Base Objects
-########################################
 
-e_1     = cga_object(np.eye(32)[:,1])
-e_2     = cga_object(np.eye(32)[:,2])
-e_3     = cga_object(np.eye(32)[:,3])
-e_i     = cga_object(np.eye(32)[:,4])
-e_o     = cga_object(np.eye(32)[:,5])
-e_12    = cga_object(np.eye(32)[:,6])
-e_13    = cga_object(np.eye(32)[:,7])
-e_1i    = cga_object(np.eye(32)[:,8])
-e_1o    = cga_object(np.eye(32)[:,9])
-e_23    = cga_object(np.eye(32)[:,10])
-e_2i    = cga_object(np.eye(32)[:,11])
-e_2o    = cga_object(np.eye(32)[:,12])
-e_3i    = cga_object(np.eye(32)[:,13])
-e_3o    = cga_object(np.eye(32)[:,14])
-e_io    = cga_object(np.eye(32)[:,15])
-e_123   = cga_object(np.eye(32)[:,16])
-e_12i   = cga_object(np.eye(32)[:,17])
-e_12o   = cga_object(np.eye(32)[:,18])
-e_13i   = cga_object(np.eye(32)[:,19])
-e_13o   = cga_object(np.eye(32)[:,20])
-e_1io   = cga_object(np.eye(32)[:,21])
-e_23i   = cga_object(np.eye(32)[:,22])
-e_23o   = cga_object(np.eye(32)[:,23])
-e_2io   = cga_object(np.eye(32)[:,24])
-e_3io   = cga_object(np.eye(32)[:,25])
-e_123i  = cga_object(np.eye(32)[:,26])
-e_123o  = cga_object(np.eye(32)[:,27])
-e_12io  = cga_object(np.eye(32)[:,28])
-e_13io  = cga_object(np.eye(32)[:,29])
-e_23io  = cga_object(np.eye(32)[:,30])
-e_123io = cga_object(np.eye(32)[:,31])
-
-eps_1 = e_123i
-eps_2 = e_123o
-eps_3 = e_1*e_2+1
-q_i = -e_23
-q_j = e_13
-q_k = -e_12
