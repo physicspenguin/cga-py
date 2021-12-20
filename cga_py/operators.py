@@ -71,3 +71,27 @@ def n_grade(obj,grade):
         ind = 31
         vec[ind] = obj.coeff[ind]
         return cga_object(vec)
+
+def r_norm(obj):
+    """Return obj*(obj^*) in CGA
+
+    Args:
+        obj (cga_object): object of which to compute norm
+
+    Returns: cga_object
+
+    """
+    return obj*(~obj)
+
+def l_norm(obj):
+    """Return (obj^*)*obj in CGA
+
+    Args:
+        obj (cga_object): object of which to compute norm
+
+    Returns: cga_object
+
+    """
+    return (~obj)*obj
+
+

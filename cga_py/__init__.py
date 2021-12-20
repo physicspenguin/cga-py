@@ -6,3 +6,8 @@ from .multivector import cga_object
 from .base_objects import *
 from .permutations import *
 from .operators import *
+from .geom_generators import *
+from .random import *
+from .conditions import *
+from .four_quaternions import *
+
