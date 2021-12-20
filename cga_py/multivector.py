@@ -90,13 +90,946 @@ class cga_object:
         Returns: (cga_object) multiplication of other and self
 
         """
-        pass
+        try:
+            out = [
+    -2*self.coeff[27]*other.coeff[26] - self.coeff[10]*other.coeff[10] -
+            self.coeff[7]*other.coeff[7] + self.coeff[1]*other.coeff[1] +
+            self.coeff[2]*other.coeff[2] - self.coeff[6]*other.coeff[6] +
+            self.coeff[3]*other.coeff[3] - self.coeff[16]*other.coeff[16] +
+            2*self.coeff[12]*other.coeff[11] +
+            2*self.coeff[23]*other.coeff[22] -
+            2*self.coeff[5]*other.coeff[4] +
+            2*self.coeff[20]*other.coeff[19] +
+            2*self.coeff[18]*other.coeff[17] +
+            2*self.coeff[9]*other.coeff[8] +
+            2*self.coeff[14]*other.coeff[13] +
+            self.coeff[0]*other.coeff[0],
+    2*self.coeff[14]*other.coeff[19] - self.coeff[3]*other.coeff[7] +
+            other.coeff[1]*self.coeff[0] - self.coeff[2]*other.coeff[6] +
+            2*self.coeff[5]*other.coeff[8] + self.coeff[6]*other.coeff[2] +
+            2*self.coeff[27]*other.coeff[22] +
+            2*self.coeff[20]*other.coeff[13] -
+            2*self.coeff[23]*other.coeff[26] +
+            2*self.coeff[12]*other.coeff[17] -
+            self.coeff[16]*other.coeff[10] + self.coeff[1]*other.coeff[0] +
+            2*self.coeff[18]*other.coeff[11] -
+            self.coeff[10]*other.coeff[16] - 2*self.coeff[9]*other.coeff[4]
+            + self.coeff[7]*other.coeff[3],
+    2*self.coeff[14]*other.coeff[22] - self.coeff[3]*other.coeff[10] +
+            self.coeff[2]*other.coeff[0] + other.coeff[2]*self.coeff[0] +
+            2*self.coeff[5]*other.coeff[11] - self.coeff[6]*other.coeff[1]
+            - 2*self.coeff[27]*other.coeff[19] +
+            2*self.coeff[20]*other.coeff[26] +
+            2*self.coeff[23]*other.coeff[13] -
+            2*self.coeff[12]*other.coeff[4] + self.coeff[1]*other.coeff[6]
+            + self.coeff[16]*other.coeff[7] -
+            2*self.coeff[18]*other.coeff[8] + self.coeff[10]*other.coeff[3]
+            + self.coeff[7]*other.coeff[16] -
+            2*self.coeff[9]*other.coeff[17],
+    -2*self.coeff[14]*other.coeff[4] + self.coeff[3]*other.coeff[0] +
+            2*self.coeff[5]*other.coeff[13] + other.coeff[3]*self.coeff[0]
+            + self.coeff[2]*other.coeff[10] +
+            2*self.coeff[27]*other.coeff[17] -
+            2*self.coeff[20]*other.coeff[8] -
+            2*self.coeff[23]*other.coeff[11] -
+            2*self.coeff[12]*other.coeff[22] + self.coeff[1]*other.coeff[7]
+            - self.coeff[16]*other.coeff[6] -
+            2*self.coeff[18]*other.coeff[26] -
+            self.coeff[10]*other.coeff[2] - self.coeff[7]*other.coeff[1] -
+            2*self.coeff[9]*other.coeff[19] -
+            self.coeff[6]*other.coeff[16],
+    -self.coeff[17]*other.coeff[6] + 2*self.coeff[30]*other.coeff[22] -
+            self.coeff[8]*other.coeff[1] - self.coeff[7]*other.coeff[19] +
+            other.coeff[4]*self.coeff[0] + self.coeff[2]*other.coeff[11] -
+            2*self.coeff[15]*other.coeff[4] - self.coeff[6]*other.coeff[17]
+            + 2*self.coeff[29]*other.coeff[19] -
+            self.coeff[22]*other.coeff[10] + self.coeff[26]*other.coeff[16]
+            - 2*self.coeff[25]*other.coeff[13] -
+            self.coeff[13]*other.coeff[3] -
+            2*self.coeff[24]*other.coeff[11] -
+            2*self.coeff[21]*other.coeff[8] - self.coeff[19]*other.coeff[7]
+            + 2*self.coeff[28]*other.coeff[17] +
+            self.coeff[4]*other.coeff[0] - self.coeff[11]*other.coeff[2] +
+            self.coeff[1]*other.coeff[8] + 2*self.coeff[31]*other.coeff[26]
+            - self.coeff[16]*other.coeff[26] -
+            self.coeff[10]*other.coeff[22] + self.coeff[3]*other.coeff[13],
+    -self.coeff[23]*other.coeff[10] + 2*self.coeff[23]*other.coeff[30] +
+            2*self.coeff[12]*other.coeff[24] + self.coeff[1]*other.coeff[9] -
+            self.coeff[16]*other.coeff[27] - self.coeff[18]*other.coeff[6] -
+            self.coeff[10]*other.coeff[23] + self.coeff[27]*other.coeff[16] +
+            2*self.coeff[14]*other.coeff[25] - self.coeff[14]*other.coeff[3] +
+            self.coeff[3]*other.coeff[14] + 2*self.coeff[18]*other.coeff[28] -
+            self.coeff[9]*other.coeff[1] + 2*self.coeff[9]*other.coeff[21] -
+            self.coeff[7]*other.coeff[20] - 2*self.coeff[5]*other.coeff[15] +
+            other.coeff[5]*self.coeff[0] + self.coeff[2]*other.coeff[12] -
+            self.coeff[6]*other.coeff[18] - 2*self.coeff[27]*other.coeff[31] -
+            self.coeff[20]*other.coeff[7] + 2*self.coeff[20]*other.coeff[29] -
+            self.coeff[12]*other.coeff[2] + self.coeff[5]*other.coeff[0],
+    -2*self.coeff[12]*other.coeff[8] - 2*self.coeff[18]*other.coeff[4] +
+            2*self.coeff[9]*other.coeff[11] + self.coeff[1]*other.coeff[2] +
+            self.coeff[16]*other.coeff[3] + self.coeff[10]*other.coeff[7] -
+            self.coeff[7]*other.coeff[10] + 2*self.coeff[27]*other.coeff[13] +
+            2*self.coeff[14]*other.coeff[26] + self.coeff[3]*other.coeff[16] -
+            2*self.coeff[5]*other.coeff[17] + other.coeff[6]*self.coeff[0] -
+            self.coeff[2]*other.coeff[1] + self.coeff[6]*other.coeff[0] +
+            2*self.coeff[20]*other.coeff[22] - 2*self.coeff[23]*other.coeff[19],
+    -self.coeff[3]*other.coeff[1] - self.coeff[2]*other.coeff[16] -
+            2*self.coeff[18]*other.coeff[22] + 2*self.coeff[9]*other.coeff[13] -
+            2*self.coeff[20]*other.coeff[4] + 2*self.coeff[23]*other.coeff[17] -
+            2*self.coeff[12]*other.coeff[26] - 2*self.coeff[27]*other.coeff[11]-
+            2*self.coeff[14]*other.coeff[8] - 2*self.coeff[5]*other.coeff[19] +
+            other.coeff[7]*self.coeff[0] + self.coeff[1]*other.coeff[3] -
+            self.coeff[16]*other.coeff[2] - self.coeff[10]*other.coeff[6] +
+            self.coeff[6]*other.coeff[10] + self.coeff[7]*other.coeff[0],
+    -self.coeff[17]*other.coeff[2] + 2*self.coeff[30]*other.coeff[26] +
+            self.coeff[7]*other.coeff[13] - 2*self.coeff[15]*other.coeff[8] -
+            2*self.coeff[29]*other.coeff[13] + self.coeff[8]*other.coeff[0] +
+            self.coeff[6]*other.coeff[11] + self.coeff[22]*other.coeff[16] -
+            self.coeff[26]*other.coeff[10] - self.coeff[13]*other.coeff[7] +
+            2*self.coeff[25]*other.coeff[19] + 2*self.coeff[24]*other.coeff[17]-
+            2*self.coeff[21]*other.coeff[4] - self.coeff[19]*other.coeff[3] -
+            2*self.coeff[28]*other.coeff[11] - self.coeff[4]*other.coeff[1] -
+            self.coeff[11]*other.coeff[6] + self.coeff[1]*other.coeff[4] +
+            2*self.coeff[31]*other.coeff[22] - self.coeff[16]*other.coeff[22] -
+            self.coeff[10]*other.coeff[26] - self.coeff[3]*other.coeff[19] -
+            self.coeff[2]*other.coeff[17] + other.coeff[8]*self.coeff[0],
+    2*self.coeff[20]*other.coeff[25] - self.coeff[12]*other.coeff[6] +
+            self.coeff[23]*other.coeff[16] - 2*self.coeff[23]*other.coeff[31] +
+            2*self.coeff[12]*other.coeff[28] + self.coeff[1]*other.coeff[5] -
+            self.coeff[16]*other.coeff[23] - self.coeff[18]*other.coeff[2] +
+            2*self.coeff[18]*other.coeff[24] - self.coeff[10]*other.coeff[27] -
+            self.coeff[27]*other.coeff[10] - self.coeff[5]*other.coeff[1] -
+            self.coeff[14]*other.coeff[7] - self.coeff[3]*other.coeff[20] -
+            self.coeff[2]*other.coeff[18] + self.coeff[7]*other.coeff[14] +
+            self.coeff[9]*other.coeff[0] - 2*self.coeff[9]*other.coeff[15] +
+            other.coeff[9]*self.coeff[0] + 2*self.coeff[5]*other.coeff[21] +
+            self.coeff[6]*other.coeff[12] + 2*self.coeff[27]*other.coeff[30] +
+            2*self.coeff[14]*other.coeff[29] - self.coeff[20]*other.coeff[3],
+    2*self.coeff[18]*other.coeff[19] - self.coeff[3]*other.coeff[2] +
+            other.coeff[10]*self.coeff[0] + self.coeff[2]*other.coeff[3] +
+            self.coeff[1]*other.coeff[16] + self.coeff[16]*other.coeff[1] +
+            self.coeff[7]*other.coeff[6] + self.coeff[10]*other.coeff[0] -
+            self.coeff[6]*other.coeff[7] + 2*self.coeff[9]*other.coeff[26] -
+            2*self.coeff[20]*other.coeff[17] - 2*self.coeff[23]*other.coeff[4] +
+            2*self.coeff[12]*other.coeff[13] - 2*self.coeff[5]*other.coeff[22] +
+            2*self.coeff[27]*other.coeff[8] - 2*self.coeff[14]*other.coeff[11],
+    -2*self.coeff[24]*other.coeff[4] - 2*self.coeff[21]*other.coeff[17] -
+            self.coeff[19]*other.coeff[16] + 2*self.coeff[28]*other.coeff[8] -
+            self.coeff[4]*other.coeff[2] + self.coeff[11]*other.coeff[0] +
+            self.coeff[1]*other.coeff[17] - 2*self.coeff[31]*other.coeff[19] +
+            self.coeff[16]*other.coeff[19] + self.coeff[10]*other.coeff[13] +
+            self.coeff[17]*other.coeff[1] - 2*self.coeff[30]*other.coeff[13] +
+            self.coeff[7]*other.coeff[26] + self.coeff[8]*other.coeff[6] -
+            self.coeff[3]*other.coeff[22] + self.coeff[2]*other.coeff[4] +
+            other.coeff[11]*self.coeff[0] - 2*self.coeff[15]*other.coeff[11] -
+            2*self.coeff[29]*other.coeff[26] - self.coeff[6]*other.coeff[8] -
+            self.coeff[22]*other.coeff[3] + self.coeff[26]*other.coeff[7] -
+            self.coeff[13]*other.coeff[10] + 2*self.coeff[25]*other.coeff[22],
+    self.coeff[27]*other.coeff[7] - self.coeff[5]*other.coeff[2] -
+            self.coeff[14]*other.coeff[10] - self.coeff[3]*other.coeff[23] +
+            self.coeff[2]*other.coeff[5] + other.coeff[12]*self.coeff[0] +
+            2*self.coeff[5]*other.coeff[24] - self.coeff[6]*other.coeff[9] -
+            2*self.coeff[27]*other.coeff[29] + 2*self.coeff[14]*other.coeff[30]-
+            self.coeff[20]*other.coeff[16] + 2*self.coeff[20]*other.coeff[31] -
+            self.coeff[23]*other.coeff[3] + 2*self.coeff[23]*other.coeff[25] +
+            self.coeff[12]*other.coeff[0] - 2*self.coeff[12]*other.coeff[15] +
+            self.coeff[1]*other.coeff[18] + self.coeff[18]*other.coeff[1] +
+            self.coeff[16]*other.coeff[20] + self.coeff[10]*other.coeff[14] -
+            2*self.coeff[18]*other.coeff[21] + self.coeff[9]*other.coeff[6] +
+            self.coeff[7]*other.coeff[27] - 2*self.coeff[9]*other.coeff[28],
+    self.coeff[2]*other.coeff[22] + other.coeff[13]*self.coeff[0] -
+            2*self.coeff[15]*other.coeff[13] - self.coeff[6]*other.coeff[26] +
+            2*self.coeff[29]*other.coeff[8] + self.coeff[22]*other.coeff[2] -
+            self.coeff[26]*other.coeff[6] - 2*self.coeff[25]*other.coeff[4] +
+            self.coeff[13]*other.coeff[0] - 2*self.coeff[24]*other.coeff[22] -
+            2*self.coeff[21]*other.coeff[19] + self.coeff[19]*other.coeff[1] +
+            2*self.coeff[28]*other.coeff[26] - self.coeff[4]*other.coeff[3] +
+            self.coeff[11]*other.coeff[10] + self.coeff[1]*other.coeff[19] +
+            2*self.coeff[31]*other.coeff[17] - self.coeff[16]*other.coeff[17] -
+            self.coeff[10]*other.coeff[11] + 2*self.coeff[30]*other.coeff[11] +
+            self.coeff[17]*other.coeff[16] - self.coeff[7]*other.coeff[8] +
+            self.coeff[8]*other.coeff[7] + self.coeff[3]*other.coeff[4],
+    self.coeff[9]*other.coeff[7] - 2*self.coeff[18]*other.coeff[31] -
+            self.coeff[7]*other.coeff[9] - 2*self.coeff[9]*other.coeff[29] +
+            self.coeff[3]*other.coeff[5] + self.coeff[2]*other.coeff[23] +
+            other.coeff[14]*self.coeff[0] + 2*self.coeff[5]*other.coeff[25] -
+            self.coeff[6]*other.coeff[27] + 2*self.coeff[27]*other.coeff[28] +
+            self.coeff[14]*other.coeff[0] - 2*self.coeff[14]*other.coeff[15] +
+            self.coeff[20]*other.coeff[1] - 2*self.coeff[20]*other.coeff[21] +
+            self.coeff[12]*other.coeff[10] + self.coeff[23]*other.coeff[2] -
+            2*self.coeff[23]*other.coeff[24] - 2*self.coeff[12]*other.coeff[30]+
+            self.coeff[1]*other.coeff[20] + self.coeff[18]*other.coeff[16] -
+            self.coeff[16]*other.coeff[18] - self.coeff[10]*other.coeff[12] -
+            self.coeff[27]*other.coeff[6] - self.coeff[5]*other.coeff[3],
+    -self.coeff[27]*other.coeff[26] + self.coeff[12]*other.coeff[11] +
+            self.coeff[23]*other.coeff[22] - self.coeff[31]*other.coeff[16] -
+            self.coeff[30]*other.coeff[10] - self.coeff[29]*other.coeff[7] +
+            self.coeff[25]*other.coeff[3] + self.coeff[24]*other.coeff[2] +
+            self.coeff[21]*other.coeff[1] - self.coeff[28]*other.coeff[6] +
+            self.coeff[15]*other.coeff[0] + self.coeff[26]*other.coeff[27] -
+            2*self.coeff[25]*other.coeff[25] - self.coeff[13]*other.coeff[14] -
+            2*self.coeff[24]*other.coeff[24] - 2*self.coeff[21]*other.coeff[21]-
+            self.coeff[19]*other.coeff[20] + 2*self.coeff[28]*other.coeff[28] +
+            self.coeff[4]*other.coeff[5] + self.coeff[3]*other.coeff[25] +
+            other.coeff[15]*self.coeff[0] + self.coeff[2]*other.coeff[24] -
+            2*self.coeff[15]*other.coeff[15] - self.coeff[6]*other.coeff[28] +
+            2*self.coeff[29]*other.coeff[29] - self.coeff[11]*other.coeff[12] +
+            self.coeff[1]*other.coeff[21] + 2*self.coeff[31]*other.coeff[31] -
+            self.coeff[16]*other.coeff[31] - self.coeff[10]*other.coeff[30] +
+            2*self.coeff[30]*other.coeff[30] - self.coeff[17]*other.coeff[18] -
+            self.coeff[8]*other.coeff[9] - self.coeff[7]*other.coeff[29] -
+            self.coeff[22]*other.coeff[23] - self.coeff[5]*other.coeff[4] +
+            self.coeff[20]*other.coeff[19] + self.coeff[18]*other.coeff[17] +
+            self.coeff[9]*other.coeff[8] + self.coeff[14]*other.coeff[13],
+    -2*self.coeff[27]*other.coeff[4] - 2*self.coeff[14]*other.coeff[17] +
+            2*self.coeff[5]*other.coeff[26] + self.coeff[6]*other.coeff[3] +
+            self.coeff[1]*other.coeff[10] + self.coeff[10]*other.coeff[1] +
+            self.coeff[16]*other.coeff[0] - self.coeff[7]*other.coeff[2] -
+            2*self.coeff[20]*other.coeff[11] + 2*self.coeff[23]*other.coeff[8] +
+            2*self.coeff[12]*other.coeff[19] + 2*self.coeff[18]*other.coeff[13]-
+            2*self.coeff[9]*other.coeff[22] + self.coeff[3]*other.coeff[6] +
+            other.coeff[16]*self.coeff[0] - self.coeff[2]*other.coeff[7],
+    2*self.coeff[29]*other.coeff[22] + self.coeff[6]*other.coeff[4] +
+            self.coeff[22]*other.coeff[7] - self.coeff[26]*other.coeff[3] -
+            2*self.coeff[25]*other.coeff[26] - self.coeff[13]*other.coeff[16] +
+            2*self.coeff[24]*other.coeff[8] - 2*self.coeff[21]*other.coeff[11] -
+            self.coeff[19]*other.coeff[10] - 2*self.coeff[28]*other.coeff[4] +
+            self.coeff[4]*other.coeff[6] + self.coeff[11]*other.coeff[1] +
+            self.coeff[1]*other.coeff[11] + self.coeff[16]*other.coeff[13] -
+            2*self.coeff[31]*other.coeff[13] + self.coeff[10]*other.coeff[19] -
+            2*self.coeff[30]*other.coeff[19] + self.coeff[17]*other.coeff[0] -
+            self.coeff[8]*other.coeff[2] - self.coeff[7]*other.coeff[22] +
+            self.coeff[3]*other.coeff[26] + other.coeff[17]*self.coeff[0] -
+            self.coeff[2]*other.coeff[8] - 2*self.coeff[15]*other.coeff[17],
+    self.coeff[6]*other.coeff[5] + 2*self.coeff[27]*other.coeff[25] -
+            2*self.coeff[23]*other.coeff[29] + 2*self.coeff[14]*other.coeff[31]-
+            self.coeff[20]*other.coeff[10] + 2*self.coeff[20]*other.coeff[30] +
+            self.coeff[12]*other.coeff[1] + self.coeff[23]*other.coeff[7] -
+            2*self.coeff[12]*other.coeff[21] + self.coeff[1]*other.coeff[12] +
+            self.coeff[16]*other.coeff[14] - self.coeff[9]*other.coeff[2] +
+            self.coeff[10]*other.coeff[20] - 2*self.coeff[18]*other.coeff[15] +
+            self.coeff[18]*other.coeff[0] + 2*self.coeff[9]*other.coeff[24] -
+            self.coeff[7]*other.coeff[23] - self.coeff[27]*other.coeff[3] +
+            self.coeff[5]*other.coeff[6] - self.coeff[14]*other.coeff[16] +
+            self.coeff[3]*other.coeff[27] - 2*self.coeff[5]*other.coeff[28] +
+            other.coeff[18]*self.coeff[0] - self.coeff[2]*other.coeff[9],
+    2*self.coeff[24]*other.coeff[26] - 2*self.coeff[21]*other.coeff[13] -
+            2*self.coeff[28]*other.coeff[22] + self.coeff[4]*other.coeff[7] +
+            self.coeff[19]*other.coeff[0] + self.coeff[11]*other.coeff[16] +
+            self.coeff[1]*other.coeff[13] + 2*self.coeff[31]*other.coeff[11] -
+            self.coeff[16]*other.coeff[11] - self.coeff[10]*other.coeff[17] +
+            self.coeff[17]*other.coeff[10] + 2*self.coeff[30]*other.coeff[17] +
+            self.coeff[7]*other.coeff[4] - self.coeff[8]*other.coeff[3] -
+            self.coeff[3]*other.coeff[8] + other.coeff[19]*self.coeff[0] -
+            self.coeff[2]*other.coeff[26] - 2*self.coeff[15]*other.coeff[19] +
+            self.coeff[6]*other.coeff[22] - 2*self.coeff[29]*other.coeff[4] -
+            self.coeff[22]*other.coeff[6] + self.coeff[26]*other.coeff[2] +
+            2*self.coeff[25]*other.coeff[8] + self.coeff[13]*other.coeff[1],
+    self.coeff[27]*other.coeff[2] + self.coeff[5]*other.coeff[7] -
+            2*self.coeff[14]*other.coeff[21] + self.coeff[14]*other.coeff[1] -
+            self.coeff[3]*other.coeff[9] - 2*self.coeff[5]*other.coeff[29] +
+            other.coeff[20]*self.coeff[0] - self.coeff[2]*other.coeff[27] +
+            self.coeff[6]*other.coeff[23] + 2*self.coeff[23]*other.coeff[28] -
+            2*self.coeff[27]*other.coeff[24] + self.coeff[20]*other.coeff[0] -
+            2*self.coeff[20]*other.coeff[15] + self.coeff[12]*other.coeff[16] -
+            self.coeff[23]*other.coeff[6] - 2*self.coeff[12]*other.coeff[31] +
+            self.coeff[1]*other.coeff[14] - self.coeff[16]*other.coeff[12] +
+            self.coeff[18]*other.coeff[10] - self.coeff[9]*other.coeff[3] -
+            self.coeff[10]*other.coeff[18] - 2*self.coeff[18]*other.coeff[30] +
+            2*self.coeff[9]*other.coeff[25] + self.coeff[7]*other.coeff[5],
+    self.coeff[27]*other.coeff[22] + self.coeff[20]*other.coeff[13] -
+            self.coeff[23]*other.coeff[26] + self.coeff[12]*other.coeff[17] +
+            self.coeff[14]*other.coeff[19] + self.coeff[5]*other.coeff[8] +
+            self.coeff[18]*other.coeff[11] - self.coeff[9]*other.coeff[4] -
+            self.coeff[26]*other.coeff[23] + 2*self.coeff[25]*other.coeff[29] -
+            self.coeff[13]*other.coeff[20] + 2*self.coeff[24]*other.coeff[28] -
+            2*self.coeff[21]*other.coeff[15] - 2*self.coeff[28]*other.coeff[24]-
+            self.coeff[4]*other.coeff[9] - self.coeff[19]*other.coeff[14] +
+            self.coeff[1]*other.coeff[15] + 2*self.coeff[31]*other.coeff[30] -
+            self.coeff[16]*other.coeff[30] - self.coeff[10]*other.coeff[31] -
+            self.coeff[17]*other.coeff[12] + 2*self.coeff[30]*other.coeff[31] +
+            self.coeff[7]*other.coeff[25] + self.coeff[8]*other.coeff[5] -
+            self.coeff[11]*other.coeff[18] - self.coeff[3]*other.coeff[29] -
+            self.coeff[2]*other.coeff[28] + other.coeff[21]*self.coeff[0] -
+            2*self.coeff[15]*other.coeff[21] + self.coeff[6]*other.coeff[24] -
+            2*self.coeff[29]*other.coeff[25] + self.coeff[22]*other.coeff[27] -
+            self.coeff[31]*other.coeff[10] - self.coeff[30]*other.coeff[16] +
+            self.coeff[15]*other.coeff[1] - self.coeff[25]*other.coeff[7] -
+            self.coeff[24]*other.coeff[6] + self.coeff[21]*other.coeff[0] +
+            self.coeff[28]*other.coeff[2] + self.coeff[29]*other.coeff[3],
+    self.coeff[16]*other.coeff[8] + self.coeff[10]*other.coeff[4] -
+            2*self.coeff[30]*other.coeff[4] - self.coeff[17]*other.coeff[7] +
+            self.coeff[7]*other.coeff[17] - self.coeff[8]*other.coeff[16] -
+            self.coeff[3]*other.coeff[11] + other.coeff[22]*self.coeff[0] +
+            self.coeff[2]*other.coeff[13] - 2*self.coeff[15]*other.coeff[22] -
+            self.coeff[6]*other.coeff[19] - 2*self.coeff[29]*other.coeff[17] +
+            self.coeff[22]*other.coeff[0] - self.coeff[26]*other.coeff[1] +
+            2*self.coeff[25]*other.coeff[11] + self.coeff[13]*other.coeff[2] -
+            2*self.coeff[24]*other.coeff[13] - 2*self.coeff[21]*other.coeff[26]+
+            self.coeff[19]*other.coeff[6] + 2*self.coeff[28]*other.coeff[19] +
+            self.coeff[4]*other.coeff[10] - self.coeff[11]*other.coeff[3] +
+            self.coeff[1]*other.coeff[26] - 2*self.coeff[31]*other.coeff[8],
+    -self.coeff[9]*other.coeff[16] + 2*self.coeff[18]*other.coeff[29] +
+            2*self.coeff[9]*other.coeff[31] + self.coeff[7]*other.coeff[18] -
+            self.coeff[27]*other.coeff[1] + self.coeff[5]*other.coeff[10] -
+            2*self.coeff[14]*other.coeff[24] + self.coeff[14]*other.coeff[2] -
+            self.coeff[3]*other.coeff[12] - 2*self.coeff[5]*other.coeff[30] +
+            other.coeff[23]*self.coeff[0] + self.coeff[2]*other.coeff[14] -
+            self.coeff[6]*other.coeff[20] + self.coeff[23]*other.coeff[0] -
+            2*self.coeff[23]*other.coeff[15] + 2*self.coeff[27]*other.coeff[21]+
+            self.coeff[20]*other.coeff[6] - 2*self.coeff[20]*other.coeff[28] -
+            self.coeff[12]*other.coeff[3] + 2*self.coeff[12]*other.coeff[25] +
+            self.coeff[1]*other.coeff[27] + self.coeff[16]*other.coeff[9] -
+            self.coeff[18]*other.coeff[7] + self.coeff[10]*other.coeff[5],
+    self.coeff[30]*other.coeff[3] + self.coeff[15]*other.coeff[2] +
+            self.coeff[29]*other.coeff[16] - 2*self.coeff[31]*other.coeff[29] +
+            self.coeff[16]*other.coeff[29] + self.coeff[10]*other.coeff[25] -
+            2*self.coeff[30]*other.coeff[25] + self.coeff[17]*other.coeff[9] +
+            self.coeff[7]*other.coeff[31] - self.coeff[3]*other.coeff[30] +
+            self.coeff[2]*other.coeff[15] + other.coeff[24]*self.coeff[0] -
+            2*self.coeff[15]*other.coeff[24] - 2*self.coeff[29]*other.coeff[31]-
+            self.coeff[6]*other.coeff[21] + self.coeff[8]*other.coeff[18] -
+            self.coeff[22]*other.coeff[14] + self.coeff[26]*other.coeff[20] +
+            2*self.coeff[25]*other.coeff[30] - self.coeff[25]*other.coeff[10] +
+            self.coeff[24]*other.coeff[0] + self.coeff[21]*other.coeff[6] -
+            self.coeff[28]*other.coeff[1] + self.coeff[31]*other.coeff[7] -
+            self.coeff[13]*other.coeff[23] - 2*self.coeff[24]*other.coeff[15] -
+            2*self.coeff[21]*other.coeff[28] - self.coeff[19]*other.coeff[27] +
+            2*self.coeff[28]*other.coeff[21] - self.coeff[4]*other.coeff[12] +
+            self.coeff[11]*other.coeff[5] + self.coeff[1]*other.coeff[28] +
+            self.coeff[14]*other.coeff[22] + self.coeff[5]*other.coeff[11] -
+            self.coeff[27]*other.coeff[19] + self.coeff[20]*other.coeff[26] +
+            self.coeff[23]*other.coeff[13] - self.coeff[12]*other.coeff[4] -
+            self.coeff[18]*other.coeff[8] - self.coeff[9]*other.coeff[17],
+    -self.coeff[7]*other.coeff[21] + self.coeff[3]*other.coeff[15] +
+            self.coeff[2]*other.coeff[30] + other.coeff[25]*self.coeff[0] -
+            2*self.coeff[15]*other.coeff[25] - self.coeff[6]*other.coeff[31] -
+            2*self.coeff[21]*other.coeff[29] + 2*self.coeff[28]*other.coeff[31]+
+            self.coeff[19]*other.coeff[9] - self.coeff[4]*other.coeff[14] +
+            2*self.coeff[29]*other.coeff[21] + self.coeff[8]*other.coeff[20] +
+            self.coeff[22]*other.coeff[12] - self.coeff[26]*other.coeff[18] +
+            self.coeff[13]*other.coeff[5] - 2*self.coeff[25]*other.coeff[15] -
+            2*self.coeff[24]*other.coeff[30] + self.coeff[11]*other.coeff[23] +
+            self.coeff[1]*other.coeff[29] + 2*self.coeff[31]*other.coeff[28] -
+            self.coeff[16]*other.coeff[28] - self.coeff[10]*other.coeff[24] +
+            2*self.coeff[30]*other.coeff[24] + self.coeff[17]*other.coeff[27] -
+            self.coeff[31]*other.coeff[6] - self.coeff[30]*other.coeff[2] +
+            self.coeff[15]*other.coeff[3] - self.coeff[28]*other.coeff[16] -
+            self.coeff[29]*other.coeff[1] + self.coeff[25]*other.coeff[0] +
+            self.coeff[24]*other.coeff[10] + self.coeff[21]*other.coeff[7] -
+            self.coeff[14]*other.coeff[4] + self.coeff[5]*other.coeff[13] +
+            self.coeff[27]*other.coeff[17] - self.coeff[20]*other.coeff[8] -
+            self.coeff[23]*other.coeff[11] - self.coeff[12]*other.coeff[22] -
+            self.coeff[18]*other.coeff[26] - self.coeff[9]*other.coeff[19],
+    self.coeff[3]*other.coeff[17] - self.coeff[2]*other.coeff[19] +
+            other.coeff[26]*self.coeff[0] - 2*self.coeff[15]*other.coeff[26] +
+            2*self.coeff[29]*other.coeff[11] + self.coeff[6]*other.coeff[13] -
+            self.coeff[22]*other.coeff[1] + self.coeff[26]*other.coeff[0] +
+            self.coeff[13]*other.coeff[6] - 2*self.coeff[25]*other.coeff[17] +
+            2*self.coeff[24]*other.coeff[19] - 2*self.coeff[21]*other.coeff[22]+
+            self.coeff[19]*other.coeff[2] - 2*self.coeff[28]*other.coeff[13] -
+            self.coeff[4]*other.coeff[16] - self.coeff[11]*other.coeff[7] +
+            self.coeff[1]*other.coeff[22] - 2*self.coeff[31]*other.coeff[4] +
+            self.coeff[16]*other.coeff[4] + self.coeff[10]*other.coeff[8] -
+            2*self.coeff[30]*other.coeff[8] - self.coeff[17]*other.coeff[3] -
+            self.coeff[7]*other.coeff[11] + self.coeff[8]*other.coeff[10],
+    self.coeff[27]*other.coeff[0] - 2*self.coeff[27]*other.coeff[15] -
+            2*self.coeff[14]*other.coeff[28] + self.coeff[20]*other.coeff[2] -
+            2*self.coeff[20]*other.coeff[24] - self.coeff[12]*other.coeff[7] -
+            self.coeff[23]*other.coeff[1] + 2*self.coeff[23]*other.coeff[21] +
+            2*self.coeff[12]*other.coeff[29] + self.coeff[1]*other.coeff[23] +
+            self.coeff[16]*other.coeff[5] - self.coeff[18]*other.coeff[3] +
+            2*self.coeff[18]*other.coeff[25] + self.coeff[10]*other.coeff[9] +
+            self.coeff[9]*other.coeff[10] - self.coeff[7]*other.coeff[12] -
+            2*self.coeff[9]*other.coeff[30] - self.coeff[5]*other.coeff[16] +
+            self.coeff[14]*other.coeff[6] + self.coeff[3]*other.coeff[18] -
+            self.coeff[2]*other.coeff[20] + 2*self.coeff[5]*other.coeff[31] +
+            other.coeff[27]*self.coeff[0] + self.coeff[6]*other.coeff[14],
+    self.coeff[3]*other.coeff[31] + other.coeff[28]*self.coeff[0] -
+            self.coeff[2]*other.coeff[21] - 2*self.coeff[15]*other.coeff[28] +
+            self.coeff[6]*other.coeff[15] - self.coeff[8]*other.coeff[12] +
+            self.coeff[15]*other.coeff[6] - self.coeff[7]*other.coeff[30] +
+            self.coeff[10]*other.coeff[29] + self.coeff[17]*other.coeff[5] -
+            2*self.coeff[30]*other.coeff[29] + self.coeff[16]*other.coeff[25] +
+            self.coeff[30]*other.coeff[7] + 2*self.coeff[29]*other.coeff[30] -
+            self.coeff[29]*other.coeff[10] + self.coeff[22]*other.coeff[20] -
+            self.coeff[26]*other.coeff[14] + self.coeff[25]*other.coeff[16] -
+            2*self.coeff[25]*other.coeff[31] - self.coeff[13]*other.coeff[27] -
+            self.coeff[24]*other.coeff[1] + 2*self.coeff[24]*other.coeff[21] +
+            self.coeff[21]*other.coeff[2] - 2*self.coeff[21]*other.coeff[24] -
+            self.coeff[19]*other.coeff[23] + self.coeff[28]*other.coeff[0] -
+            2*self.coeff[28]*other.coeff[15] + self.coeff[4]*other.coeff[18] +
+            self.coeff[11]*other.coeff[9] + self.coeff[1]*other.coeff[24] +
+            self.coeff[31]*other.coeff[3] - 2*self.coeff[31]*other.coeff[25] -
+            self.coeff[12]*other.coeff[8] - self.coeff[18]*other.coeff[4] +
+            self.coeff[9]*other.coeff[11] + self.coeff[27]*other.coeff[13] +
+            self.coeff[14]*other.coeff[26] - self.coeff[5]*other.coeff[17] +
+            self.coeff[20]*other.coeff[22] - self.coeff[23]*other.coeff[19],
+    -self.coeff[31]*other.coeff[2] + 2*self.coeff[31]*other.coeff[24] -
+            self.coeff[16]*other.coeff[24] - self.coeff[18]*other.coeff[22] -
+            self.coeff[30]*other.coeff[6] - self.coeff[10]*other.coeff[28] +
+            2*self.coeff[30]*other.coeff[28] + self.coeff[17]*other.coeff[23] +
+            self.coeff[9]*other.coeff[13] + self.coeff[7]*other.coeff[15] +
+            self.coeff[15]*other.coeff[7] - self.coeff[25]*other.coeff[1] +
+            2*self.coeff[25]*other.coeff[21] + self.coeff[13]*other.coeff[9] -
+            self.coeff[24]*other.coeff[16] + 2*self.coeff[24]*other.coeff[31] +
+            self.coeff[21]*other.coeff[3] - 2*self.coeff[21]*other.coeff[25] -
+            self.coeff[20]*other.coeff[4] + self.coeff[28]*other.coeff[10] +
+            self.coeff[19]*other.coeff[5] - 2*self.coeff[28]*other.coeff[30] +
+            self.coeff[4]*other.coeff[20] + self.coeff[23]*other.coeff[17] -
+            self.coeff[12]*other.coeff[26] + self.coeff[11]*other.coeff[27] +
+            self.coeff[1]*other.coeff[25] - self.coeff[27]*other.coeff[11] -
+            self.coeff[14]*other.coeff[8] - self.coeff[3]*other.coeff[21] -
+            self.coeff[2]*other.coeff[31] + other.coeff[29]*self.coeff[0] -
+            self.coeff[5]*other.coeff[19] - 2*self.coeff[15]*other.coeff[29] +
+            self.coeff[6]*other.coeff[30] + self.coeff[29]*other.coeff[0] -
+            2*self.coeff[29]*other.coeff[15] - self.coeff[8]*other.coeff[14] -
+            self.coeff[22]*other.coeff[18] + self.coeff[26]*other.coeff[12],
+    self.coeff[16]*other.coeff[21] - self.coeff[8]*other.coeff[27] +
+            self.coeff[10]*other.coeff[15] - 2*self.coeff[31]*other.coeff[21] -
+            2*self.coeff[30]*other.coeff[15] + self.coeff[1]*other.coeff[31] +
+            self.coeff[15]*other.coeff[10] + self.coeff[18]*other.coeff[19] +
+            self.coeff[31]*other.coeff[1] + self.coeff[7]*other.coeff[28] +
+            self.coeff[9]*other.coeff[26] + self.coeff[30]*other.coeff[0] -
+            self.coeff[17]*other.coeff[20] - self.coeff[20]*other.coeff[17] -
+            self.coeff[28]*other.coeff[7] + 2*self.coeff[28]*other.coeff[29] +
+            self.coeff[4]*other.coeff[23] - self.coeff[23]*other.coeff[4] +
+            self.coeff[19]*other.coeff[18] + self.coeff[12]*other.coeff[13] -
+            self.coeff[11]*other.coeff[14] - self.coeff[5]*other.coeff[22] -
+            2*self.coeff[15]*other.coeff[30] - self.coeff[6]*other.coeff[29] -
+            2*self.coeff[29]*other.coeff[28] + self.coeff[29]*other.coeff[6] +
+            self.coeff[27]*other.coeff[8] + self.coeff[22]*other.coeff[5] -
+            self.coeff[26]*other.coeff[9] - self.coeff[25]*other.coeff[2] +
+            2*self.coeff[25]*other.coeff[24] + self.coeff[13]*other.coeff[12] +
+            self.coeff[24]*other.coeff[3] - 2*self.coeff[24]*other.coeff[25] +
+            self.coeff[21]*other.coeff[16] - 2*self.coeff[21]*other.coeff[31] -
+            self.coeff[14]*other.coeff[11] - self.coeff[3]*other.coeff[24] +
+            other.coeff[30]*self.coeff[0] + self.coeff[2]*other.coeff[25],
+    self.coeff[6]*other.coeff[25] + 2*self.coeff[29]*other.coeff[24] -
+            self.coeff[29]*other.coeff[2] + self.coeff[8]*other.coeff[23] -
+            self.coeff[27]*other.coeff[4] - self.coeff[22]*other.coeff[9] +
+            self.coeff[26]*other.coeff[5] + self.coeff[25]*other.coeff[6] -
+            2*self.coeff[25]*other.coeff[28] - self.coeff[14]*other.coeff[17] +
+            self.coeff[3]*other.coeff[28] - self.coeff[2]*other.coeff[29] +
+            other.coeff[31]*self.coeff[0] - 2*self.coeff[15]*other.coeff[31] +
+            self.coeff[5]*other.coeff[26] + self.coeff[15]*other.coeff[16] -
+            self.coeff[7]*other.coeff[24] - self.coeff[17]*other.coeff[14] +
+            self.coeff[13]*other.coeff[18] - self.coeff[24]*other.coeff[7] +
+            2*self.coeff[24]*other.coeff[29] + self.coeff[21]*other.coeff[10] -
+            self.coeff[20]*other.coeff[11] - 2*self.coeff[21]*other.coeff[30] +
+            self.coeff[28]*other.coeff[3] + self.coeff[19]*other.coeff[12] -
+            2*self.coeff[28]*other.coeff[25] - self.coeff[4]*other.coeff[27] +
+            self.coeff[23]*other.coeff[8] + self.coeff[12]*other.coeff[19] -
+            self.coeff[11]*other.coeff[20] + self.coeff[1]*other.coeff[30] +
+            self.coeff[31]*other.coeff[0] - 2*self.coeff[31]*other.coeff[15] +
+            self.coeff[16]*other.coeff[15] + self.coeff[10]*other.coeff[21] +
+            self.coeff[18]*other.coeff[13] + self.coeff[30]*other.coeff[1] -
+            2*self.coeff[30]*other.coeff[21] - self.coeff[9]*other.coeff[22]
+            ]
+            return cga_object(out)
+        except:
+            return other*self
 
     def __rmul__(self,other):
         cof = np.zeros(self.dim)
         for i in range(self.dim):
             cof[i] = other*self.coeff[i]
         return cga_object(cof)
+
+    def __xor__(self, other):
+        """outer / wedge product
+
+        Args:
+            other (TODO): TODO
+
+        Returns: TODO
+
+        """
+        out =[
+        self.coeff[0]*other.coeff[0] + self.coeff[4]*other.coeff[5] -
+            self.coeff[5]*other.coeff[4] - self.coeff[15]*other.coeff[15],
+ self.coeff[0]*other.coeff[1] + self.coeff[1]*other.coeff[0] -
+            self.coeff[4]*other.coeff[9] + self.coeff[5]*other.coeff[8] +
+            self.coeff[8]*other.coeff[5] - self.coeff[9]*other.coeff[4] -
+            self.coeff[15]*other.coeff[21] - self.coeff[21]*other.coeff[15],
+ self.coeff[0]*other.coeff[2] + self.coeff[2]*other.coeff[0] -
+            self.coeff[4]*other.coeff[12] + self.coeff[5]*other.coeff[11] +
+            self.coeff[11]*other.coeff[5] - self.coeff[12]*other.coeff[4] -
+            self.coeff[15]*other.coeff[24] - self.coeff[24]*other.coeff[15],
+ self.coeff[0]*other.coeff[3] + self.coeff[3]*other.coeff[0] -
+            self.coeff[4]*other.coeff[14] + self.coeff[5]*other.coeff[13] +
+            self.coeff[13]*other.coeff[5] - self.coeff[14]*other.coeff[4] -
+            self.coeff[15]*other.coeff[25] - self.coeff[25]*other.coeff[15],
+ self.coeff[0]*other.coeff[4] + self.coeff[4]*other.coeff[0] -
+            self.coeff[4]*other.coeff[15] - self.coeff[15]*other.coeff[4],
+ self.coeff[0]*other.coeff[5] + self.coeff[5]*other.coeff[0] -
+            self.coeff[5]*other.coeff[15] - self.coeff[15]*other.coeff[5],
+ -self.coeff[2]*other.coeff[1] + self.coeff[1]*other.coeff[2] +
+            other.coeff[6]*self.coeff[0] - self.coeff[12]*other.coeff[8] -
+            self.coeff[8]*other.coeff[12] - self.coeff[28]*other.coeff[15] -
+            self.coeff[15]*other.coeff[28] - self.coeff[21]*other.coeff[24] +
+            self.coeff[11]*other.coeff[9] - self.coeff[5]*other.coeff[17] +
+            self.coeff[4]*other.coeff[18] + self.coeff[6]*other.coeff[0] +
+            self.coeff[24]*other.coeff[21] - self.coeff[18]*other.coeff[4] +
+            self.coeff[17]*other.coeff[5] + self.coeff[9]*other.coeff[11],
+ -self.coeff[3]*other.coeff[1] + self.coeff[1]*other.coeff[3] +
+            other.coeff[7]*self.coeff[0] - self.coeff[29]*other.coeff[15] -
+            self.coeff[8]*other.coeff[14] + self.coeff[13]*other.coeff[9] -
+            self.coeff[15]*other.coeff[29] - self.coeff[21]*other.coeff[25] -
+            self.coeff[5]*other.coeff[19] + self.coeff[4]*other.coeff[20] +
+            self.coeff[7]*other.coeff[0] + self.coeff[25]*other.coeff[21] -
+            self.coeff[20]*other.coeff[4] + self.coeff[19]*other.coeff[5] +
+            self.coeff[9]*other.coeff[13] - self.coeff[14]*other.coeff[8],
+ self.coeff[0]*other.coeff[8] + self.coeff[1]*other.coeff[4] -
+            self.coeff[4]*other.coeff[1] + self.coeff[4]*other.coeff[21] +
+            self.coeff[8]*other.coeff[0] - self.coeff[8]*other.coeff[15] -
+            self.coeff[15]*other.coeff[8] - self.coeff[21]*other.coeff[4],
+ self.coeff[0]*other.coeff[9] + self.coeff[1]*other.coeff[5] -
+            self.coeff[5]*other.coeff[1] + self.coeff[5]*other.coeff[21] +
+            self.coeff[9]*other.coeff[0] - self.coeff[9]*other.coeff[15] -
+            self.coeff[15]*other.coeff[9] - self.coeff[21]*other.coeff[5],
+ -self.coeff[3]*other.coeff[2] + self.coeff[2]*other.coeff[3] +
+             other.coeff[10]*self.coeff[0] - self.coeff[30]*other.coeff[15] +
+             self.coeff[12]*other.coeff[13] + self.coeff[13]*other.coeff[12] -
+             self.coeff[15]*other.coeff[30] - self.coeff[24]*other.coeff[25] -
+             self.coeff[11]*other.coeff[14] - self.coeff[5]*other.coeff[22] +
+             self.coeff[4]*other.coeff[23] + self.coeff[10]*other.coeff[0] +
+             self.coeff[25]*other.coeff[24] - self.coeff[14]*other.coeff[11] +
+             self.coeff[22]*other.coeff[5] - self.coeff[23]*other.coeff[4],
+ self.coeff[0]*other.coeff[11] + self.coeff[2]*other.coeff[4] -
+             self.coeff[4]*other.coeff[2] + self.coeff[4]*other.coeff[24] +
+             self.coeff[11]*other.coeff[0] - self.coeff[11]*other.coeff[15] -
+             self.coeff[15]*other.coeff[11] - self.coeff[24]*other.coeff[4],
+ self.coeff[0]*other.coeff[12] + self.coeff[2]*other.coeff[5] -
+             self.coeff[5]*other.coeff[2] + self.coeff[5]*other.coeff[24] +
+             self.coeff[12]*other.coeff[0] - self.coeff[12]*other.coeff[15] -
+             self.coeff[15]*other.coeff[12] - self.coeff[24]*other.coeff[5],
+             self.coeff[0]*other.coeff[13] + self.coeff[3]*other.coeff[4] -
+             self.coeff[4]*other.coeff[3] + self.coeff[4]*other.coeff[25] +
+             self.coeff[13]*other.coeff[0] - self.coeff[13]*other.coeff[15] -
+             self.coeff[15]*other.coeff[13] - self.coeff[25]*other.coeff[4],
+ self.coeff[0]*other.coeff[14] + self.coeff[3]*other.coeff[5] -
+             self.coeff[5]*other.coeff[3] + self.coeff[5]*other.coeff[25] +
+             self.coeff[14]*other.coeff[0] - self.coeff[14]*other.coeff[15] -
+             self.coeff[15]*other.coeff[14] - self.coeff[25]*other.coeff[5],
+ self.coeff[0]*other.coeff[15] + self.coeff[4]*other.coeff[5] -
+             self.coeff[5]*other.coeff[4] + self.coeff[15]*other.coeff[0] -
+             2*self.coeff[15]*other.coeff[15],
+ self.coeff[16]*other.coeff[0] + self.coeff[3]*other.coeff[6] -
+             self.coeff[7]*other.coeff[2] + self.coeff[24]*other.coeff[29] +
+             self.coeff[5]*other.coeff[26] + self.coeff[13]*other.coeff[18] +
+             self.coeff[12]*other.coeff[19] - self.coeff[11]*other.coeff[20] -
+             self.coeff[4]*other.coeff[27] - self.coeff[31]*other.coeff[15] -
+             self.coeff[21]*other.coeff[30] - self.coeff[20]*other.coeff[11] +
+             self.coeff[19]*other.coeff[12] - self.coeff[30]*other.coeff[21] +
+             self.coeff[18]*other.coeff[13] + self.coeff[29]*other.coeff[24] -
+             self.coeff[17]*other.coeff[14] - self.coeff[28]*other.coeff[25] -
+             self.coeff[15]*other.coeff[31] - self.coeff[9]*other.coeff[22] +
+             self.coeff[8]*other.coeff[23] - self.coeff[14]*other.coeff[17] -
+             self.coeff[25]*other.coeff[28] - self.coeff[22]*other.coeff[9] +
+             self.coeff[23]*other.coeff[8] + self.coeff[26]*other.coeff[5] -
+             self.coeff[27]*other.coeff[4] + self.coeff[6]*other.coeff[3] +
+             other.coeff[16]*self.coeff[0] + self.coeff[10]*other.coeff[1] +
+             self.coeff[1]*other.coeff[10] - self.coeff[2]*other.coeff[7],
+ self.coeff[0]*other.coeff[17] + self.coeff[1]*other.coeff[11] -
+             self.coeff[2]*other.coeff[8] + self.coeff[4]*other.coeff[6] -
+             self.coeff[4]*other.coeff[28] + self.coeff[6]*other.coeff[4] -
+             self.coeff[8]*other.coeff[2] + self.coeff[8]*other.coeff[24] +
+             self.coeff[11]*other.coeff[1] - self.coeff[11]*other.coeff[21] -
+             self.coeff[15]*other.coeff[17] + self.coeff[17]*other.coeff[0] -
+             self.coeff[17]*other.coeff[15] - self.coeff[21]*other.coeff[11] +
+             self.coeff[24]*other.coeff[8] - self.coeff[28]*other.coeff[4],
+ self.coeff[0]*other.coeff[18] + self.coeff[1]*other.coeff[12] -
+             self.coeff[2]*other.coeff[9] + self.coeff[5]*other.coeff[6] -
+             self.coeff[5]*other.coeff[28] + self.coeff[6]*other.coeff[5] -
+             self.coeff[9]*other.coeff[2] + self.coeff[9]*other.coeff[24] +
+             self.coeff[12]*other.coeff[1] - self.coeff[12]*other.coeff[21] -
+             self.coeff[15]*other.coeff[18] + self.coeff[18]*other.coeff[0] -
+             self.coeff[18]*other.coeff[15] - self.coeff[21]*other.coeff[12] +
+             self.coeff[24]*other.coeff[9] - self.coeff[28]*other.coeff[5],
+ self.coeff[0]*other.coeff[19] + self.coeff[1]*other.coeff[13] -
+             self.coeff[3]*other.coeff[8] + self.coeff[4]*other.coeff[7] -
+             self.coeff[4]*other.coeff[29] + self.coeff[7]*other.coeff[4] -
+             self.coeff[8]*other.coeff[3] + self.coeff[8]*other.coeff[25] +
+             self.coeff[13]*other.coeff[1] - self.coeff[13]*other.coeff[21] -
+             self.coeff[15]*other.coeff[19] + self.coeff[19]*other.coeff[0] -
+             self.coeff[19]*other.coeff[15] - self.coeff[21]*other.coeff[13] +
+             self.coeff[25]*other.coeff[8] - self.coeff[29]*other.coeff[4],
+ self.coeff[0]*other.coeff[20] + self.coeff[1]*other.coeff[14] -
+             self.coeff[3]*other.coeff[9] + self.coeff[5]*other.coeff[7] -
+             self.coeff[5]*other.coeff[29] + self.coeff[7]*other.coeff[5] -
+             self.coeff[9]*other.coeff[3] + self.coeff[9]*other.coeff[25] +
+             self.coeff[14]*other.coeff[1] - self.coeff[14]*other.coeff[21] -
+             self.coeff[15]*other.coeff[20] + self.coeff[20]*other.coeff[0] -
+             self.coeff[20]*other.coeff[15] - self.coeff[21]*other.coeff[14] +
+             self.coeff[25]*other.coeff[9] - self.coeff[29]*other.coeff[5],
+ self.coeff[0]*other.coeff[21] + self.coeff[1]*other.coeff[15] -
+             self.coeff[4]*other.coeff[9] + self.coeff[5]*other.coeff[8] +
+             self.coeff[8]*other.coeff[5] - self.coeff[9]*other.coeff[4] +
+             self.coeff[15]*other.coeff[1] - 2*self.coeff[15]*other.coeff[21] +
+             self.coeff[21]*other.coeff[0] - 2*self.coeff[21]*other.coeff[15],
+ self.coeff[0]*other.coeff[22] + self.coeff[2]*other.coeff[13] -
+             self.coeff[3]*other.coeff[11] + self.coeff[4]*other.coeff[10] -
+             self.coeff[4]*other.coeff[30] + self.coeff[10]*other.coeff[4] -
+             self.coeff[11]*other.coeff[3] + self.coeff[11]*other.coeff[25] +
+             self.coeff[13]*other.coeff[2] - self.coeff[13]*other.coeff[24] -
+             self.coeff[15]*other.coeff[22] + self.coeff[22]*other.coeff[0] -
+             self.coeff[22]*other.coeff[15] - self.coeff[24]*other.coeff[13] +
+             self.coeff[25]*other.coeff[11] - self.coeff[30]*other.coeff[4],
+ self.coeff[0]*other.coeff[23] + self.coeff[2]*other.coeff[14] -
+             self.coeff[3]*other.coeff[12] + self.coeff[5]*other.coeff[10] -
+             self.coeff[5]*other.coeff[30] + self.coeff[10]*other.coeff[5] -
+             self.coeff[12]*other.coeff[3] + self.coeff[12]*other.coeff[25] +
+             self.coeff[14]*other.coeff[2] - self.coeff[14]*other.coeff[24] -
+             self.coeff[15]*other.coeff[23] + self.coeff[23]*other.coeff[0] -
+             self.coeff[23]*other.coeff[15] - self.coeff[24]*other.coeff[14] +
+             self.coeff[25]*other.coeff[12] - self.coeff[30]*other.coeff[5],
+ self.coeff[0]*other.coeff[24] + self.coeff[2]*other.coeff[15] -
+             self.coeff[4]*other.coeff[12] + self.coeff[5]*other.coeff[11] +
+             self.coeff[11]*other.coeff[5] - self.coeff[12]*other.coeff[4] +
+             self.coeff[15]*other.coeff[2] - 2*self.coeff[15]*other.coeff[24] +
+             self.coeff[24]*other.coeff[0] - 2*self.coeff[24]*other.coeff[15],
+ self.coeff[0]*other.coeff[25] + self.coeff[3]*other.coeff[15] -
+             self.coeff[4]*other.coeff[14] + self.coeff[5]*other.coeff[13] +
+             self.coeff[13]*other.coeff[5] - self.coeff[14]*other.coeff[4] +
+             self.coeff[15]*other.coeff[3] - 2*self.coeff[15]*other.coeff[25] +
+             self.coeff[25]*other.coeff[0] - 2*self.coeff[25]*other.coeff[15],
+ self.coeff[6]*other.coeff[13] - self.coeff[13]*other.coeff[28] +
+             self.coeff[13]*other.coeff[6] - self.coeff[26]*other.coeff[15] +
+             self.coeff[26]*other.coeff[0] + other.coeff[26]*self.coeff[0] -
+             self.coeff[15]*other.coeff[26] - self.coeff[11]*other.coeff[7] +
+             self.coeff[11]*other.coeff[29] - self.coeff[4]*other.coeff[16] -
+             self.coeff[7]*other.coeff[11] - self.coeff[21]*other.coeff[22] +
+             self.coeff[3]*other.coeff[17] - self.coeff[2]*other.coeff[19] -
+             self.coeff[31]*other.coeff[4] + self.coeff[1]*other.coeff[22] -
+             self.coeff[30]*other.coeff[8] - self.coeff[19]*other.coeff[24] +
+             self.coeff[19]*other.coeff[2] + self.coeff[29]*other.coeff[11] -
+             self.coeff[28]*other.coeff[13] + self.coeff[17]*other.coeff[25] -
+             self.coeff[17]*other.coeff[3] + self.coeff[8]*other.coeff[10] -
+             self.coeff[8]*other.coeff[30] + self.coeff[24]*other.coeff[19] +
+             self.coeff[10]*other.coeff[8] + self.coeff[16]*other.coeff[4] +
+             self.coeff[22]*other.coeff[21] - self.coeff[22]*other.coeff[1] -
+             self.coeff[25]*other.coeff[17] + self.coeff[4]*other.coeff[31],
+ self.coeff[20]*other.coeff[2] + self.coeff[6]*other.coeff[14] -
+             self.coeff[12]*other.coeff[7] - self.coeff[5]*other.coeff[16] -
+             self.coeff[14]*other.coeff[28] - self.coeff[15]*other.coeff[27] -
+             self.coeff[27]*other.coeff[15] + self.coeff[27]*other.coeff[0] +
+             other.coeff[27]*self.coeff[0] + self.coeff[12]*other.coeff[29] +
+             self.coeff[5]*other.coeff[31] - self.coeff[21]*other.coeff[23] +
+             self.coeff[3]*other.coeff[18] - self.coeff[2]*other.coeff[20] -
+             self.coeff[31]*other.coeff[5] + self.coeff[1]*other.coeff[23] -
+             self.coeff[30]*other.coeff[9] - self.coeff[20]*other.coeff[24] +
+             self.coeff[29]*other.coeff[12] - self.coeff[18]*other.coeff[3] +
+             self.coeff[18]*other.coeff[25] - self.coeff[28]*other.coeff[14] +
+             self.coeff[9]*other.coeff[10] + self.coeff[14]*other.coeff[6] -
+             self.coeff[9]*other.coeff[30] - self.coeff[7]*other.coeff[12] +
+             self.coeff[24]*other.coeff[20] + self.coeff[10]*other.coeff[9] +
+             self.coeff[16]*other.coeff[5] - self.coeff[25]*other.coeff[18] +
+             self.coeff[23]*other.coeff[21] - self.coeff[23]*other.coeff[1],
+ 2*self.coeff[24]*other.coeff[21] + self.coeff[6]*other.coeff[15] -
+             self.coeff[12]*other.coeff[8] - self.coeff[8]*other.coeff[12] -
+             2*self.coeff[28]*other.coeff[15] + other.coeff[28]*self.coeff[0] +
+             self.coeff[28]*other.coeff[0] - 2*self.coeff[15]*other.coeff[28] +
+             self.coeff[11]*other.coeff[9] - self.coeff[5]*other.coeff[17] +
+             self.coeff[4]*other.coeff[18] - self.coeff[24]*other.coeff[1] -
+             2*self.coeff[21]*other.coeff[24] - self.coeff[2]*other.coeff[21] +
+             self.coeff[1]*other.coeff[24] - self.coeff[18]*other.coeff[4] +
+             self.coeff[17]*other.coeff[5] + self.coeff[15]*other.coeff[6] +
+             self.coeff[9]*other.coeff[11] + self.coeff[21]*other.coeff[2],
+ -2*self.coeff[29]*other.coeff[15] - self.coeff[8]*other.coeff[14] +
+             self.coeff[13]*other.coeff[9] + self.coeff[29]*other.coeff[0] +
+             other.coeff[29]*self.coeff[0] - 2*self.coeff[15]*other.coeff[29] -
+             self.coeff[5]*other.coeff[19] + self.coeff[4]*other.coeff[20] -
+             self.coeff[3]*other.coeff[21] - 2*self.coeff[21]*other.coeff[25] +
+             self.coeff[1]*other.coeff[25] - self.coeff[20]*other.coeff[4] +
+             self.coeff[19]*other.coeff[5] + self.coeff[15]*other.coeff[7] +
+             self.coeff[9]*other.coeff[13] - self.coeff[14]*other.coeff[8] +
+             self.coeff[7]*other.coeff[15] + 2*self.coeff[25]*other.coeff[21] -
+             self.coeff[25]*other.coeff[1] + self.coeff[21]*other.coeff[3],
+ -2*self.coeff[30]*other.coeff[15] + self.coeff[12]*other.coeff[13] +
+             self.coeff[13]*other.coeff[12] + self.coeff[30]*other.coeff[0] +
+             other.coeff[30]*self.coeff[0] - 2*self.coeff[15]*other.coeff[30] -
+             self.coeff[11]*other.coeff[14] - self.coeff[5]*other.coeff[22] +
+             self.coeff[4]*other.coeff[23] - 2*self.coeff[24]*other.coeff[25] +
+             self.coeff[24]*other.coeff[3] - self.coeff[3]*other.coeff[24] +
+             self.coeff[2]*other.coeff[25] + self.coeff[15]*other.coeff[10] -
+             self.coeff[14]*other.coeff[11] + self.coeff[10]*other.coeff[15] +
+             self.coeff[22]*other.coeff[5] + 2*self.coeff[25]*other.coeff[24] -
+             self.coeff[25]*other.coeff[2] - self.coeff[23]*other.coeff[4],
+ other.coeff[31]*self.coeff[0] + self.coeff[6]*other.coeff[25] +
+             2*self.coeff[24]*other.coeff[29] + self.coeff[5]*other.coeff[26] +
+             self.coeff[13]*other.coeff[18] + self.coeff[12]*other.coeff[19] -
+             self.coeff[11]*other.coeff[20] - self.coeff[4]*other.coeff[27] -
+             self.coeff[24]*other.coeff[7] - self.coeff[7]*other.coeff[24] +
+             self.coeff[3]*other.coeff[28] - 2*self.coeff[31]*other.coeff[15] -
+             2*self.coeff[21]*other.coeff[30] - self.coeff[2]*other.coeff[29] +
+             self.coeff[1]*other.coeff[30] - self.coeff[20]*other.coeff[11] +
+             self.coeff[19]*other.coeff[12] - 2*self.coeff[30]*other.coeff[21] +
+             self.coeff[30]*other.coeff[1] + self.coeff[18]*other.coeff[13] +
+             2*self.coeff[29]*other.coeff[24] - self.coeff[29]*other.coeff[2] -
+             self.coeff[17]*other.coeff[14] + self.coeff[28]*other.coeff[3] -
+             2*self.coeff[28]*other.coeff[25] + self.coeff[15]*other.coeff[16] -
+             2*self.coeff[15]*other.coeff[31] - self.coeff[9]*other.coeff[22] +
+             self.coeff[8]*other.coeff[23] - self.coeff[14]*other.coeff[17] +
+             self.coeff[10]*other.coeff[21] + self.coeff[16]*other.coeff[15] -
+             2*self.coeff[25]*other.coeff[28] - self.coeff[22]*other.coeff[9] +
+             self.coeff[25]*other.coeff[6] + self.coeff[23]*other.coeff[8] +
+             self.coeff[26]*other.coeff[5] - self.coeff[27]*other.coeff[4] +
+             self.coeff[21]*other.coeff[10] + self.coeff[31]*other.coeff[0]
+ ]
+        return cga_object(out)
+
+    def __or__(self, other):
+        """inner product
+
+        Args:
+            other (TODO): TODO
+
+        Returns: TODO
+
+        """
+        out =[
+self.coeff[13]*other.coeff[14] + self.coeff[11]*other.coeff[12] +
+            self.coeff[23]*other.coeff[22] + self.coeff[12]*other.coeff[11] +
+            self.coeff[15]*other.coeff[15] + self.coeff[22]*other.coeff[23] -
+            self.coeff[27]*other.coeff[26] + self.coeff[20]*other.coeff[19] -
+            self.coeff[5]*other.coeff[4] - self.coeff[10]*other.coeff[10] -
+            self.coeff[16]*other.coeff[16] + self.coeff[3]*other.coeff[3] +
+            self.coeff[9]*other.coeff[8] - self.coeff[26]*other.coeff[27] +
+            self.coeff[14]*other.coeff[13] - self.coeff[7]*other.coeff[7] +
+            self.coeff[17]*other.coeff[18] + self.coeff[19]*other.coeff[20] +
+            self.coeff[1]*other.coeff[1] + self.coeff[2]*other.coeff[2] +
+            self.coeff[8]*other.coeff[9] - self.coeff[4]*other.coeff[5] -
+            self.coeff[6]*other.coeff[6] + self.coeff[18]*other.coeff[17],
+ -self.coeff[24]*other.coeff[28] + self.coeff[30]*other.coeff[16] +
+            self.coeff[11]*other.coeff[18] + self.coeff[4]*other.coeff[9] -
+            self.coeff[9]*other.coeff[4] - self.coeff[6]*other.coeff[24] +
+            self.coeff[6]*other.coeff[2] + self.coeff[18]*other.coeff[11] -
+            self.coeff[7]*other.coeff[25] + self.coeff[21]*other.coeff[15] +
+            self.coeff[7]*other.coeff[3] - self.coeff[10]*other.coeff[16] +
+            self.coeff[16]*other.coeff[30] - self.coeff[16]*other.coeff[10] +
+            self.coeff[19]*other.coeff[14] + self.coeff[20]*other.coeff[13] +
+            self.coeff[26]*other.coeff[23] + self.coeff[27]*other.coeff[22] -
+            self.coeff[22]*other.coeff[27] - self.coeff[23]*other.coeff[26] -
+            self.coeff[3]*other.coeff[7] - self.coeff[2]*other.coeff[6] +
+            self.coeff[17]*other.coeff[12] + self.coeff[15]*other.coeff[21] -
+            self.coeff[8]*other.coeff[5] + self.coeff[14]*other.coeff[19] +
+            self.coeff[13]*other.coeff[20] + self.coeff[5]*other.coeff[8] +
+            self.coeff[12]*other.coeff[17] + self.coeff[25]*other.coeff[7] +
+            self.coeff[24]*other.coeff[6] - self.coeff[25]*other.coeff[29] -
+            self.coeff[31]*other.coeff[30] - self.coeff[30]*other.coeff[31] +
+            self.coeff[29]*other.coeff[25] + self.coeff[28]*other.coeff[24],
+-self.coeff[29]*other.coeff[16] + self.coeff[14]*other.coeff[22] +
+            self.coeff[13]*other.coeff[23] - self.coeff[8]*other.coeff[18] +
+            self.coeff[5]*other.coeff[11] - self.coeff[12]*other.coeff[4] -
+            self.coeff[11]*other.coeff[5] + self.coeff[25]*other.coeff[10] +
+            self.coeff[4]*other.coeff[12] - self.coeff[9]*other.coeff[17] +
+            self.coeff[6]*other.coeff[21] - self.coeff[6]*other.coeff[1] -
+            self.coeff[18]*other.coeff[8] + self.coeff[7]*other.coeff[16] -
+            self.coeff[10]*other.coeff[25] + self.coeff[10]*other.coeff[3] -
+            self.coeff[16]*other.coeff[29] + self.coeff[16]*other.coeff[7] -
+            self.coeff[21]*other.coeff[6] + self.coeff[24]*other.coeff[15] +
+            self.coeff[19]*other.coeff[27] + self.coeff[20]*other.coeff[26] -
+            self.coeff[26]*other.coeff[20] - self.coeff[27]*other.coeff[19] +
+            self.coeff[22]*other.coeff[14] + self.coeff[23]*other.coeff[13] -
+            self.coeff[3]*other.coeff[10] - self.coeff[17]*other.coeff[9] +
+            self.coeff[1]*other.coeff[6] + self.coeff[15]*other.coeff[24] -
+            self.coeff[25]*other.coeff[30] + self.coeff[21]*other.coeff[28] +
+            self.coeff[31]*other.coeff[29] + self.coeff[30]*other.coeff[25] +
+            self.coeff[29]*other.coeff[31] - self.coeff[28]*other.coeff[21],
+self.coeff[24]*other.coeff[30] - self.coeff[18]*other.coeff[26] -
+            self.coeff[6]*other.coeff[16] + self.coeff[7]*other.coeff[21] -
+            self.coeff[7]*other.coeff[1] + self.coeff[10]*other.coeff[24] -
+            self.coeff[10]*other.coeff[2] + self.coeff[16]*other.coeff[28] -
+            self.coeff[16]*other.coeff[6] - self.coeff[21]*other.coeff[7] -
+            self.coeff[19]*other.coeff[9] - self.coeff[24]*other.coeff[10] +
+            self.coeff[25]*other.coeff[15] - self.coeff[20]*other.coeff[8] +
+            self.coeff[26]*other.coeff[18] + self.coeff[27]*other.coeff[17] -
+            self.coeff[22]*other.coeff[12] - self.coeff[23]*other.coeff[11] +
+            self.coeff[2]*other.coeff[10] + self.coeff[1]*other.coeff[7] -
+            self.coeff[17]*other.coeff[27] + self.coeff[15]*other.coeff[25] -
+            self.coeff[14]*other.coeff[4] - self.coeff[13]*other.coeff[5] -
+            self.coeff[8]*other.coeff[20] + self.coeff[5]*other.coeff[13] -
+            self.coeff[12]*other.coeff[22] - self.coeff[11]*other.coeff[23] +
+            self.coeff[28]*other.coeff[16] + self.coeff[4]*other.coeff[14] -
+            self.coeff[9]*other.coeff[19] + self.coeff[21]*other.coeff[29] -
+            self.coeff[31]*other.coeff[28] - self.coeff[30]*other.coeff[24] -
+            self.coeff[29]*other.coeff[21] - self.coeff[28]*other.coeff[31],
+-2*self.coeff[24]*other.coeff[11] + self.coeff[26]*other.coeff[16] -
+            2*self.coeff[25]*other.coeff[13] - self.coeff[19]*other.coeff[7] -
+            self.coeff[16]*other.coeff[26] - self.coeff[10]*other.coeff[22] -
+            self.coeff[7]*other.coeff[19] - 2*self.coeff[21]*other.coeff[8] -
+            self.coeff[22]*other.coeff[10] + self.coeff[3]*other.coeff[13] +
+            2*self.coeff[31]*other.coeff[26] - self.coeff[6]*other.coeff[17] +
+            self.coeff[2]*other.coeff[11] - self.coeff[17]*other.coeff[6] +
+            self.coeff[1]*other.coeff[8] + 2*self.coeff[30]*other.coeff[22] -
+            self.coeff[15]*other.coeff[4] - self.coeff[8]*other.coeff[1] -
+            self.coeff[13]*other.coeff[3] + 2*self.coeff[29]*other.coeff[19] +
+            2*self.coeff[28]*other.coeff[17] - self.coeff[11]*other.coeff[2] +
+            self.coeff[4]*other.coeff[15],
+2*self.coeff[23]*other.coeff[30] - 2*self.coeff[27]*other.coeff[31] -
+            self.coeff[20]*other.coeff[7] + 2*self.coeff[20]*other.coeff[29] -
+            self.coeff[16]*other.coeff[27] - self.coeff[18]*other.coeff[6] -
+            self.coeff[10]*other.coeff[23] - self.coeff[7]*other.coeff[20] +
+            self.coeff[3]*other.coeff[14] - self.coeff[6]*other.coeff[18] +
+            self.coeff[2]*other.coeff[12] + 2*self.coeff[18]*other.coeff[28] +
+            self.coeff[1]*other.coeff[9] + self.coeff[15]*other.coeff[5] -
+            self.coeff[14]*other.coeff[3] - self.coeff[9]*other.coeff[1] +
+            2*self.coeff[14]*other.coeff[25] - self.coeff[12]*other.coeff[2] -
+            self.coeff[5]*other.coeff[15] + 2*self.coeff[12]*other.coeff[24] -
+            self.coeff[23]*other.coeff[10] + 2*self.coeff[9]*other.coeff[21] +
+            self.coeff[27]*other.coeff[16],
+self.coeff[3]*other.coeff[16] - self.coeff[4]*other.coeff[18] -
+            self.coeff[5]*other.coeff[17] + self.coeff[13]*other.coeff[27] +
+            self.coeff[14]*other.coeff[26] + self.coeff[15]*other.coeff[28] +
+            self.coeff[16]*other.coeff[3] - self.coeff[16]*other.coeff[25] -
+            self.coeff[17]*other.coeff[5] - self.coeff[18]*other.coeff[4] -
+            self.coeff[25]*other.coeff[16] + self.coeff[25]*other.coeff[31] +
+            self.coeff[26]*other.coeff[14] + self.coeff[27]*other.coeff[13] +
+            self.coeff[28]*other.coeff[15] + self.coeff[31]*other.coeff[25],
+-self.coeff[2]*other.coeff[16] - self.coeff[4]*other.coeff[20] -
+            self.coeff[5]*other.coeff[19] - self.coeff[11]*other.coeff[27] -
+            self.coeff[12]*other.coeff[26] + self.coeff[15]*other.coeff[29] -
+            self.coeff[16]*other.coeff[2] + self.coeff[16]*other.coeff[24] -
+            self.coeff[19]*other.coeff[5] - self.coeff[20]*other.coeff[4] +
+            self.coeff[24]*other.coeff[16] - self.coeff[24]*other.coeff[31] -
+            self.coeff[26]*other.coeff[12] - self.coeff[27]*other.coeff[11] +
+            self.coeff[29]*other.coeff[15] - self.coeff[31]*other.coeff[24],
+self.coeff[22]*other.coeff[31] - self.coeff[26]*other.coeff[10] +
+            self.coeff[26]*other.coeff[30] + self.coeff[25]*other.coeff[19] -
+            self.coeff[19]*other.coeff[3] + self.coeff[19]*other.coeff[25] -
+            self.coeff[10]*other.coeff[26] - self.coeff[21]*other.coeff[4] +
+            self.coeff[24]*other.coeff[17] - self.coeff[3]*other.coeff[19] -
+            self.coeff[17]*other.coeff[2] + self.coeff[31]*other.coeff[22] +
+            self.coeff[30]*other.coeff[26] - self.coeff[2]*other.coeff[17] +
+            self.coeff[17]*other.coeff[24] - self.coeff[13]*other.coeff[29] -
+            self.coeff[29]*other.coeff[13] - self.coeff[28]*other.coeff[11] -
+            self.coeff[4]*other.coeff[21] - self.coeff[11]*other.coeff[28],
+self.coeff[27]*other.coeff[30] + self.coeff[25]*other.coeff[20] -
+            self.coeff[20]*other.coeff[3] + self.coeff[20]*other.coeff[25] -
+            self.coeff[10]*other.coeff[27] - self.coeff[18]*other.coeff[2] +
+            self.coeff[18]*other.coeff[24] + self.coeff[21]*other.coeff[5] -
+            self.coeff[23]*other.coeff[31] + self.coeff[24]*other.coeff[18] -
+            self.coeff[3]*other.coeff[20] - self.coeff[31]*other.coeff[23] +
+            self.coeff[30]*other.coeff[27] - self.coeff[2]*other.coeff[18] +
+            self.coeff[14]*other.coeff[29] + self.coeff[29]*other.coeff[14] +
+            self.coeff[28]*other.coeff[12] + self.coeff[5]*other.coeff[21] +
+            self.coeff[12]*other.coeff[28] - self.coeff[27]*other.coeff[10],
+self.coeff[1]*other.coeff[16] - self.coeff[4]*other.coeff[23] -
+            self.coeff[5]*other.coeff[22] + self.coeff[8]*other.coeff[27] +
+            self.coeff[9]*other.coeff[26] + self.coeff[15]*other.coeff[30] +
+            self.coeff[16]*other.coeff[1] - self.coeff[16]*other.coeff[21] -
+            self.coeff[21]*other.coeff[16] + self.coeff[21]*other.coeff[31] -
+            self.coeff[22]*other.coeff[5] - self.coeff[23]*other.coeff[4] +
+            self.coeff[26]*other.coeff[9] + self.coeff[27]*other.coeff[8] +
+            self.coeff[30]*other.coeff[15] + self.coeff[31]*other.coeff[21],
+-self.coeff[24]*other.coeff[4] + self.coeff[22]*other.coeff[25] +
+            self.coeff[26]*other.coeff[7] - self.coeff[26]*other.coeff[29] +
+            self.coeff[25]*other.coeff[22] - self.coeff[19]*other.coeff[31] -
+            self.coeff[21]*other.coeff[17] + self.coeff[7]*other.coeff[26] -
+            self.coeff[22]*other.coeff[3] - self.coeff[3]*other.coeff[22] +
+            self.coeff[17]*other.coeff[1] - self.coeff[31]*other.coeff[19] -
+            self.coeff[17]*other.coeff[21] + self.coeff[1]*other.coeff[17] -
+            self.coeff[30]*other.coeff[13] - self.coeff[13]*other.coeff[30] -
+            self.coeff[29]*other.coeff[26] + self.coeff[8]*other.coeff[28] +
+            self.coeff[28]*other.coeff[8] - self.coeff[4]*other.coeff[24],
+self.coeff[24]*other.coeff[5] - self.coeff[27]*other.coeff[29] +
+            self.coeff[25]*other.coeff[23] + self.coeff[20]*other.coeff[31] +
+            self.coeff[18]*other.coeff[1] - self.coeff[21]*other.coeff[18] -
+            self.coeff[18]*other.coeff[21] + self.coeff[7]*other.coeff[27] -
+            self.coeff[3]*other.coeff[23] + self.coeff[31]*other.coeff[20] +
+            self.coeff[1]*other.coeff[18] + self.coeff[30]*other.coeff[14] -
+            self.coeff[29]*other.coeff[27] + self.coeff[14]*other.coeff[30] -
+            self.coeff[9]*other.coeff[28] + self.coeff[5]*other.coeff[24] -
+            self.coeff[28]*other.coeff[9] - self.coeff[23]*other.coeff[3] +
+            self.coeff[27]*other.coeff[7] + self.coeff[23]*other.coeff[25],
+-self.coeff[22]*other.coeff[24] - self.coeff[26]*other.coeff[6] +
+            self.coeff[26]*other.coeff[28] - self.coeff[25]*other.coeff[4] +
+            self.coeff[19]*other.coeff[1] - self.coeff[19]*other.coeff[21] -
+            self.coeff[24]*other.coeff[22] - self.coeff[21]*other.coeff[19] +
+            self.coeff[22]*other.coeff[2] - self.coeff[6]*other.coeff[26] +
+            self.coeff[31]*other.coeff[17] + self.coeff[17]*other.coeff[31] +
+            self.coeff[2]*other.coeff[22] + self.coeff[1]*other.coeff[19] +
+            self.coeff[30]*other.coeff[11] + self.coeff[8]*other.coeff[29] +
+            self.coeff[29]*other.coeff[8] + self.coeff[28]*other.coeff[26] -
+            self.coeff[4]*other.coeff[25] + self.coeff[11]*other.coeff[30],
+self.coeff[27]*other.coeff[28] + self.coeff[20]*other.coeff[1] +
+            self.coeff[25]*other.coeff[5] - self.coeff[20]*other.coeff[21] -
+            self.coeff[24]*other.coeff[23] - self.coeff[21]*other.coeff[20] -
+            self.coeff[6]*other.coeff[27] - self.coeff[18]*other.coeff[31] +
+            self.coeff[2]*other.coeff[23] - self.coeff[31]*other.coeff[18] +
+            self.coeff[1]*other.coeff[20] - self.coeff[30]*other.coeff[12] -
+            self.coeff[29]*other.coeff[9] - self.coeff[9]*other.coeff[29] +
+            self.coeff[28]*other.coeff[27] + self.coeff[5]*other.coeff[25] -
+            self.coeff[12]*other.coeff[30] + self.coeff[23]*other.coeff[2] -
+            self.coeff[23]*other.coeff[24] - self.coeff[27]*other.coeff[6],
+self.coeff[1]*other.coeff[21] + self.coeff[2]*other.coeff[24] +
+            self.coeff[3]*other.coeff[25] - self.coeff[6]*other.coeff[28] -
+            self.coeff[7]*other.coeff[29] - self.coeff[10]*other.coeff[30] -
+            self.coeff[16]*other.coeff[31] + self.coeff[21]*other.coeff[1] -
+            2*self.coeff[21]*other.coeff[21] + self.coeff[24]*other.coeff[2] -
+            2*self.coeff[24]*other.coeff[24] + self.coeff[25]*other.coeff[3] -
+            2*self.coeff[25]*other.coeff[25] - self.coeff[28]*other.coeff[6] +
+            2*self.coeff[28]*other.coeff[28] - self.coeff[29]*other.coeff[7] +
+            2*self.coeff[29]*other.coeff[29] - self.coeff[30]*other.coeff[10] +
+            2*self.coeff[30]*other.coeff[30] - self.coeff[31]*other.coeff[16] +
+            2*self.coeff[31]*other.coeff[31],
+self.coeff[4]*other.coeff[27] + self.coeff[5]*other.coeff[26] +
+            self.coeff[15]*other.coeff[31] - self.coeff[26]*other.coeff[5] -
+            self.coeff[27]*other.coeff[4] + self.coeff[31]*other.coeff[15],
+self.coeff[3]*other.coeff[26] + self.coeff[4]*other.coeff[28] -
+            self.coeff[13]*other.coeff[31] - self.coeff[25]*other.coeff[26] -
+            self.coeff[26]*other.coeff[3] + self.coeff[26]*other.coeff[25] -
+            self.coeff[28]*other.coeff[4] - self.coeff[31]*other.coeff[13],
+self.coeff[3]*other.coeff[27] - self.coeff[5]*other.coeff[28] +
+            self.coeff[14]*other.coeff[31] - self.coeff[25]*other.coeff[27] -
+            self.coeff[27]*other.coeff[3] + self.coeff[27]*other.coeff[25] +
+            self.coeff[28]*other.coeff[5] + self.coeff[31]*other.coeff[14],
+-self.coeff[2]*other.coeff[26] + self.coeff[4]*other.coeff[29] +
+            self.coeff[11]*other.coeff[31] + self.coeff[24]*other.coeff[26] +
+            self.coeff[26]*other.coeff[2] - self.coeff[26]*other.coeff[24] -
+            self.coeff[29]*other.coeff[4] + self.coeff[31]*other.coeff[11],
+-self.coeff[2]*other.coeff[27] - self.coeff[5]*other.coeff[29] -
+            self.coeff[12]*other.coeff[31] + self.coeff[24]*other.coeff[27] +
+            self.coeff[27]*other.coeff[2] - self.coeff[27]*other.coeff[24] +
+            self.coeff[29]*other.coeff[5] - self.coeff[31]*other.coeff[12],
+-self.coeff[2]*other.coeff[28] - self.coeff[3]*other.coeff[29] -
+            self.coeff[10]*other.coeff[31] + self.coeff[24]*other.coeff[28] +
+            self.coeff[25]*other.coeff[29] + self.coeff[28]*other.coeff[2] -
+            self.coeff[28]*other.coeff[24] + self.coeff[29]*other.coeff[3] -
+            self.coeff[29]*other.coeff[25] + self.coeff[30]*other.coeff[31] -
+            self.coeff[31]*other.coeff[10] + self.coeff[31]*other.coeff[30],
+self.coeff[1]*other.coeff[26] + self.coeff[4]*other.coeff[30] -
+            self.coeff[8]*other.coeff[31] - self.coeff[21]*other.coeff[26] -
+            self.coeff[26]*other.coeff[1] + self.coeff[26]*other.coeff[21] -
+            self.coeff[30]*other.coeff[4] - self.coeff[31]*other.coeff[8],
+self.coeff[1]*other.coeff[27] - self.coeff[5]*other.coeff[30] +
+            self.coeff[9]*other.coeff[31] - self.coeff[21]*other.coeff[27] -
+            self.coeff[27]*other.coeff[1] + self.coeff[27]*other.coeff[21] +
+            self.coeff[30]*other.coeff[5] + self.coeff[31]*other.coeff[9],
+self.coeff[1]*other.coeff[28] - self.coeff[3]*other.coeff[30] +
+            self.coeff[7]*other.coeff[31] - self.coeff[21]*other.coeff[28] +
+            self.coeff[25]*other.coeff[30] - self.coeff[28]*other.coeff[1] +
+            self.coeff[28]*other.coeff[21] - self.coeff[29]*other.coeff[31] +
+            self.coeff[30]*other.coeff[3] - self.coeff[30]*other.coeff[25] +
+            self.coeff[31]*other.coeff[7] - self.coeff[31]*other.coeff[29],
+self.coeff[1]*other.coeff[29] + self.coeff[2]*other.coeff[30] -
+            self.coeff[6]*other.coeff[31] - self.coeff[21]*other.coeff[29] -
+            self.coeff[24]*other.coeff[30] + self.coeff[28]*other.coeff[31] -
+            self.coeff[29]*other.coeff[1] + self.coeff[29]*other.coeff[21] -
+            self.coeff[30]*other.coeff[2] + self.coeff[30]*other.coeff[24] -
+            self.coeff[31]*other.coeff[6] + self.coeff[31]*other.coeff[28],
+-self.coeff[4]*other.coeff[31] - self.coeff[31]*other.coeff[4],
+self.coeff[5]*other.coeff[31] + self.coeff[31]*other.coeff[5],
+self.coeff[3]*other.coeff[31] - self.coeff[25]*other.coeff[31] +
+            self.coeff[31]*other.coeff[3] - self.coeff[31]*other.coeff[25],
+-self.coeff[2]*other.coeff[31] + self.coeff[24]*other.coeff[31] -
+            self.coeff[31]*other.coeff[2] + self.coeff[31]*other.coeff[24],
+self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
+            self.coeff[31]*other.coeff[1] - self.coeff[31]*other.coeff[21],
+0
+        ]
+        return cga_object(out)
 
     def __pos__(self):
         """TODO: Docstring for __NEG__.
@@ -120,6 +1053,35 @@ class cga_object:
         """
         return cga_object(-self.coeff)
 
+    def __invert__(self):
+        """Generates inverse of cga_object
+        """
+        out = [self.coeff[0] - 2*self.coeff[15], self.coeff[1] -
+               2*self.coeff[21], self.coeff[2] - 2*self.coeff[24],
+               self.coeff[3] - 2*self.coeff[25], self.coeff[4], self.coeff[5],
+               -self.coeff[6] + 2*self.coeff[28], -self.coeff[7] +
+               2*self.coeff[29], -self.coeff[8], -self.coeff[9],
+               -self.coeff[10] + 2*self.coeff[30], -self.coeff[11],
+               -self.coeff[12], -self.coeff[13], -self.coeff[14],
+               -self.coeff[15], -self.coeff[16] + 2*self.coeff[31],
+               -self.coeff[17], -self.coeff[18], -self.coeff[19],
+               -self.coeff[20], -self.coeff[21], -self.coeff[22],
+               -self.coeff[23], -self.coeff[24], -self.coeff[25],
+               self.coeff[26], self.coeff[27], self.coeff[28], self.coeff[29],
+               self.coeff[30], self.coeff[31]]
+        return cga_object(out)
+
+    def __eq__(self,other):
+        """equality checking
+
+        Args:
+            other (TODO): TODO
+
+        Returns: TODO
+
+        """
+        return not(any(self.coeff!=other.coeff))
+
     def __str__(self):
         out = ""
         is_first = True
@@ -130,6 +1092,8 @@ class cga_object:
                     is_first = False
                 else:
                     out += " + "+str(self.coeff[i])+self.coeff_names[i]
+        if out == "":
+            return "0"
         return out
 
 
@@ -170,11 +1134,9 @@ e_13io  = cga_object(np.eye(32)[:,29])
 e_23io  = cga_object(np.eye(32)[:,30])
 e_123io = cga_object(np.eye(32)[:,31])
 
-########################################
-# Testing
-########################################
-d = cga_object([1,1,0,3])
-
-e = cga_object([0,1,1,0])
-
-f = cga_object([1,1,1,0])
+eps_1 = e_123i
+eps_2 = e_123o
+eps_3 = e_1*e_2+1
+q_i = -e_23
+q_j = e_13
+q_k = -e_12
