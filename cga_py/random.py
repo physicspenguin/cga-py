@@ -25,9 +25,9 @@ def rand_point(maximum = 10, conformal = True):
     Returns: cga_object
 
     """
-    return point(rand_rational(maximum),
+    return point([rand_rational(maximum),
                  rand_rational(maximum),
-                 rand_rational(maximum),
+                 rand_rational(maximum)],
                  conformal)
 
 def rand_sphere(maximum = 10):

@@ -43,11 +43,10 @@ class cga_object:
                    "e_23io",
                    "e_123io"]
 
-    even_mask = [1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0,
-                 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0]
+    even_mask = np.array([1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0,
+                          0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0])
 
-
-    def __init__(self, gen):
+    def __init__(self, gen=[0]):
         if isinstance(gen,cga_object):
             cof = gen.coeff
         else:
@@ -1127,12 +1126,14 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
             return "0"
         return out
 
+
+    def __repr__(self):
+        return str(self)
+
     def make_even(self):
         """generates cga_object of even grade with coefficients of self
 
         Returns: (cga_object) even graded version of self
         """
         return cga_object([self.coeff[i]*self.even_mask[i] for i in range(self.dim)])
-
-
 
