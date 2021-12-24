@@ -39,6 +39,9 @@ def point_to_cartesian(point):
     Returns: (nd.array)
 
     """
+    if any(point.coeff[5:-1]==0) :
+        print("Object is not a representation of a point in CGA")
+        return
     return(np.array(normalize_point(point).coeff[1:4]))
 
 def sphere(center, radius):
@@ -64,6 +67,9 @@ def normalize_sphere(sphere):
     Returns: cga representation of the sphere normalized to e0
 
     """
+    if any(sphere.coeff[5:-1]==0) :
+        print("Object is not a representation of a sphere in CGA")
+        return
     return cga_object(1/sphere.coeff[5]*sphere.coeff)
 
 def sphere_to_cartesian(sphere):
@@ -75,6 +81,9 @@ def sphere_to_cartesian(sphere):
     Returns: (nd.array, float)
 
     """
+    if any(sphere.coeff[5:-1]==0) :
+        print("Object is not a representation of a sphere in CGA")
+        return
     norm_sphere = normalize_sphere(sphere)
     x = norm_sphere.coeff[1]
     y = norm_sphere.coeff[2]
