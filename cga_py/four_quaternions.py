@@ -13,7 +13,7 @@ def arr_to_quat(arr):
     return arr[0] + q_i*arr[1] + q_j*arr[2] + q_k*arr[3]
 
 def quat_to_arr(q):
-    """gives coefficients of quaternion given in CGA as an array
+    """Gives coefficients of quaternion given in CGA as an array
 
     Args:
         q (cga_object): quaternion of qhich coefficients are to be given

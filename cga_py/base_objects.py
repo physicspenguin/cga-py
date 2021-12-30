@@ -35,7 +35,7 @@ e_123io = cga_object(np.eye(32)[:,31])
 
 eps_1 = e_123i
 eps_2 = e_123o
-eps_3 = e_1*e_2+1
+eps_3 = eps_1*eps_2+1
 q_i = -e_23
 q_j = e_13
 q_k = -e_12

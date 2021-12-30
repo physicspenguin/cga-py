@@ -43,23 +43,22 @@ class cga_object:
                    "e_23io",
                    "e_123io"]
 
-    even_mask = np.array([1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0,
-                          0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0])
+    even_indices = np.array([ 0,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 26, 27,
+                             28, 29, 30])
 
-    def __init__(self, gen=[0]):
+    def __init__(self, gen=[0], even = False):
         if isinstance(gen,cga_object):
             cof = gen.coeff
         else:
             cof = gen
         ## Version if list is given
         self.coeff = np.zeros(self.dim)
-        self.even_coeff = []
-        for i in range(len(cof)):
-            self.coeff[i] = cof[i]
-
-        for i in range(self.dim):
-            if self.even_mask[i] == 1:
-                self.even_coeff.append(self.coeff[i])
+        if not even:
+            for i in range(len(cof)):
+                self.coeff[i] = cof[i]
+        else:
+            for i in range(len(even_indices)):
+                self.coeff[self.even_indices[i]] = cof[i]
 
     def __add__(self, other):
         """Addition of cga_object
@@ -1135,5 +1134,14 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
 
         Returns: (cga_object) even graded version of self
         """
-        return cga_object([self.coeff[i]*self.even_mask[i] for i in range(self.dim)])
+        return cga_object(self.coeff[even_indices], even = True)
+
+    def get_even(self):
+        """Returns even coefficients of object
+
+        Returns: nd.array
+
+        """
+        return self.coeff[self.even_indices]
+
 

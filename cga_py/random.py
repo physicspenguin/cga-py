@@ -58,4 +58,14 @@ def rand_plane(maximum = 10):
                   rand_rational(maximum)],
                  rand_rational(maximum))
 
+def rand_rotor(maximum = 10):
+    """Generates random rotor with rational coefficients
+
+    Kwargs:
+        maximum (float): maximum value
+
+    Returns: TODO
+
+    """
+    pass
 
