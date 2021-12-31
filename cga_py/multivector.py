@@ -57,7 +57,7 @@ class cga_object:
             for i in range(len(cof)):
                 self.coeff[i] = cof[i]
         else:
-            for i in range(len(even_indices)):
+            for i in range(len(self.even_indices)):
                 self.coeff[self.even_indices[i]] = cof[i]
 
     def __add__(self, other):
@@ -1125,7 +1125,6 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
             return "0"
         return out
 
-
     def __repr__(self):
         return str(self)
 
@@ -1134,7 +1133,7 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
 
         Returns: (cga_object) even graded version of self
         """
-        return cga_object(self.coeff[even_indices], even = True)
+        return cga_object(self.coeff[self.even_indices], even = True)
 
     def get_even(self):
         """Returns even coefficients of object

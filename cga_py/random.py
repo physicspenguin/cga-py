@@ -1,7 +1,9 @@
 import numpy.random as rand
+from scipy.optimize import curve_fit as solve
 from .multivector import *
 from .base_objects import *
 from .geom_generators import *
+from .conditions import *
 
 def rand_rational(maximum=10):
     """Generate randomn rational number up to n
@@ -67,5 +69,19 @@ def rand_rotor(maximum = 10):
     Returns: TODO
 
     """
-    pass
+    x = np.array([rand_rational(maximum),
+                  rand_rational(maximum),
+                  rand_rational(maximum),
+                  rand_rational(maximum),
+                  rand_rational(maximum),
+                  rand_rational(maximum),
+                  rand_rational(maximum),
+                  rand_rational(maximum),
+                  rand_rational(maximum),
+                  rand_rational(maximum),
+                  rand_rational(maximum)])
+    study = lambda y,x12,x13,x14,x15,x16: study_var(cga_object(
+        np.append(x,np.array([x12,x13,x14,x15,x16])),True))
+
+    return solve(study,np.array([0,0,0,0,0]))
 
