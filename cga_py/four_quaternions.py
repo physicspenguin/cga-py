@@ -60,4 +60,17 @@ def quat_to_rotor(q0, q1, q2, q3):
 
     return p0 + eps_1*p1 + eps_2*p2 + eps_3*p3
 
+def vectorial(quat):
+    """Returns vectorial part of quaternion given as CGA or as list of coefficients
+
+    Args:
+        quat (TODO): TODO
+
+    Returns: TODO
+
+    """
+    if isinstance(quat, cga_object):
+        return 1/2*(quat-(~quat))
+    else:
+        return quat[1:-1]
 

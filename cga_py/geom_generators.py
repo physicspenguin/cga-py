@@ -1,5 +1,6 @@
 from .multivector import *
 from .base_objects import *
+import cmath as cm
 
 def point(point, conformal = True):
     """Generate Point in (x,y,z)
@@ -93,9 +94,11 @@ def sphere_to_cartesian(sphere):
     x = norm_sphere.coeff[1]
     y = norm_sphere.coeff[2]
     z = norm_sphere.coeff[3]
-    r = np.sqrt(x**2 + y**2 + z**2 - 2*norm_sphere.coeff[4])
-
-    return np.array([x, y, z]), r
+    r = x**2 + y**2 + z**2 - 2*norm_sphere.coeff[4]
+    if r>=0:
+        return np.array([x, y, z]), np.sqrt(r)
+    else:
+        return np.array([x, y, z]), cm.sqrt(r)
 
 def plane(normal, distance):
     """Generate conformal representation of s plane with normalvector normal and

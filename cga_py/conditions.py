@@ -22,29 +22,17 @@ def study_var(r):
     Returns: nd.array
 
     """
-    a1 = r.coeff[1]
-    a2 = r.coeff[6]
-    a3 = r.coeff[7]
-    a4 = r.coeff[10]
-    a5 = r.coeff[8]
-    a6 = r.coeff[11]
-    a7 = r.coeff[13]
-    a8 = r.coeff[26]
-    c1 = r.coeff[28]
-    c2 = r.coeff[15]
-    c3 = r.coeff[30]
-    c4 = r.coeff[29]
-    c5 = r.coeff[12]
-    c6 = r.coeff[9]
-    c7 = r.coeff[27]
-    c8 = r.coeff[14]
-
-    return np.array([a1*a8 - a2*a7 + a3*a6 - a4*a5, a1*c7 - a2*c8 + a3*c5 -
-                     a4*c6, a1*c1 - a2*c2 + a5*c5 - a6*c6, a1*c4 - a3*c2 +
-                     a5*c8 - a7*c6, a1*c3 - a4*c2 + a6*c8 - a7*c5, -a2*c4 +
-                     a3*c1 - a5*c7 + a8*c6, a2*c3 - a4*c1 + a6*c7 - a8*c5,
-                     -a3*c3 + a4*c4 - a7*c7 + a8*c8, a5*c3 - a6*c4 + a7*c1 -
-                     a8*c2, -c1*c8 + c2*c7 - c3*c6 + c4*c5])
+    b = r.get_even()
+    return np.array([b[0]*b[11] - b[1]*b[8] + b[2]*b[6] - b[3]*b[5],
+                     b[0]*b[12] - b[1]*b[9] + b[2]*b[7] - b[4]*b[5],
+                     b[0]*b[13] - b[1]*b[10] + b[3]*b[7] - b[4]*b[6],
+                     b[0]*b[14] - b[2]*b[10] + b[3]*b[9] - b[4]*b[8],
+                     b[0]*b[15] - b[5]*b[10] + b[6]*b[9] - b[7]*b[8],
+                     -b[1]*b[14] + b[2]*b[13] - b[3]*b[12] + b[4]*b[11],
+                     b[1]*b[15] - b[5]*b[13] + b[6]*b[12] - b[7]*b[11],
+                     -b[2]*b[15] + b[5]*b[14] - b[8]*b[12] + b[9]*b[11],
+                     b[3]*b[15] - b[6]*b[14] + b[8]*b[13] - b[10]*b[11],
+                     -b[4]*b[15] + b[7]*b[14] - b[9]*b[13] + b[10]*b[12]])
 
 def null_quadric(r):
     """Evaluates Nullquadric condition for r. Condition is true, if output is 0.
