@@ -60,11 +60,12 @@ def rand_plane(maximum = 10):
                   rand_rational(maximum)],
                  rand_rational(maximum))
 
-def rand_rotor(maximum = 10):
+def rand_rotor(maximum = 10, tol = 0):
     """Generates random rotor with rational coefficients
 
     Kwargs:
         maximum (int): maximum for rational coefficients
+        tol (float): tolerance for numerical error
 
     Returns: cga-object
 
@@ -95,16 +96,17 @@ def rand_rotor(maximum = 10):
     a[3] = (a[6]*a[14] - a[8]*a[13] + a[10]*a[11])/a[15]
     a[4] = (a[7]*a[14] - a[9]*a[13] + a[10]*a[12])/a[15]
     out = cga_object(a,True)
-    if(np.linalg.norm(study_var(out)) != 0):
+    if not(np.linalg.norm(study_var(out)) <= tol):
         return rand_rotor(maximum)
 
     return out
 
-def rand_rot_poly(maximum = 10):
+def rand_rot_poly(maximum = 10, tol = 0):
     """Generates random rotor for rotor polynomials with rational coefficients.
 
     Kwargs:
         maximum (int): maximum for rational coefficients
+        tol (float): tolerance for numerical error
 
     Returns: cga-object
 
@@ -133,15 +135,16 @@ def rand_rot_poly(maximum = 10):
     a[2] = (a[3]*a[9] - a[4]*a[8])/a[10]
     a[5] = (a[6]*a[9] - a[7]*a[8])/a[10]
     out = cga_object(a,True)
-    if(np.linalg.norm(study_var(out)) != 0):
+    if(np.linalg.norm(study_var(out)) > tol):
         return rand_rot_poly(maximum)
     return out
 
-def rand_zero(maximum = 10):
+def rand_zero(maximum = 10, tol = 0):
     """Generates random rotor for zero displacement
 
     Kwargs:
         maximum (int): maximum for rational coefficients
+        tol (float): tolerance for numerical error
 
     Returns: cga-object
 
@@ -299,6 +302,6 @@ def rand_zero(maximum = 10):
         b = gen()
         out  = cga_object(b,True)
         # Check if Null displacement condition and Study condition is fullfilled
-        if(np.linalg.norm(study_var(out)) == 0 and np.linalg.norm(null_quadric(out)) == 0):
+        if(max(abs(study_var(out))) <= tol and abs(null_quadric(out)) <= tol):
             return out
 
