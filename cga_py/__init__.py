@@ -7,8 +7,8 @@ from .conditions import (study_cond, study_var, null_quadric)
 from .four_quaternions import (arr_to_quat, quat_to_arr, rotor_to_quat,
                                quat_to_rotor)
 from .geom_generators import (point, normalize_point, point_to_cartesian,
-                              sphere, normalize_sphere, plane, normalize_plane,
-                              plane_to_cartesian)
+                              sphere, normalize_sphere, sphere_to_cartesian,
+                              plane, normalize_plane, plane_to_cartesian)
 from .multivector import cga_object
 from .operators import (act, com, anti_com, n_grade, r_norm, l_norm)
 from .permutations import *
