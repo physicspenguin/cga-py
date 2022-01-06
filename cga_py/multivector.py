@@ -1120,7 +1120,7 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
                     out += str(self.coeff[i])+self.coeff_names[i]
                     is_first = False
                 else:
-                    out += " + "+str(self.coeff[i])+self.coeff_names[i]
+                    out += " + "+str(self.coeff[i])+"*"+self.coeff_names[i]
         if out == "":
             return "0"
         return out
