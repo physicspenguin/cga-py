@@ -1,16 +1,21 @@
 from .multivector import *
 from .base_objects import *
+import cmath as cm
 
 def point(point, conformal = True):
     """Generate Point in (x,y,z)
 
-    Args:
-        point (nd.array): array of form [x,y,z] giving the coordinates of the point
+    Parameters
+    ----------
+    point : nd.array
+        array of form [x,y,z] giving the coordinates of the point
+        Kwargs:
+    conformal : bool
+        return conformal description or euclidean
+        Returns: cga_object (Default value = True)
 
-    Kwargs:
-        conformal (bool): return conformal description or euclidean
-
-    Returns: cga_object
+    Returns
+    -------
 
     """
     if conformal:
@@ -22,10 +27,14 @@ def point(point, conformal = True):
 def normalize_point(point):
     """normalize CGA representation of point
 
-    Args:
-        point (cga_object): Point in conformal representation
+    Parameters
+    ----------
+    point : cga_object
+        Point in conformal representation
+        Returns: cga_object
 
-    Returns: cga_object
+    Returns
+    -------
 
     """
     if any(sphere.coeff[6:-1]):
@@ -37,10 +46,14 @@ def normalize_point(point):
 def point_to_cartesian(point):
     """Convert cga representation of a point into cartesian coordinates
 
-    Args:
-        point (cga_object): Point to be converted into cartesian system
+    Parameters
+    ----------
+    point : cga_object
+        Point to be converted into cartesian system
+        Returns: (nd.array)
 
-    Returns: (nd.array)
+    Returns
+    -------
 
     """
     if any(sphere.coeff[6:-1]):
@@ -51,11 +64,16 @@ def point_to_cartesian(point):
 def sphere(center, radius):
     """Generate conformal representation of a sphere in center with radius
 
-    Args:
-        center (nd.array): center as [x,y,z]
-        radius (float): radius of sphere
+    Parameters
+    ----------
+    center : nd.array
+        center as [x,y,z]
+    radius : float
+        radius of sphere
+        Returns: cga_object
 
-    Returns: cga_object
+    Returns
+    -------
 
     """
     return (center[0]*e_1 + center[1]*e_2 + center[2]*e_3 +
@@ -65,10 +83,14 @@ def sphere(center, radius):
 def normalize_sphere(sphere):
     """Normalize CGA representation of a sphere
 
-    Args:
-        sphere (cga_object): cga representation of a sphere
+    Parameters
+    ----------
+    sphere : cga_object
+        cga representation of a sphere
+        Returns: cga representation of the sphere normalized to e0
 
-    Returns: cga representation of the sphere normalized to e0
+    Returns
+    -------
 
     """
     if any(sphere.coeff[6:-1]):
@@ -79,10 +101,14 @@ def normalize_sphere(sphere):
 def sphere_to_cartesian(sphere):
     """Convert sphere in CGA representation to midpoint and radius
 
-    Args:
-        sphere (cga_object): Sphere to be converted to cartesian
+    Parameters
+    ----------
+    sphere : cga_object
+        Sphere to be converted to cartesian
+        Returns: (nd.array, float)
 
-    Returns: (nd.array, float)
+    Returns
+    -------
 
     """
     if any(sphere.coeff[6:-1]):
@@ -93,19 +119,26 @@ def sphere_to_cartesian(sphere):
     x = norm_sphere.coeff[1]
     y = norm_sphere.coeff[2]
     z = norm_sphere.coeff[3]
-    r = np.sqrt(x**2 + y**2 + z**2 - 2*norm_sphere.coeff[4])
-
-    return np.array([x, y, z]), r
+    r = x**2 + y**2 + z**2 - 2*norm_sphere.coeff[4]
+    if r>=0:
+        return np.array([x, y, z]), np.sqrt(r)
+    else:
+        return np.array([x, y, z]), cm.sqrt(r)
 
 def plane(normal, distance):
     """Generate conformal representation of s plane with normalvector normal and
     distance to origin distance
 
-    Args:
-        normal (nd.array): Normal vector given as [x,y,z]
-        distance (float): Distance to origin
+    Parameters
+    ----------
+    normal : nd.array
+        Normal vector given as [x,y,z]
+    distance : float
+        Distance to origin
+        Returns: cga_object
 
-    Returns: cga_object
+    Returns
+    -------
 
     """
     c = normal/np.sqrt(normal[0]**2+normal[1]**2+normal[2]**2)
@@ -114,10 +147,14 @@ def plane(normal, distance):
 def normalize_plane(plane):
     """Normalize CGA representation of a plane
 
-    Args:
-        plane (cga_object): Plane to be normalized
+    Parameters
+    ----------
+    plane : cga_object
+        Plane to be normalized
+        Returns: (cga_object)
 
-    Returns: (cga_object)
+    Returns
+    -------
 
     """
     if any(plane.coeff[5:-1]):
@@ -130,10 +167,14 @@ def plane_to_cartesian(plane):
     """Convert plane given in CGA to representation ad normal vector and
     distance from origin.
 
-    Args:
-        plane (cga_object): plane to be converted
+    Parameters
+    ----------
+    plane : cga_object
+        plane to be converted
+        Returns: (nd.array, float) normal unit-vector, distance from origin
 
-    Returns: (nd.array, float) normal unit-vector, distance from origin
+    Returns
+    -------
 
     """
     if any(plane.coeff[5:-1]):

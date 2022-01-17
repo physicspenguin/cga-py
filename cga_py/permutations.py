@@ -1,4 +1,8 @@
-from .base_objects import *
+from .base_objects import (e_1, e_2, e_3, e_i, e_o, e_12, e_13, e_1i, e_1o,
+                           e_23, e_2i, e_2o, e_3i, e_3o, e_io, e_123, e_12i,
+                           e_12o, e_13i, e_13o, e_1io, e_23i, e_23o, e_2io,
+                           e_3io, e_123i, e_123o, e_12io, e_13io, e_23io,
+                           e_123io)
 
 # Permutations of order 2 elements
 e_12 =  e_12; e_13 =  e_13; e_1i =  e_1i; e_1o =  e_1o; e_23 =  e_23; e_2i =  e_2i; e_2o =  e_2o; e_3i =  e_3i; e_3o =  e_3o; e_io =  e_io

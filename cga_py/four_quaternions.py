@@ -4,10 +4,16 @@ from .base_objects import *
 def arr_to_quat(arr):
     """Converts an array to quaternion with coefficients given in array
 
-    Args:
-        lst (array): TODO
+    Parameters
+    ----------
+    lst : array
+        TODO
+        Returns: cga_object
+    arr :
+        
 
-    Returns: cga_object
+    Returns
+    -------
 
     """
     return arr[0] + q_i*arr[1] + q_j*arr[2] + q_k*arr[3]
@@ -15,10 +21,14 @@ def arr_to_quat(arr):
 def quat_to_arr(q):
     """Gives coefficients of quaternion given in CGA as an array
 
-    Args:
-        q (cga_object): quaternion of qhich coefficients are to be given
+    Parameters
+    ----------
+    q : cga_object
+        quaternion of qhich coefficients are to be given
+        Returns: array
 
-    Returns: array
+    Returns
+    -------
 
     """
     return np.array([q.coeff[0], -q.coeff[10], q.coeff[7], -q.coeff[6]])
@@ -26,10 +36,13 @@ def quat_to_arr(q):
 def rotor_to_quat(rot):
     """Convert Rotor to its four quaternion representation
 
-    Args:
-        rot (cga_object):
+    Parameters
+    ----------
+    rot : cga_object
+        Returns: list of quaternions
 
-    Returns: list of quaternions
+    Returns
+    -------
 
     """
     coeff = rot.even_coeff
@@ -44,13 +57,20 @@ def quat_to_rotor(q0, q1, q2, q3):
     """Compute rotor given by the four quaternions q0,q1,q2,q3 as lists so that
     h = q0 + eps_1*q1 + eps_2*q2 + eps_3*q3
 
-    Args:
-        q0 (nd.array): Quaternion given in List form
-        q1 (nd.array): Quaternion given in List form
-        q2 (nd.array): Quaternion given in List form
-        q3 (nd.array): Quaternion given in List form
+    Parameters
+    ----------
+    q0 : nd.array
+        Quaternion given in List form
+    q1 : nd.array
+        Quaternion given in List form
+    q2 : nd.array
+        Quaternion given in List form
+    q3 : nd.array
+        Quaternion given in List form
+        Returns: (cga_object) Rotor defined by the four quaternions
 
-    Returns: (cga_object) Rotor defined by the four quaternions
+    Returns
+    -------
 
     """
     p0 = q0[1] + q_i*q0[2] + q_j*q0[3] + q_k*q0[4]
@@ -60,4 +80,21 @@ def quat_to_rotor(q0, q1, q2, q3):
 
     return p0 + eps_1*p1 + eps_2*p2 + eps_3*p3
 
+def vectorial(quat):
+    """Returns vectorial part of quaternion given as CGA or as list of coefficients
+
+    Parameters
+    ----------
+    quat : TODO
+        TODO
+        Returns: TODO
+
+    Returns
+    -------
+
+    """
+    if isinstance(quat, cga_object):
+        return 1/2*(quat-(~quat))
+    else:
+        return quat[1:-1]
 

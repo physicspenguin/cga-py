@@ -3,11 +3,16 @@ from .multivector import *
 def act(Rotator, obj):
     """Function to let Rotator act on obj
 
-    Args:
-        Rotator (cga_object): Rotator to apply to obj
-        obj (cga_object): Object to be acted upon
+    Parameters
+    ----------
+    Rotator : cga_object
+        Rotator to apply to obj
+    obj : cga_object
+        Object to be acted upon
+        Returns: (cga_object) Rotated object
 
-    Returns: (cga_object) Rotated object
+    Returns
+    -------
 
     """
     return Rotator*obj*(~Rotator)
@@ -15,11 +20,16 @@ def act(Rotator, obj):
 def com(a,b):
     """commutator Product of a and b
 
-    Args:
-        a (cga_object): TODO
-        b (cga_object): TODO
+    Parameters
+    ----------
+    a : cga_object
+        TODO
+    b : cga_object
+        TODO
+        Returns: cga_object
 
-    Returns: cga_object
+    Returns
+    -------
 
     """
     return (1/2)*(a*b - b*a)
@@ -27,11 +37,16 @@ def com(a,b):
 def anti_com(a,b):
     """anti-commutator Product of a and b
 
-    Args:
-        a (cga_object): TODO
-        b (cga_object): TODO
+    Parameters
+    ----------
+    a : cga_object
+        TODO
+    b : cga_object
+        TODO
+        Returns: cga_object
 
-    Returns: cga_object
+    Returns
+    -------
 
     """
     return (1/2)*(a*b + b*a)
@@ -39,11 +54,16 @@ def anti_com(a,b):
 def n_grade(obj,grade):
     """Returns parts of obj with grade grade
 
-    Args:
-        obj (cga_object): object of which to extract grade-graded parts
-        grade (int): grade of parts to be extracted
+    Parameters
+    ----------
+    obj : cga_object
+        object of which to extract grade-graded parts
+    grade : int
+        grade of parts to be extracted
+        Returns: (cga_object) grade-graded parts of obj
 
-    Returns: (cga_object) grade-graded parts of obj
+    Returns
+    -------
 
     """
     vec = np.zeros(32)
@@ -75,10 +95,15 @@ def n_grade(obj,grade):
 def r_norm(obj):
     """Return obj*(obj^*) in CGA
 
-    Args:
-        obj (cga_object): object of which to compute norm
+    Parameters
+    ----------
+    obj :
+        cga_object
 
-    Returns: cga_object
+    Returns
+    -------
+    type
+        
 
     """
     return obj*(~obj)
@@ -86,10 +111,15 @@ def r_norm(obj):
 def l_norm(obj):
     """Return (obj^*)*obj in CGA
 
-    Args:
-        obj (cga_object): object of which to compute norm
+    Parameters
+    ----------
+    obj :
+        cga_object
 
-    Returns: cga_object
+    Returns
+    -------
+    type
+        
 
     """
     return (~obj)*obj
