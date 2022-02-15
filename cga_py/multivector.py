@@ -593,13 +593,52 @@ class cga_object:
         if isinstance(other,cga_object):
             print("Division of cga_objects not allowed")
         else:
-            # cof = np.zeros(self.dim)
-            # for i in range(self.dim):
-                # cof[i] = self.coeff[i]/other
-            # return cga_object(cof)
-            return (1/other)*self
+            cof = np.zeros(self.dim)
+            for i in range(self.dim):
+                cof[i] = self.coeff[i]/other
+            return cga_object(cof)
 
-    __rtruediv__ = __truediv__
+    def __floordiv__(self, other):
+        """division by non cga_objects
+
+        Parameters
+        ----------
+        other : TODO
+            TODO
+            Returns: TODO
+
+        Returns
+        -------
+
+        """
+        if isinstance(other,cga_object):
+            print("Division of cga_objects not allowed")
+        else:
+            cof = np.zeros(self.dim)
+            for i in range(self.dim):
+                cof[i] = self.coeff[i]//other
+            return cga_object(cof)
+
+    def __mod__(self, other):
+        """division by non cga_objects
+
+        Parameters
+        ----------
+        other : TODO
+            TODO
+            Returns: TODO
+
+        Returns
+        -------
+
+        """
+        if isinstance(other,cga_object):
+            print("Division of cga_objects not allowed")
+        else:
+            cof = np.zeros(self.dim)
+            for i in range(self.dim):
+                cof[i] = self.coeff[i]%other
+            return cga_object(cof)
 
     def __xor__(self, other):
         """outer / wedge product

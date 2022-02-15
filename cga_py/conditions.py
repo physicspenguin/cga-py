@@ -2,24 +2,32 @@ from .multivector import *
 from .base_objects import *
 
 def study_cond(a,b):
-    """Computes Study condition for quaternions a and b embeded into the CGA
+    """Computes Study condition for objects a and b embeded into the CGA
 
-    Args:
-        a (cga_object):
-        b (cga_object):
+    Parameters
+    ----------
+    a : cga_object
+        First parameter
+    b : cga_object
 
-    Returns: cga_object
-
+    Returns
+    -------
+    cga_object
+        Study condition of `a` and `b`
     """
     return a*(~b) + b*(~a)
 
 def study_var(r):
     """Compute Study variety equations for even graded elements of CGA
 
-    Args:
-        r (cga_object): even graded cga_object
+    Parameters
+    ----------
+    r : cga_object
+        even graded cga_object
+        Returns: nd.array
 
-    Returns: nd.array
+    Returns
+    -------
 
     """
     b = r.get_even()
@@ -37,10 +45,14 @@ def study_var(r):
 def null_quadric(r):
     """Evaluates Nullquadric condition for r. Condition is true, if output is 0.
 
-    Args:
-        r (cga_object): object of which to evaluate the null quadric condition
+    Parameters
+    ----------
+    r : cga_object
+        object of which to evaluate the null quadric condition
+        Returns: float
 
-    Returns: float
+    Returns
+    -------
 
     """
     return (r*(~r)).coeff[0]
