@@ -2,10 +2,16 @@ import numpy as np
 
 class cga_object:
 
-    """
-    Element of the CGA with methods for:
+    """Element of the CGA with methods for:
     addition, multiplication,
     printing
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+
 
     """
     dim = 32
@@ -47,6 +53,19 @@ class cga_object:
                              28, 29, 30])
 
     def __init__(self, gen=[0], even = False):
+        """
+
+        Parameters
+        ----------
+        gen :
+             (Default value = [0])
+        even :
+             (Default value = False)
+
+        Returns
+        -------
+
+        """
         if isinstance(gen,cga_object):
             cof = gen.coeff
         else:
@@ -63,10 +82,14 @@ class cga_object:
     def __add__(self, other):
         """Addition of cga_object
 
-        Args:
-            other (cga_object): object to add to self
+        Parameters
+        ----------
+        other : cga_object
+            object to add to self
+            Returns: addition of cga_object with cga_object
 
-        Returns: addition of cga_object with cga_object
+        Returns
+        -------
 
         """
         # This is a rather hacky way of ensuring that addition of different
@@ -82,10 +105,14 @@ class cga_object:
     def __sub__(self, other):
         """TODO: Docstring for __sub__.
 
-        Args:
-            other (TODO): TODO
+        Parameters
+        ----------
+        other : TODO
+            TODO
+            Returns: TODO
 
-        Returns: TODO
+        Returns
+        -------
 
         """
         return self + (-other)
@@ -95,10 +122,14 @@ class cga_object:
     def __mul__(self, other):
         """CGA multiplication of two cga_object
 
-        Args:
-            other (cga_object): cga_object to multiply with self
+        Parameters
+        ----------
+        other : cga_object
+            cga_object to multiply with self
+            Returns: (cga_object) multiplication of other and self
 
-        Returns: (cga_object) multiplication of other and self
+        Returns
+        -------
 
         """
         try:
@@ -546,32 +577,41 @@ class cga_object:
 
     __rmul__ = __mul__
 
-    def __div__(self, other):
+    def __truediv__(self, other):
         """division by non cga_objects
 
-        Args:
-            other (TODO): TODO
+        Parameters
+        ----------
+        other : TODO
+            TODO
+            Returns: TODO
 
-        Returns: TODO
+        Returns
+        -------
 
         """
         if isinstance(other,cga_object):
             print("Division of cga_objects not allowed")
         else:
-            cof = np.zeros(self.dim)
-            for i in range(self.dim):
-                cof[i] = self.coeff[i]/other
-            return cga_object(cof)
+            # cof = np.zeros(self.dim)
+            # for i in range(self.dim):
+                # cof[i] = self.coeff[i]/other
+            # return cga_object(cof)
+            return (1/other)*self
 
-    __rdiv__ = __div__
+    __rtruediv__ = __truediv__
 
     def __xor__(self, other):
         """outer / wedge product
 
-        Args:
-            other (TODO): TODO
+        Parameters
+        ----------
+        other : TODO
+            TODO
+            Returns: TODO
 
-        Returns: TODO
+        Returns
+        -------
 
         """
         out =[
@@ -811,10 +851,14 @@ class cga_object:
     def __or__(self, other):
         """inner product
 
-        Args:
-            other (TODO): TODO
+        Parameters
+        ----------
+        other : TODO
+            TODO
+            Returns: TODO
 
-        Returns: TODO
+        Returns
+        -------
 
         """
         out =[
@@ -1063,10 +1107,14 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
     def __pos__(self):
         """TODO: Docstring for __NEG__.
 
-        Args:
-            other (TODO): TODO
+        Parameters
+        ----------
+        other : TODO
+            TODO
+            Returns: TODO
 
-        Returns: TODO
+        Returns
+        -------
 
         """
         return cga_object(self.coeff)
@@ -1074,17 +1122,20 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
     def __neg__(self):
         """TODO: Docstring for __NEG__.
 
-        Args:
-            other (TODO): TODO
+        Parameters
+        ----------
+        other : TODO
+            TODO
+            Returns: TODO
 
-        Returns: TODO
+        Returns
+        -------
 
         """
         return cga_object(-self.coeff)
 
     def __invert__(self):
-        """Generates inverse of cga_object
-        """
+        """Generates inverse of cga_object"""
         out = [self.coeff[0] - 2*self.coeff[15], self.coeff[1] -
                2*self.coeff[21], self.coeff[2] - 2*self.coeff[24],
                self.coeff[3] - 2*self.coeff[25], self.coeff[4], self.coeff[5],
@@ -1103,15 +1154,20 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
     def __eq__(self,other):
         """equality checking
 
-        Args:
-            other (TODO): TODO
+        Parameters
+        ----------
+        other : TODO
+            TODO
+            Returns: TODO
 
-        Returns: TODO
+        Returns
+        -------
 
         """
         return not(any(self.coeff!=other.coeff))
 
     def __str__(self):
+        """ """
         out = ""
         is_first = True
         for i in range(self.dim):
@@ -1126,12 +1182,21 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
         return out
 
     def __repr__(self):
+        """ """
         return str(self)
 
     def make_even(self):
         """generates cga_object of even grade with coefficients of self
 
         Returns: (cga_object) even graded version of self
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+
+
         """
         return cga_object(self.coeff[self.even_indices], even = True)
 
@@ -1139,6 +1204,13 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
         """Returns even coefficients of object
 
         Returns: nd.array
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+
 
         """
         return self.coeff[self.even_indices]
