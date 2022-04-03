@@ -1228,7 +1228,7 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
 
     def __repr__(self):
         """ """
-        out = "cga_object("
+        out = ""
         is_first = True
         for i in range(self.dim):
             if self.coeff[i] != 0:
@@ -1243,9 +1243,9 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
                         out += " + "+repr(self.coeff[i].real)+"*"+self.coeff_names[i]
                     else:
                         out += " + "+repr(self.coeff[i])+"*"+self.coeff_names[i]
-        if out == "cga_object(":
-            return out + "0)"
-        return out+ ")"
+        if out == "":
+            return "0"
+        return out
 
     def make_even(self):
         """generates cga_object of even grade with coefficients of self
