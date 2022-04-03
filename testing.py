@@ -4,7 +4,14 @@ import numpy as np
 from scipy.optimize import root as solve
 a = e_12 + 3*e_1o
 b = e_1 + e_12
-# s = sphere([3,2,1], 4)
+s1 = sphere([0,0,0], 1)
+s2 = sphere([1,0,0], 1)
+
+# print(sphere_to_cartesian(act(s1,s2)))
+si = s2
+for i in range(5):
+    si = act(s1,si)
+    print(si)
 # print(sphere_to_cartesian(s))
 # print(s)
 # s = 2*s
@@ -31,4 +38,3 @@ b = e_1 + e_12
 # x = rand_rot_poly()
 # print(x)
 # print(study_var(x))
-
