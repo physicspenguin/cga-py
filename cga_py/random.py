@@ -1,5 +1,4 @@
 import numpy.random as rand
-from scipy.optimize import curve_fit as solve
 from .multivector import *
 from .base_objects import *
 from .geom_generators import *

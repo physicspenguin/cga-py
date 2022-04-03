@@ -12,7 +12,7 @@ class cga_object:
     Returns
     -------
 
-    
+
     """
     dim = 32
 
@@ -71,13 +71,13 @@ class cga_object:
         else:
             cof = gen
         ## Version if list is given
-        self.coeff = np.zeros(self.dim)
+        self.coeff = np.zeros(self.dim,dtype = complex)
         if not even:
             for i in range(len(cof)):
-                self.coeff[i] = cof[i]
+                self.coeff[i] = complex(cof[i])
         else:
             for i in range(len(self.even_indices)):
-                self.coeff[self.even_indices[i]] = cof[i]
+                self.coeff[self.even_indices[i]] = complex(cof[i])
 
     def __add__(self, other):
         """Addition of cga_object
@@ -570,14 +570,14 @@ class cga_object:
             ]
             return cga_object(out)
         except:
-            cof = np.zeros(self.dim)
+            cof = np.zeros(self.dim,dtype=complex)
             for i in range(self.dim):
                 cof[i] = other*self.coeff[i]
             return cga_object(cof)
 
     __rmul__ = __mul__
 
-    def __div__(self, other):
+    def __truediv__(self, other):
         """division by non cga_objects
 
         Parameters
@@ -598,7 +598,47 @@ class cga_object:
                 cof[i] = self.coeff[i]/other
             return cga_object(cof)
 
-    __rdiv__ = __div__
+    def __floordiv__(self, other):
+        """division by non cga_objects
+
+        Parameters
+        ----------
+        other : TODO
+            TODO
+            Returns: TODO
+
+        Returns
+        -------
+
+        """
+        if isinstance(other,cga_object):
+            print("Division of cga_objects not allowed")
+        else:
+            cof = np.zeros(self.dim)
+            for i in range(self.dim):
+                cof[i] = self.coeff[i]//other
+            return cga_object(cof)
+
+    def __mod__(self, other):
+        """division by non cga_objects
+
+        Parameters
+        ----------
+        other : TODO
+            TODO
+            Returns: TODO
+
+        Returns
+        -------
+
+        """
+        if isinstance(other,cga_object):
+            print("Division of cga_objects not allowed")
+        else:
+            cof = np.zeros(self.dim)
+            for i in range(self.dim):
+                cof[i] = self.coeff[i]%other
+            return cga_object(cof)
 
     def __xor__(self, other):
         """outer / wedge product
@@ -1172,21 +1212,44 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
         for i in range(self.dim):
             if self.coeff[i] != 0:
                 if is_first:
-                    out += str(self.coeff[i])+self.coeff_names[i]
+                    if self.coeff[i].imag == 0:
+                        out += repr(self.coeff[i].real)+self.coeff_names[i]
+                    else:
+                        out += repr(self.coeff[i])+self.coeff_names[i]
                     is_first = False
                 else:
-                    out += " + "+str(self.coeff[i])+"*"+self.coeff_names[i]
+                    if self.coeff[i].imag == 0:
+                        out += " + "+repr(self.coeff[i].real)+self.coeff_names[i]
+                    else:
+                        out += " + "+repr(self.coeff[i])+self.coeff_names[i]
         if out == "":
             return "0"
         return out
 
     def __repr__(self):
         """ """
-        return str(self)
+        out = "cga_object("
+        is_first = True
+        for i in range(self.dim):
+            if self.coeff[i] != 0:
+                if is_first:
+                    if self.coeff[i].imag == 0:
+                        out += repr(self.coeff[i].real)+"*"+self.coeff_names[i]
+                    else:
+                        out += repr(self.coeff[i])+"*"+self.coeff_names[i]
+                    is_first = False
+                else:
+                    if self.coeff[i].imag == 0:
+                        out += " + "+repr(self.coeff[i].real)+"*"+self.coeff_names[i]
+                    else:
+                        out += " + "+repr(self.coeff[i])+"*"+self.coeff_names[i]
+        if out == "cga_object(":
+            return out + "0)"
+        return out+ ")"
 
     def make_even(self):
         """generates cga_object of even grade with coefficients of self
-        
+
         Returns: (cga_object) even graded version of self
 
         Parameters
@@ -1195,13 +1258,13 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
         Returns
         -------
 
-        
+
         """
         return cga_object(self.coeff[self.even_indices], even = True)
 
     def get_even(self):
         """Returns even coefficients of object
-        
+
         Returns: nd.array
 
         Parameters
@@ -1210,8 +1273,7 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
         Returns
         -------
 
-        
+
         """
         return self.coeff[self.even_indices]
-
 

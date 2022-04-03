@@ -6,29 +6,30 @@ def arr_to_quat(arr):
 
     Parameters
     ----------
-    lst : array
-        TODO
-        Returns: cga_object
-    arr :
-        
+    arr : array_like
+        array giving the coefficients of [1,i,j,k] in this order.
 
     Returns
     -------
+    cga_object
+        Quaternion given by the coefficients in `arr` represented in terms of
+        CGA.
 
     """
     return arr[0] + q_i*arr[1] + q_j*arr[2] + q_k*arr[3]
 
 def quat_to_arr(q):
-    """Gives coefficients of quaternion given in CGA as an array
+    """Coefficients of quaternion `q` given in terms of CGA.
 
     Parameters
     ----------
     q : cga_object
-        quaternion of qhich coefficients are to be given
-        Returns: array
+        Quaternion of which coefficients are to be calculated.
 
     Returns
     -------
+    array
+        Coefficients of quaternion `q` given in order of [1,i,j,k].
 
     """
     return np.array([q.coeff[0], -q.coeff[10], q.coeff[7], -q.coeff[6]])
@@ -43,9 +44,19 @@ def rotor_to_quat(rot):
 
     Returns
     -------
+    tuple
+        Tuple of quaternions that represent the rotor in terms of the four
+        quaternion decomposition.
+
+    Notes
+    -----
+    Rotors in CGA can be represented through four quaternions in the form
+    q0 + eps_1*q1 + eps_2*q2 + eps_3*q3.
+    These quaternions can be directly extracted from the CGA representation of
+    the rotor.
 
     """
-    coeff = rot.even_coeff
+    coeff = rot.get_even()
     p0  = coeff[0]  - q_i*coeff[5]  + q_j*coeff[2]  - q_k*coeff[1]
     q1  = coeff[11] + q_i*coeff[8]  + q_j*coeff[3]  - q_k*coeff[6]
     q2  = coeff[12] + q_i*coeff[9]  + q_j*coeff[4]  - q_k*coeff[7]
@@ -54,43 +65,57 @@ def rotor_to_quat(rot):
     return q0, q1, q2, q3
 
 def quat_to_rotor(q0, q1, q2, q3):
-    """Compute rotor given by the four quaternions q0,q1,q2,q3 as lists so that
-    h = q0 + eps_1*q1 + eps_2*q2 + eps_3*q3
+    """Compute rotor given by the four quaternions q0,q1,q2,q3
 
     Parameters
     ----------
-    q0 : nd.array
-        Quaternion given in List form
-    q1 : nd.array
-        Quaternion given in List form
-    q2 : nd.array
-        Quaternion given in List form
-    q3 : nd.array
-        Quaternion given in List form
-        Returns: (cga_object) Rotor defined by the four quaternions
+    q0 : array_like
+        Quaternion given in list-form
+    q1 : array_like
+        Quaternion given in list-form
+    q2 : array_like
+        Quaternion given in list-form
+    q3 : array_like
+        Quaternion given in list-form
 
     Returns
     -------
+    cga_object
+        Rotor defined by the four quaternions.
+
+    Notes
+    -----
+    Rotors can be represented by four quaternionsq0 q1,q2,q3 as lists so that
+    h = q0 + eps_1*q1 + eps_2*q2 + eps_3*q3
+
 
     """
-    p0 = q0[1] + q_i*q0[2] + q_j*q0[3] + q_k*q0[4]
-    p1 = q1[1] + q_i*q1[2] + q_j*q1[3] + q_k*q1[4]
-    p2 = q2[1] + q_i*q2[2] + q_j*q2[3] + q_k*q2[4]
-    p3 = q3[1] + q_i*q3[2] + q_j*q3[3] + q_k*q3[4]
+    try:
+        p0 = q0[1] + q_i*q0[2] + q_j*q0[3] + q_k*q0[4]
+        p1 = q1[1] + q_i*q1[2] + q_j*q1[3] + q_k*q1[4]
+        p2 = q2[1] + q_i*q2[2] + q_j*q2[3] + q_k*q2[4]
+        p3 = q3[1] + q_i*q3[2] + q_j*q3[3] + q_k*q3[4]
+    except:
+        p0 = q0
+        p1 = q1
+        p2 = q2
+        p3 = q3
+
 
     return p0 + eps_1*p1 + eps_2*p2 + eps_3*p3
 
 def vectorial(quat):
-    """Returns vectorial part of quaternion given as CGA or as list of coefficients
+    """Returns vectorial part of quaternion
 
     Parameters
     ----------
-    quat : TODO
-        TODO
-        Returns: TODO
+    quat : cga_object or array_like
+        Quaternion of which to to extract the vectorial component.
 
     Returns
     -------
+    cga_object or array_like
+        Vectorial part of quaternion in same representation as input datatype.
 
     """
     if isinstance(quat, cga_object):

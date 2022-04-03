@@ -5,7 +5,7 @@ from .base_objects import (e_1, e_2, e_3, e_i, e_o, e_12, e_13, e_1i, e_1o,
                            e_123io, eps_1, eps_2, eps_3, q_i, q_j, q_k)
 from .conditions import (study_cond, study_var, null_quadric)
 from .four_quaternions import (arr_to_quat, quat_to_arr, rotor_to_quat,
-                               quat_to_rotor)
+                               quat_to_rotor, vectorial)
 from .geom_generators import (point, normalize_point, point_to_cartesian,
                               sphere, normalize_sphere, sphere_to_cartesian,
                               plane, normalize_plane, plane_to_cartesian)
