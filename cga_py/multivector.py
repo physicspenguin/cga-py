@@ -3,16 +3,8 @@ import numpy as np
 class cga_object:
 
     """Element of the CGA with methods for:
-    addition, multiplication,
-    printing
-
-    Parameters
-    ----------
-
-    Returns
-    -------
-
-
+    addition, multiplication, subtraction, division by scalars, modolo by scalar
+    wedgeproduct, dot product, equality checking, reversion and printing
     """
     dim = 32
 
@@ -1230,19 +1222,22 @@ self.coeff[1]*other.coeff[31] - self.coeff[21]*other.coeff[31] +
         """ """
         out = ""
         is_first = True
+        mul_str = ""
         for i in range(self.dim):
             if self.coeff[i] != 0:
                 if is_first:
                     if self.coeff[i].imag == 0:
-                        out += repr(self.coeff[i].real)+"*"+self.coeff_names[i]
+                        out += repr(self.coeff[i].real)+mul_str+self.coeff_names[i]
                     else:
-                        out += repr(self.coeff[i])+"*"+self.coeff_names[i]
+                        out += repr(self.coeff[i])+mul_str+self.coeff_names[i]
                     is_first = False
                 else:
                     if self.coeff[i].imag == 0:
-                        out += " + "+repr(self.coeff[i].real)+"*"+self.coeff_names[i]
+                        out += " + "+repr(self.coeff[i].real)+mul_str+self.coeff_names[i]
                     else:
-                        out += " + "+repr(self.coeff[i])+"*"+self.coeff_names[i]
+                        out += " + "+repr(self.coeff[i])+mul_str+self.coeff_names[i]
+            if i == 0 :
+                mul_str = "*"
         if out == "":
             return "0"
         return out
