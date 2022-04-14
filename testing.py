@@ -40,3 +40,5 @@ for i in range(5):
 # print(study_var(x))
 
 q0 = arr_to_quat([1,2,3,4])
+
+
