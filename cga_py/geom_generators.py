@@ -2,15 +2,13 @@ from .multivector import *
 from .base_objects import *
 import cmath as cm
 
-def point(point, conformal = True):
+def point(point):
     """Generate Point in (x,y,z)
 
     Parameters
     ----------
     point : array_like
         Cartesian coordinates of point given as [x, y, z]
-    conformal : bool, optional (Default value = True)
-        Return conformal or euclidean description.
 
     Returns
     -------
@@ -27,11 +25,8 @@ def point(point, conformal = True):
         x*e_1 + y*e_2 + z*e_3 + 1/2*(x^2 + y^2 + z^2)*e_i + e_0
 
     """
-    if conformal:
-        return (point[0]*e_1 + point[1]*e_2 + point[2]*e_3 +
-                1/2*(point[0]**2 + point[1]**2 + point[2]**2)*e_i + e_o)
-    else:
-        return point[0]*e_1 + point[1]*e_2 + point[2]*e_3
+    return (point[0]*e_1 + point[1]*e_2 + point[2]*e_3 +
+            1/2*(point[0]**2 + point[1]**2 + point[2]**2)*e_i + e_o)
 
 def normalize_point(point):
     """Normalize CGA representation of point
@@ -68,7 +63,7 @@ def point_to_cartesian(point):
 
     """
     if any(point.coeff[6:-1]):
-        print("Object is not a cga representation of a Point")
+        print(f"{point} is not a cga representation of a Point")
         return
     return(np.array(normalize_point(point).coeff[1:4]))
 

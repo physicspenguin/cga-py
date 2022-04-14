@@ -14,4 +14,7 @@ from .operators import (act, com, anti_com, n_grade, r_norm, l_norm)
 from .permutations import *
 from .random import (rand_rational, rand_point, rand_sphere, rand_plane,
                      rand_plane, rand_rotor, rand_rot_poly, rand_zero)
+from .kinematic_polynomials import (poly_act)
+from .dorst_motions import (iso_scale, transv)
+from .visualization import point_p_act
 

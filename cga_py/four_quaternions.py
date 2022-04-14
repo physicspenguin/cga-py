@@ -140,3 +140,5 @@ def scalar(quat):
         return quat-1/2*(quat-(~quat))
     else:
         return quat[0]
+
+
