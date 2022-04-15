@@ -4,7 +4,7 @@ import numpy as np
 import multiprocessing as mp
 from functools import partial
 
-def fun (i, points, param, poly):
+def point_p_act_helper (i, points, param, poly):
     return point_to_cartesian(poly_act(param, poly, point(points[i])))
 
 def point_p_act(points, param, poly):
@@ -25,5 +25,7 @@ def point_p_act(points, param, poly):
         Cartesian coordinates of points after rotor application
 
     """
-    return np.array(mp.Pool().map(partial(fun,points = points, param = param, poly = poly), range(points.shape[0])))
+    return np.array(mp.Pool().map(
+        partial(point_p_act_helper, points = points,
+                param = param, poly = poly), range(points.shape[0])))
 
