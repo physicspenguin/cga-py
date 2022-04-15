@@ -91,16 +91,15 @@ def quat_to_rotor(q0, q1, q2, q3):
 
     """
     try:
-        p0 = q0[1] + q_i*q0[2] + q_j*q0[3] + q_k*q0[4]
-        p1 = q1[1] + q_i*q1[2] + q_j*q1[3] + q_k*q1[4]
-        p2 = q2[1] + q_i*q2[2] + q_j*q2[3] + q_k*q2[4]
-        p3 = q3[1] + q_i*q3[2] + q_j*q3[3] + q_k*q3[4]
+        p0 = q0[0] + q_i*q0[1] + q_j*q0[2] + q_k*q0[3]
+        p1 = q1[0] + q_i*q1[1] + q_j*q1[2] + q_k*q1[3]
+        p2 = q2[0] + q_i*q2[1] + q_j*q2[2] + q_k*q2[3]
+        p3 = q3[0] + q_i*q3[1] + q_j*q3[2] + q_k*q3[3]
     except:
         p0 = q0
         p1 = q1
         p2 = q2
         p3 = q3
-
 
     return p0 + eps_1*p1 + eps_2*p2 + eps_3*p3
 
@@ -122,4 +121,24 @@ def vectorial(quat):
         return 1/2*(quat-(~quat))
     else:
         return quat[1:-1]
+
+def scalar(quat):
+    """Returns scalar part of quaternion
+
+    Parameters
+    ----------
+    quat : cga_object or array_like
+        Quaternion of which to extract the scalar component.
+
+    Returns
+    -------
+    cga_object or array_like
+        Vectorial part of quaternion in same representation as input datatype.
+
+    """
+    if isinstance(quat, cga_object):
+        return quat-1/2*(quat-(~quat))
+    else:
+        return quat[0]
+
 

@@ -1,12 +1,12 @@
 from .multivector import *
 
-def act(Rotator, obj):
-    """Function to let Rotator act on obj
+def act(rotator, obj):
+    """Function to let rotator act on obj
 
     Parameters
     ----------
-    Rotator : cga_object
-        Rotator to apply to obj
+    rotator : cga_object
+        rotator to apply to obj
     obj : cga_object
         Object to be acted upon
         Returns: (cga_object) Rotated object
@@ -15,7 +15,7 @@ def act(Rotator, obj):
     -------
 
     """
-    return Rotator*obj*(~Rotator)
+    return rotator*obj*(~rotator)
 
 def com(a,b):
     """commutator Product of a and b
