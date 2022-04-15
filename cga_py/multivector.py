@@ -1087,9 +1087,9 @@ class cga_object:
 
     def __mul__(self,other):
         try:
-            return jcga_object(mul(self.coeff,other.coeff))
+            return cga_object(mul(self.coeff,other.coeff))
         except:
-            return jcga_object(self.coeff*other)
+            return cga_object(self.coeff*other)
 
     __rmul__ = __mul__
 
