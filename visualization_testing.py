@@ -11,26 +11,6 @@ from cga_py import *
 import numpy as np
 from numba import jit, njit, prange
 
-a = [0,0,0]
-scale = iso_scale(a)
-
-@njit(parallel = True, cache = True)
-def generate_points (start, end, subd):
-    points = np.linspace(start, end, subd)
-    plot_points = np.zeros((subd**3,3))
-    colors = np.ones((subd**3,4))
-    for x in prange(subd):
-        for y in range(subd):
-            for z in range(subd):
-                plot_points[subd*subd*x+subd*y+z,0] = points[x]
-                plot_points[subd*subd*x+subd*y+z,1] = points[y]
-                plot_points[subd*subd*x+subd*y+z,2] = points[z]
-                colors[subd*subd*x+subd*y+z,0] = points[x]
-                colors[subd*subd*x+subd*y+z,1] = points[y]
-                colors[subd*subd*x+subd*y+z,2] = points[z]
-    return plot_points, ((colors-start)/(end-start))
-
-plot_points, cols = generate_points(-1,1,6)
 
 
 # What happens at update of parameter
@@ -69,20 +49,44 @@ t_slider = p.addChild(pTypes.SliderParameter(name = 't'))
 # Extract slider for convenience
 # slider = p.child('t')
 # change settings
-t_slider.setLimits([0,10])
+t_slider.setLimits([-10,20])
 t_slider.setOpts(step =0.01)
+t_slider.setValue(0)
 
 # Add Spinbox
 subd_slider = p.addChild(pTypes.SliderParameter(name = 'subdivisions' ))
 
-subd_slider.setLimits([1,100])
+subd_slider.setLimits([2,20])
 subd_slider.setOpts(step =1)
+subd_slider.setValue(10)
 
 
 # Create a parameter tree for displaying the slider
 t = ParameterTree()
 t.setParameters(p, showTop=False)
 t.setWindowTitle('pyqtgraph example: Parameter Tree')
+
+a = [0,0,0]
+scale = iso_scale(a)
+
+@njit(parallel = True, cache = True)
+def generate_points (start, end, subd):
+    points = np.linspace(start, end, subd)
+    plot_points = np.zeros((subd**3,3))
+    colors = np.ones((subd**3,4))
+    for x in range(subd):
+        for y in range(subd):
+            for z in range(subd):
+                plot_points[subd*subd*x+subd*y+z,0] = points[x]
+                plot_points[subd*subd*x+subd*y+z,1] = points[y]
+                plot_points[subd*subd*x+subd*y+z,2] = points[z]
+                colors[subd*subd*x+subd*y+z,0] = points[x]
+                colors[subd*subd*x+subd*y+z,1] = points[y]
+                colors[subd*subd*x+subd*y+z,2] = points[z]
+    return plot_points, ((colors-start)/(end-start))
+
+plot_points, cols = generate_points(-1,1,subd_slider.value())
+
 
 # Create a 3d viewport
 view = gl.GLViewWidget()
@@ -101,11 +105,9 @@ scatter = gl.GLScatterPlotItem(pos = plot_points, color = cols)
 # add them to the viewport
 view.addItem(scatter)
 
-
+# Connect the slider change signals to the update functions
 t_slider.sigValueChanged.connect(update_t)
 subd_slider.sigValueChanged.connect(update_subd)
-
-
 
 # show the window
 win.show()

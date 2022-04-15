@@ -41,4 +41,4 @@ for i in range(5):
 
 q0 = arr_to_quat([1,2,3,4])
 
-
+point_p_act(np.array([[1,1,1],[-1,-1,-1]]), 4, [1,iso_scale([0,0,0])])
