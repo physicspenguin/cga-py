@@ -42,9 +42,9 @@ def normalize_point(point):
         `point` given in its normalized CGA representation.
 
     """
-    if any(point.coeff[6:-1]):
-        print("Object is not a cga representation of a Point")
-        return
+    # if any(point.coeff[6:-1]):
+        # print("Object is not a cga representation of a Point")
+        # return
 
     return cga_object(1/point.coeff[5]*point.coeff)
 
@@ -62,10 +62,10 @@ def point_to_cartesian(point):
         Cartesian coordinates of `point`.
 
     """
-    if any(point.coeff[6:-1]):
-        print(f"{point} is not a cga representation of a Point")
-        return
-    return(np.array(normalize_point(point).coeff[1:4]))
+    # if any(point.coeff[6:-1]):
+        # print(f"{point} is not a cga representation of a Point")
+        # return
+    return(np.array(normalize_point(point).coeff[1:4],dtype = complex))
 
 def sphere(center, radius):
     """Generate conformal representation of a sphere in `center` with `radius`
