@@ -1,7 +1,7 @@
 from setuptools import setup
 
 me = "Daren Thimm"
-my_email = "daren.thimm@student.uibk.ac.at"
+my_email = "daren.thimm@gmx.at"
 setup(
     name="cga-py",
     version="0.0.1-dev",
@@ -13,12 +13,7 @@ setup(
     author_email=my_email,
     maintainer=me,
     maintainer_email=my_email,
-    description="Implementation of the CGA",
+    description="Implementation of CGA for python",
     long_description=open("./README.md").read(),
-    install_requires=["setuptools>=42", "numba==0.55.1", "numpy==1.21.6"],
-    extra_requires={
-        "dev": [
-            "pytest >= 3.7",
-        ],
-    },
+    long_description_content_type="text/markdown",
 )
