@@ -1,11 +1,11 @@
-from distutils.core import setup
+from setuptools import setup
 me = 'Daren Thimm'
 my_email = 'daren.thimm@student.uibk.ac.at'
 setup(
-    name='CGApy',
-    version='0.1dev',
-    packages=['CGApy',],
-    license='To be determined',
+    name='cga-py',
+    version='0.0.1.dev',
+    packages=['cga-py',],
+    license='Apache 2',
     author=me,
     author_email=my_email,
     maintainer=me,
