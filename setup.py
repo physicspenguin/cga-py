@@ -15,4 +15,10 @@ setup(
     maintainer_email=my_email,
     description="Implementation of the CGA",
     long_description=open("./README.md").read(),
+    install_requires=["setuptools>=42", "numba==0.55.1", "numpy==1.21.6"],
+    extra_requires={
+        "dev": [
+            "pytest >= 3.7",
+        ],
+    },
 )

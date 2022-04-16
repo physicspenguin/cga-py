@@ -1,3 +1,4 @@
 [build-system]
 requires = ["setuptools>=42","numba==0.55.1","numpy==1.21.6"]
+extra_requires = ["pytest>=3.7"]
 build-backend = "setuptools.build_meta"
