@@ -2,6 +2,7 @@ from .multivector import *
 from .base_objects import *
 import cmath as cm
 
+
 def point(point):
     """Generate Point in (x,y,z)
 
@@ -25,8 +26,14 @@ def point(point):
         x*e_1 + y*e_2 + z*e_3 + 1/2*(x^2 + y^2 + z^2)*e_i + e_0
 
     """
-    return (point[0]*e_1 + point[1]*e_2 + point[2]*e_3 +
-            1/2*(point[0]**2 + point[1]**2 + point[2]**2)*e_i + e_o)
+    return (
+        point[0] * e_1
+        + point[1] * e_2
+        + point[2] * e_3
+        + 1 / 2 * (point[0] ** 2 + point[1] ** 2 + point[2] ** 2) * e_i
+        + e_o
+    )
+
 
 def normalize_point(point):
     """Normalize CGA representation of point
@@ -43,10 +50,11 @@ def normalize_point(point):
 
     """
     # if any(point.coeff[6:-1]):
-        # print("Object is not a cga representation of a Point")
-        # return
+    # print("Object is not a cga representation of a Point")
+    # return
 
-    return cga_object(1/point.coeff[5]*point.coeff)
+    return cga_object(1 / point.coeff[5] * point.coeff)
+
 
 def point_to_cartesian(point):
     """Convert CGA representation of a point into cartesian coordinates.
@@ -63,9 +71,10 @@ def point_to_cartesian(point):
 
     """
     # if any(point.coeff[6:-1]):
-        # print(f"{point} is not a cga representation of a Point")
-        # return
-    return(np.array(normalize_point(point).coeff[1:4],dtype = complex))
+    # print(f"{point} is not a cga representation of a Point")
+    # return
+    return np.array(normalize_point(point).coeff[1:4], dtype=complex)
+
 
 def sphere(center, radius):
     """Generate conformal representation of a sphere in `center` with `radius`
@@ -89,9 +98,16 @@ def sphere(center, radius):
         x*e_1 + y*e_2 + z*e_3 + 1/2*(x^2 + y^2 + z^2 - r^2)*e_i + e_0
 
     """
-    return (center[0]*e_1 + center[1]*e_2 + center[2]*e_3 +
-            (1/2)*(center[0]**2 + center[1]**2 + center[2]**2 - radius**2)*e_i +
-            e_o)
+    return (
+        center[0] * e_1
+        + center[1] * e_2
+        + center[2] * e_3
+        + (1 / 2)
+        * (center[0] ** 2 + center[1] ** 2 + center[2] ** 2 - radius**2)
+        * e_i
+        + e_o
+    )
+
 
 def normalize_sphere(sphere):
     """Normalize CGA representation of sphere.
@@ -111,7 +127,8 @@ def normalize_sphere(sphere):
     if any(sphere.coeff[6:-1]):
         print("Object is not a cga representation of a sphere")
         return
-    return cga_object(1/sphere.coeff[5]*sphere.coeff)
+    return cga_object(1 / sphere.coeff[5] * sphere.coeff)
+
 
 def sphere_to_cartesian(sphere):
     """Convert sphere in CGA representation to center and radius.
@@ -135,8 +152,9 @@ def sphere_to_cartesian(sphere):
     x = norm_sphere.coeff[1]
     y = norm_sphere.coeff[2]
     z = norm_sphere.coeff[3]
-    r = x**2 + y**2 + z**2 - 2*norm_sphere.coeff[4]
+    r = x**2 + y**2 + z**2 - 2 * norm_sphere.coeff[4]
     return np.array([x, y, z]), cm.sqrt(r)
+
 
 def plane(normal, distance):
     """Generate conformal representation of s plane with normalvector normal and
@@ -154,8 +172,9 @@ def plane(normal, distance):
     -------
 
     """
-    c = normal/np.sqrt(normal[0]**2+normal[1]**2+normal[2]**2)
-    return c[0]*e_1 + c[1]*e_2 + c[2]*e_3 + distance*e_i
+    c = normal / np.sqrt(normal[0] ** 2 + normal[1] ** 2 + normal[2] ** 2)
+    return c[0] * e_1 + c[1] * e_2 + c[2] * e_3 + distance * e_i
+
 
 def normalize_plane(plane):
     """Normalize CGA representation of a plane
@@ -173,8 +192,9 @@ def normalize_plane(plane):
     if any(plane.coeff[5:-1]):
         print("Object is not a cga representation of a plane")
         return
-    norm = 1/np.sqrt(plane.coeff[1]**2+plane.coeff[2]**2+plane.coeff[3]**2)
+    norm = 1 / np.sqrt(plane.coeff[1] ** 2 + plane.coeff[2] ** 2 + plane.coeff[3] ** 2)
     return cga_object(norm * plane.coeff)
+
 
 def plane_to_cartesian(plane):
     """Convert plane given in CGA to representation ad normal vector and
@@ -195,4 +215,3 @@ def plane_to_cartesian(plane):
         return
     c = normalize_plane(plane).coeff
     return np.array([c[1], c[2], c[3]]), c[4]
-

@@ -1,7 +1,8 @@
 from .operators import act
 
+
 def poly_act(param, poly, obj):
-    """ Let the motion polynomial poly(param) act on obj
+    """Let the motion polynomial poly(param) act on obj
 
     Parameters
     ----------
@@ -18,4 +19,4 @@ def poly_act(param, poly, obj):
     cga_object
 
     """
-    return act(sum([poly[i]*(param**i) for i in range(len(poly))]), obj)
+    return act(sum([poly[i] * (param**i) for i in range(len(poly))]), obj)

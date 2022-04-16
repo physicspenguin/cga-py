@@ -1,6 +1,7 @@
 from .multivector import *
 from .base_objects import *
 
+
 def arr_to_quat(arr):
     """Converts an array to quaternion with coefficients given in array
 
@@ -16,7 +17,8 @@ def arr_to_quat(arr):
         CGA.
 
     """
-    return arr[0] + q_i*arr[1] + q_j*arr[2] + q_k*arr[3]
+    return arr[0] + q_i * arr[1] + q_j * arr[2] + q_k * arr[3]
+
 
 def quat_to_arr(q):
     """Coefficients of quaternion `q` given in terms of CGA.
@@ -33,6 +35,7 @@ def quat_to_arr(q):
 
     """
     return np.array([q.coeff[0], -q.coeff[10], q.coeff[7], -q.coeff[6]])
+
 
 def rotor_to_quat(rot):
     """Convert Rotor to its four quaternion representation
@@ -57,12 +60,13 @@ def rotor_to_quat(rot):
 
     """
     coeff = rot.get_even()
-    p0  = coeff[0]  - q_i*coeff[5]  + q_j*coeff[2]  - q_k*coeff[1]
-    q1  = coeff[11] + q_i*coeff[8]  + q_j*coeff[3]  - q_k*coeff[6]
-    q2  = coeff[12] + q_i*coeff[9]  + q_j*coeff[4]  - q_k*coeff[7]
-    q3  = coeff[10] - q_i*coeff[13] - q_j*coeff[15] - q_k*coeff[14]
-    q0  = p0-q3
+    p0 = coeff[0] - q_i * coeff[5] + q_j * coeff[2] - q_k * coeff[1]
+    q1 = coeff[11] + q_i * coeff[8] + q_j * coeff[3] - q_k * coeff[6]
+    q2 = coeff[12] + q_i * coeff[9] + q_j * coeff[4] - q_k * coeff[7]
+    q3 = coeff[10] - q_i * coeff[13] - q_j * coeff[15] - q_k * coeff[14]
+    q0 = p0 - q3
     return q0, q1, q2, q3
+
 
 def quat_to_rotor(q0, q1, q2, q3):
     """Compute rotor given by the four quaternions q0,q1,q2,q3
@@ -91,17 +95,18 @@ def quat_to_rotor(q0, q1, q2, q3):
 
     """
     try:
-        p0 = q0[0] + q_i*q0[1] + q_j*q0[2] + q_k*q0[3]
-        p1 = q1[0] + q_i*q1[1] + q_j*q1[2] + q_k*q1[3]
-        p2 = q2[0] + q_i*q2[1] + q_j*q2[2] + q_k*q2[3]
-        p3 = q3[0] + q_i*q3[1] + q_j*q3[2] + q_k*q3[3]
+        p0 = q0[0] + q_i * q0[1] + q_j * q0[2] + q_k * q0[3]
+        p1 = q1[0] + q_i * q1[1] + q_j * q1[2] + q_k * q1[3]
+        p2 = q2[0] + q_i * q2[1] + q_j * q2[2] + q_k * q2[3]
+        p3 = q3[0] + q_i * q3[1] + q_j * q3[2] + q_k * q3[3]
     except:
         p0 = q0
         p1 = q1
         p2 = q2
         p3 = q3
 
-    return p0 + eps_1*p1 + eps_2*p2 + eps_3*p3
+    return p0 + eps_1 * p1 + eps_2 * p2 + eps_3 * p3
+
 
 def vectorial(quat):
     """Returns vectorial part of quaternion
@@ -118,9 +123,10 @@ def vectorial(quat):
 
     """
     if isinstance(quat, cga_object):
-        return 1/2*(quat-(~quat))
+        return 1 / 2 * (quat - (~quat))
     else:
         return quat[1:-1]
+
 
 def scalar(quat):
     """Returns scalar part of quaternion
@@ -137,8 +143,6 @@ def scalar(quat):
 
     """
     if isinstance(quat, cga_object):
-        return quat-1/2*(quat-(~quat))
+        return quat - 1 / 2 * (quat - (~quat))
     else:
         return quat[0]
-
-

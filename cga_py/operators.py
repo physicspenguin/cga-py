@@ -1,5 +1,6 @@
 from .multivector import *
 
+
 def act(rotator, obj):
     """Function to let rotator act on obj
 
@@ -15,9 +16,10 @@ def act(rotator, obj):
     -------
 
     """
-    return rotator*obj*(~rotator)
+    return rotator * obj * (~rotator)
 
-def com(a,b):
+
+def com(a, b):
     """commutator Product of a and b
 
     Parameters
@@ -32,9 +34,10 @@ def com(a,b):
     -------
 
     """
-    return (1/2)*(a*b - b*a)
+    return (1 / 2) * (a * b - b * a)
 
-def anti_com(a,b):
+
+def anti_com(a, b):
     """anti-commutator Product of a and b
 
     Parameters
@@ -49,9 +52,10 @@ def anti_com(a,b):
     -------
 
     """
-    return (1/2)*(a*b + b*a)
+    return (1 / 2) * (a * b + b * a)
 
-def n_grade(obj,grade):
+
+def n_grade(obj, grade):
     """Returns parts of obj with grade grade
 
     Parameters
@@ -72,25 +76,26 @@ def n_grade(obj,grade):
         vec[ind] = obj.coeff[ind]
         return cga_object(vec)
     elif grade == 1:
-        ind =range(1,6)
+        ind = range(1, 6)
         vec[ind] = obj.coeff[ind]
         return cga_object(vec)
     elif grade == 2:
-        ind =range(6,16)
+        ind = range(6, 16)
         vec[ind] = obj.coeff[ind]
         return cga_object(vec)
     elif grade == 3:
-        ind =range(16,26)
+        ind = range(16, 26)
         vec[ind] = obj.coeff[ind]
         return cga_object(vec)
     elif grade == 4:
-        ind =range(26,31)
+        ind = range(26, 31)
         vec[ind] = obj.coeff[ind]
         return cga_object(vec)
     else:
         ind = 31
         vec[ind] = obj.coeff[ind]
         return cga_object(vec)
+
 
 def r_norm(obj):
     """Return obj*(obj^*) in CGA
@@ -103,10 +108,11 @@ def r_norm(obj):
     Returns
     -------
     type
-        
+
 
     """
-    return obj*(~obj)
+    return obj * (~obj)
+
 
 def l_norm(obj):
     """Return (obj^*)*obj in CGA
@@ -119,9 +125,7 @@ def l_norm(obj):
     Returns
     -------
     type
-        
+
 
     """
-    return (~obj)*obj
-
-
+    return (~obj) * obj

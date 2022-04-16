@@ -14,4 +14,3 @@ class GeometryError(Exception):
             return "GeometryError , {0} ".format(self.error_message)
         else:
             return "GeometryError has been raised"
-
