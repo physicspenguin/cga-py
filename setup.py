@@ -8,7 +8,7 @@ setup(
     packages=[
         "cga_py",
     ],
-    license="Apache 2",
+    license="MIT",
     author=me,
     author_email=my_email,
     maintainer=me,
