@@ -46,7 +46,7 @@ def transv(a, b):
         coord = a
         a = point(coord)
     if isinstance(b, cga_object):
-        if (a | b) != 0:
+        if (a | b) != cga_object([0]):
             raise GeometryError("Plane b must be orthogonal to point a")
     else:
         b = (
