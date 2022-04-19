@@ -1933,7 +1933,7 @@ class cga_object:
             cof = gen.coeff
         else:
             cof = gen
-        ## Version if list is given
+        # Version if list is given
         self.coeff = np.zeros(self.dim, dtype=complex)
         if not even:
             for i in range(len(cof)):
@@ -1959,7 +1959,7 @@ class cga_object:
         # datatypes is commutative. Pending better implementation
         try:
             return cga_object(self.coeff + other.coeff)
-        except:
+        except SyntaxError:
             return cga_object([other]) + self
 
     __radd__ = __add__
@@ -1984,7 +1984,7 @@ class cga_object:
     def __mul__(self, other):
         try:
             return cga_object(mul(self.coeff, other.coeff))
-        except:
+        except SyntaxError:
             return cga_object(self.coeff * other)
 
     __rmul__ = __mul__
@@ -2108,18 +2108,13 @@ class cga_object:
         out = ""
         is_first = True
         for i in range(self.dim):
-            if self.coeff[i] != 0:
-                if is_first:
-                    if self.coeff[i].imag == 0:
-                        out += repr(self.coeff[i].real) + self.coeff_names[i]
-                    else:
-                        out += repr(self.coeff[i]) + self.coeff_names[i]
-                    is_first = False
-                else:
-                    if self.coeff[i].imag == 0:
-                        out += " + " + repr(self.coeff[i].real) + self.coeff_names[i]
-                    else:
-                        out += " + " + repr(self.coeff[i]) + self.coeff_names[i]
+            if self.coeff[i] == 0:
+                continue
+            if is_first:
+                out += repr(self.coeff[i]) + self.coeff_names[i]
+                is_first = False
+            else:
+                out += " + " + repr(self.coeff[i]) + self.coeff_names[i]
         if out == "":
             return "0"
         return out
@@ -2130,25 +2125,13 @@ class cga_object:
         is_first = True
         mul_str = ""
         for i in range(self.dim):
-            if self.coeff[i] != 0:
-                if is_first:
-                    if self.coeff[i].imag == 0:
-                        out += repr(self.coeff[i].real) + mul_str + self.coeff_names[i]
-                    else:
-                        out += repr(self.coeff[i]) + mul_str + self.coeff_names[i]
-                    is_first = False
-                else:
-                    if self.coeff[i].imag == 0:
-                        out += (
-                            " + "
-                            + repr(self.coeff[i].real)
-                            + mul_str
-                            + self.coeff_names[i]
-                        )
-                    else:
-                        out += (
-                            " + " + repr(self.coeff[i]) + mul_str + self.coeff_names[i]
-                        )
+            if self.coeff[i] == 0:
+                continue
+            if is_first:
+                out += repr(self.coeff[i]) + mul_str + self.coeff_names[i]
+                is_first = False
+            else:
+                out += " + " + repr(self.coeff[i]) + mul_str + self.coeff_names[i]
             if i == 0:
                 mul_str = "*"
         if out == "":
