@@ -15,7 +15,7 @@ from numba import jit, njit, prange
 # What happens at update of parameter
 def update_t():
     scatter.setData(
-        pos=point_p_act(plot_points, t_slider.value(), [1, scale]), color=cols
+        pos=point_p_act(plot_points, np.tan(t_slider.value()), [1, scale]), color=cols
     )
 
 
@@ -51,8 +51,8 @@ t_slider = p.addChild(pTypes.SliderParameter(name="t"))
 # Extract slider for convenience
 # slider = p.child('t')
 # change settings
-t_slider.setLimits([-10, 20])
-t_slider.setOpts(step=0.01)
+t_slider.setLimits([-np.pi, np.pi])
+t_slider.setOpts(step=0.005)
 t_slider.setValue(0)
 
 # Add Spinbox
