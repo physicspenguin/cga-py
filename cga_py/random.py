@@ -1,8 +1,8 @@
 import numpy.random as rand
-from .multivector import *
-from .base_objects import *
-from .geom_generators import *
-from .conditions import *
+import numpy as np
+from .multivector import cga_object
+from .geom_generators import point, sphere, plane
+from .conditions import study_var, null_quadric
 
 
 def rand_rational(maximum=10):
@@ -148,6 +148,7 @@ def rand_rotor(maximum=10, tol=0):
     a[3] = (a[6] * a[14] - a[8] * a[13] + a[10] * a[11]) / a[15]
     a[4] = (a[7] * a[14] - a[9] * a[13] + a[10] * a[12]) / a[15]
     out = cga_object(a, True)
+    # This could be replaced by numpy.testing.is_close in the future
     if not (np.linalg.norm(study_var(out)) <= tol):
         return rand_rotor(maximum)
 

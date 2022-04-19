@@ -1,4 +1,4 @@
-from .base_objects import e_1, e_2, e_3, e_i, e_o
+from .base_objects import e_1, e_2, e_3, e_i
 from .multivector import cga_object
 from .geom_generators import point_to_cartesian, point
 from .errors import GeometryError

@@ -1,4 +1,5 @@
-from .multivector import *
+from .multivector import cga_object
+import numpy as np
 
 
 def act(rotator, obj):

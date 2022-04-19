@@ -1,5 +1,6 @@
-from .multivector import *
-from .base_objects import *
+from .multivector import cga_object
+from .base_objects import q_i, q_j, q_k, eps_1, eps_2, eps_3
+import numpy as np
 
 
 def arr_to_quat(arr):
@@ -99,7 +100,7 @@ def quat_to_rotor(q0, q1, q2, q3):
         p1 = q1[0] + q_i * q1[1] + q_j * q1[2] + q_k * q1[3]
         p2 = q2[0] + q_i * q2[1] + q_j * q2[2] + q_k * q2[3]
         p3 = q3[0] + q_i * q3[1] + q_j * q3[2] + q_k * q3[3]
-    except:
+    except TypeError:
         p0 = q0
         p1 = q1
         p2 = q2

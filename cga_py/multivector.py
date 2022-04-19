@@ -1959,7 +1959,7 @@ class cga_object:
         # datatypes is commutative. Pending better implementation
         try:
             return cga_object(self.coeff + other.coeff)
-        except SyntaxError:
+        except AttributeError:
             return cga_object([other]) + self
 
     __radd__ = __add__
@@ -1984,7 +1984,7 @@ class cga_object:
     def __mul__(self, other):
         try:
             return cga_object(mul(self.coeff, other.coeff))
-        except SyntaxError:
+        except AttributeError:
             return cga_object(self.coeff * other)
 
     __rmul__ = __mul__

@@ -1,5 +1,6 @@
-from .multivector import *
-from .base_objects import *
+from .multivector import cga_object
+from .base_objects import e_1, e_2, e_3, e_i, e_o
+import numpy as np
 import cmath as cm
 
 

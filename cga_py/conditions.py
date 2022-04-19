@@ -1,5 +1,4 @@
-from .multivector import *
-from .base_objects import *
+import numpy as np
 
 
 def study_cond(a, b):

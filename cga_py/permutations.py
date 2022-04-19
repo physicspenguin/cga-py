@@ -1,9 +1,4 @@
 from .base_objects import (
-    e_1,
-    e_2,
-    e_3,
-    e_i,
-    e_o,
     e_12,
     e_13,
     e_1i,
