@@ -24,7 +24,6 @@ cache:
     - venv/
 
 before_script:
-  - mkdir .cache/pip
   - python --version  # For debugging
   - pip install virtualenv
   - virtualenv venv
