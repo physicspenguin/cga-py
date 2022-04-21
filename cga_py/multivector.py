@@ -2101,7 +2101,12 @@ class cga_object:
         -------
 
         """
-        return not (any(self.coeff != other.coeff))
+        if isinstance(other, cga_object):
+            return not (any(self.coeff != other.coeff))
+        elif all(self.coeff[1:] == 0):
+            return self.coeff[0] == other
+        else:
+            return False
 
     def __str__(self):
         """ """
