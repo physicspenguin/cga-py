@@ -1,5 +1,5 @@
 [![Tests](https://github.com/physicspenguin/cga-py/actions/workflows/tests.yml/badge.svg)](https://github.com/physicspenguin/cga-py/actions/workflows/tests.yml)
-[![Coverage Status](https://coveralls.io/repos/github/physicspenguin/cga-py/badge.svg)](https://coveralls.io/github/physicspenguin/cga-py)
+[![codecov](https://codecov.io/gh/physicspenguin/cga-py/branch/master/graph/badge.svg?token=129CMVB1AQ)](https://codecov.io/gh/physicspenguin/cga-py)
 
 # cga_py
 
