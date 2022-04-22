@@ -1,4 +1,4 @@
-[![pipeline status](https://gitlab.com/physicspenguin/CGApy/badges/development/pipeline.svg)](https://gitlab.com/physicspenguin/CGApy/-/commits/development)
+[![Tests](https://github.com/physicspenguin/cga-py/actions/workflows/tests.yml/badge.svg)](https://github.com/physicspenguin/cga-py/actions/workflows/tests.yml)
 
 # cga_py
 
