@@ -1932,7 +1932,11 @@ class cga_object:
         if isinstance(gen, cga_object):
             cof = gen.coeff
         else:
-            cof = gen
+            try:
+                len(gen)
+                cof = gen
+            except TypeError:
+                cof = [gen]
         # Version if list is given
         self.coeff = np.zeros(self.dim, dtype=complex)
         if not even:
@@ -1985,7 +1989,7 @@ class cga_object:
         try:
             return cga_object(mul(self.coeff, other.coeff))
         except AttributeError:
-            return cga_object(self.coeff * other)
+            return cga_object(mul(self.coeff, cga_object(other).coeff))
 
     __rmul__ = __mul__
 
@@ -2038,7 +2042,13 @@ class cga_object:
         -------
 
         """
-        return cga_object(wedge(self.coeff, other.coeff))
+        try:
+            return cga_object(wedge(self.coeff, other.coeff))
+        except AttributeError:
+            try:
+                return cga_object(wedge(self.coeff, cga_object(other).coeff))
+            except ValueError:
+                raise ValueError
 
     def __or__(self, other):
         """inner product
@@ -2053,7 +2063,13 @@ class cga_object:
         -------
 
         """
-        return cga_object(inner(self.coeff, other.coeff))
+        try:
+            return cga_object(inner(self.coeff, other.coeff))
+        except AttributeError:
+            try:
+                return cga_object(inner(self.coeff, cga_object(other).coeff))
+            except ValueError:
+                raise ValueError
 
     def __pos__(self):
         """TODO: Docstring for __NEG__.
