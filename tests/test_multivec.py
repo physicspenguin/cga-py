@@ -4,10 +4,19 @@ import numpy as np
 from numpy.testing import assert_allclose
 
 
-def test_mult_cga():
+def test_mult_cga_1():
     assert e_1 * e_1 == 1
+
+
+def test_mult_cga_2():
     assert e_1 * e_2 == e_12
+
+
+def test_mult_cga_3():
     assert e_1 * e_12 == e_2
+
+
+def test_mult_cga_4():
     assert e_12 * e_12 == -1
 
 
