@@ -1,0 +1,28 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Codecov
+  # Allows you to run this workflow manually from the Actions tab
+ 
+
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Test python API
+    defaults:
+      run:
+        working-directory: ./api
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.10'
+    - name: Install requirements
+      run: 
+        pip install -r requirements.txt
+        pip install -r requirements_dev.txt
+    - name: Run tests and collect coverage
+      run: pytest --cov=cga_py tests/
+    - name: Upload coverage reports to Codecov with GitHub Action
+      uses: codecov/codecov-action@v3
+          echo test, and deploy your project.
