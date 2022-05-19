@@ -44,7 +44,7 @@ from .random import (
 )
 from .kinematic_polynomials import poly_act
 from .dorst_motions import iso_scale, transv
-from .visualization import point_p_act
+from .visualization import point_p_act, point_cube_gen
 
 
 from .permutations import (
