@@ -15,7 +15,7 @@ from numba import jit, njit, prange
 # What happens at update of parameter
 def update_t():
     scatter.setData(
-        pos=point_p_act(plot_points, np.tan(t_slider.value()), [1, scale]), color=cols
+        pos=point_p_act(plot_points, np.tan(t_slider.value()), [scale, 1]), color=cols
     )
 
 
@@ -23,7 +23,9 @@ def update_t():
 def update_subd():
     global plot_points
     global cols
-    plot_points, cols = generate_points(-1, 1, subd_slider.value())
+    plot_points, cols = point_cube_gen(
+        [0, 0, 0], [2, 2, 2], np.ones(3) * subd_slider.value()
+    )
     scatter.setData(pos=plot_points, color=cols)
 
 
@@ -71,25 +73,9 @@ t.setWindowTitle("pyqtgraph example: Parameter Tree")
 a = [0, 0, 0]
 scale = transv([0, 0, 0], [1, 2, 3])
 
-
-@njit(parallel=True, cache=True)
-def generate_points(start, end, subd):
-    points = np.linspace(start, end, subd)
-    plot_points = np.zeros((subd**3, 3))
-    colors = np.ones((subd**3, 4))
-    for x in range(subd):
-        for y in range(subd):
-            for z in range(subd):
-                plot_points[subd * subd * x + subd * y + z, 0] = points[x]
-                plot_points[subd * subd * x + subd * y + z, 1] = points[y]
-                plot_points[subd * subd * x + subd * y + z, 2] = points[z]
-                colors[subd * subd * x + subd * y + z, 0] = points[x]
-                colors[subd * subd * x + subd * y + z, 1] = points[y]
-                colors[subd * subd * x + subd * y + z, 2] = points[z]
-    return plot_points, ((colors - start) / (end - start))
-
-
-plot_points, cols = generate_points(-1, 1, subd_slider.value())
+plot_points, cols = point_cube_gen(
+    [0, 0, 0], [2, 2, 2], np.ones(3) * subd_slider.value()
+)
 
 
 # Create a 3d viewport
