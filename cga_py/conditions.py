@@ -1,4 +1,5 @@
 import numpy as np
+from .errors import GeometryError
 
 
 def study_cond(a, b):
@@ -25,10 +26,10 @@ def study_var(r):
     ----------
     r : cga_object
         even graded cga_object
-        Returns: nd.array
 
     Returns
     -------
+    ndarray
 
     """
     b = r.get_even()
@@ -49,16 +50,20 @@ def study_var(r):
 
 
 def null_quadric(r):
-    """Evaluates Nullquadric condition for r. Condition is true, if output is 0.
+    """Evaluates Nullquadric condition for even graded element r.
+    Condition is true, if output is 0.
 
     Parameters
     ----------
     r : cga_object
         object of which to evaluate the null quadric condition
-        Returns: float
 
     Returns
     -------
+    float
 
     """
-    return (r * (~r)).coeff[0]
+    if r == r.make_even():
+        return (r * (~r)).coeff[0]
+    else:
+        raise GeometryError("Element must be of even grade")

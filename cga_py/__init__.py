@@ -33,7 +33,7 @@ from .geom_generators import (
 )
 from .multivector import cga_object
 from .operators import act, com, anti_com, n_grade, r_norm, l_norm
-from .random import (
+from .random_gen import (
     rand_rational,
     rand_point,
     rand_sphere,
@@ -45,6 +45,7 @@ from .random import (
 from .kinematic_polynomials import poly_act
 from .dorst_motions import iso_scale, transv
 from .visualization import point_p_act, point_cube_gen
+from .errors import GeometryError
 
 
 from .permutations import (

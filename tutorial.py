@@ -51,9 +51,6 @@ print(b / 5)
 # Floordivision of CGA-object by numeric type
 print(b // 5)
 
-# Modulo of CGA-object by numeric type
-print(b % 5)
-
 # Wedge product
 print(e_1 ^ e_2)
 
