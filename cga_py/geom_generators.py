@@ -27,6 +27,8 @@ def point(point):
         x*e_1 + y*e_2 + z*e_3 + 1/2*(x^2 + y^2 + z^2)*e_i + e_0
 
     """
+    if len(point) != 3:
+        raise ValueError("Point must have three coordinates.")
     return (
         point[0] * e_1
         + point[1] * e_2
