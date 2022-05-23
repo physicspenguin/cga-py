@@ -3,6 +3,7 @@
 - [ ] Fully document
 	- [x] base_objects.py
 	- [x] conditions.py
+	- [x] dorst_motions.py
 	- [x] four_quaternions.py
 	- [ ] geom_generators.py
 	- [ ] multivector.py
