@@ -2106,15 +2106,29 @@ class cga_object:
         ----------
         other : TODO
             TODO
-            Returns: TODO
 
         Returns
         -------
+        TODO
 
         """
         return self + (-other)
 
-    __rsub__ = __sub__
+    def __rsub__(self, other):
+        """TODO: Docstring for __rsub__.
+
+        Parameters
+        ----------
+        other : TODO
+            TODO
+            Returns: TODO
+
+        Returns
+        -------
+        TODO
+
+        """
+        return other + (-self)
 
     def __mul__(self, other):
         if isinstance(other, cga_object):

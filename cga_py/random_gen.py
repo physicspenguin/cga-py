@@ -128,7 +128,7 @@ def rand_rotor(maximum=10, tol=0):
         )
 
         if a[15] == 0:
-            pass
+            continue
         a[0] = (a[5] * a[10] - a[6] * a[9] + a[7] * a[8]) / a[15]
         a[1] = (a[5] * a[13] - a[6] * a[12] + a[7] * a[11]) / a[15]
         a[2] = (a[5] * a[14] - a[8] * a[12] + a[9] * a[11]) / a[15]
@@ -137,7 +137,7 @@ def rand_rotor(maximum=10, tol=0):
         out = cga_object(a, True)
         # This could be replaced by numpy.testing.is_close in the future
         if not (np.linalg.norm(study_var(out)) <= tol):
-            pass
+            continue
 
         return out
 
@@ -183,13 +183,13 @@ def rand_rot_poly(maximum=10, tol=0):
         )
 
         if a[10] == 0:
-            pass
+            continue
         a[1] = (a[3] * a[7] - a[4] * a[6]) / a[10]
         a[2] = (a[3] * a[9] - a[4] * a[8]) / a[10]
         a[5] = (a[6] * a[9] - a[7] * a[8]) / a[10]
         out = cga_object(a, True)
         if np.linalg.norm(study_var(out)) > tol:
-            pass
+            continue
         return out
 
 

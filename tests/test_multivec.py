@@ -115,8 +115,11 @@ def test_sub_float():
     a = np.random.rand(32) * end - (end / 2)
     b = np.random.rand() * end - (end / 2)
     c = a.copy()
+    d = -(a.copy())
     c[0] = a[0] - b
+    d[0] = b - a[0]
     nt.assert_array_equal((cg(a) - b).coeff, c)
+    nt.assert_array_equal((b - cg(a)).coeff, d)
 
 
 def test_div_float():

@@ -61,11 +61,16 @@ def rotor_to_quat(rot):
 
     """
     coeff = rot.get_even()
-    p0 = coeff[0] - q_i * coeff[5] + q_j * coeff[2] - q_k * coeff[1]
-    q1 = coeff[11] + q_i * coeff[8] + q_j * coeff[3] - q_k * coeff[6]
-    q2 = coeff[12] + q_i * coeff[9] + q_j * coeff[4] - q_k * coeff[7]
-    q3 = coeff[10] - q_i * coeff[13] - q_j * coeff[15] - q_k * coeff[14]
-    q0 = p0 - q3
+    q0 = (
+        (coeff[0] - coeff[10])
+        + q_i * (coeff[15] - coeff[5])
+        + q_j * (coeff[2] - coeff[14])
+        + q_k * (coeff[13] - coeff[1])
+    )
+    q1 = coeff[11] + q_i * coeff[3] + q_j * coeff[6] + q_k * coeff[8]
+    q2 = coeff[12] + q_i * coeff[4] + q_j * coeff[7] + q_k * coeff[9]
+    q3 = coeff[10] + q_i * (-coeff[15]) + q_j * coeff[14] + q_k * (-coeff[13])
+    # q0 = p0 - q3
     return q0, q1, q2, q3
 
 
@@ -95,12 +100,17 @@ def quat_to_rotor(q0, q1, q2, q3):
 
 
     """
-    try:
+    if not (
+        isinstance(q0, cga_object)
+        and isinstance(q1, cga_object)
+        and isinstance(q2, cga_object)
+        and isinstance(q0, cga_object)
+    ):
         p0 = q0[0] + q_i * q0[1] + q_j * q0[2] + q_k * q0[3]
         p1 = q1[0] + q_i * q1[1] + q_j * q1[2] + q_k * q1[3]
         p2 = q2[0] + q_i * q2[1] + q_j * q2[2] + q_k * q2[3]
         p3 = q3[0] + q_i * q3[1] + q_j * q3[2] + q_k * q3[3]
-    except TypeError:
+    else:
         p0 = q0
         p1 = q1
         p2 = q2

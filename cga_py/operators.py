@@ -11,10 +11,12 @@ def act(rotator, obj):
         rotator to apply to obj
     obj : cga_object
         Object to be acted upon
-        Returns: (cga_object) Rotated object
+
 
     Returns
     -------
+    cga_object
+        Rotated object
 
     """
     return rotator * obj * (~rotator)
@@ -26,13 +28,11 @@ def com(a, b):
     Parameters
     ----------
     a : cga_object
-        TODO
     b : cga_object
-        TODO
-        Returns: cga_object
 
     Returns
     -------
+    cga_object
 
     """
     return (1 / 2) * (a * b - b * a)
@@ -44,13 +44,11 @@ def anti_com(a, b):
     Parameters
     ----------
     a : cga_object
-        TODO
     b : cga_object
-        TODO
-        Returns: cga_object
 
     Returns
     -------
+    cga_object
 
     """
     return (1 / 2) * (a * b + b * a)
@@ -65,13 +63,14 @@ def n_grade(obj, grade):
         object of which to extract grade-graded parts
     grade : int
         grade of parts to be extracted
-        Returns: (cga_object) grade-graded parts of obj
 
     Returns
     -------
+    cga_object
+        grade-graded parts of obj
 
     """
-    vec = np.zeros(32)
+    vec = np.zeros_like(obj.coeff)
     if grade == 0:
         ind = 0
         vec[ind] = obj.coeff[ind]
@@ -99,7 +98,7 @@ def n_grade(obj, grade):
 
 
 def r_norm(obj):
-    """Return obj*(obj^*) in CGA
+    """Calculates the right norm in CGA
 
     Parameters
     ----------
@@ -108,7 +107,7 @@ def r_norm(obj):
 
     Returns
     -------
-    type
+    cga_object
 
 
     """
@@ -116,7 +115,7 @@ def r_norm(obj):
 
 
 def l_norm(obj):
-    """Return (obj^*)*obj in CGA
+    """Calculates the left norm in CGA
 
     Parameters
     ----------
@@ -125,7 +124,7 @@ def l_norm(obj):
 
     Returns
     -------
-    type
+    cga_object
 
 
     """

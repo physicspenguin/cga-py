@@ -1,14 +1,13 @@
 # To Do until Package is complete
 
-- [ ] Fully document
+- [x] Fully document
 	- [x] base_objects.py
 	- [x] conditions.py
 	- [x] dorst_motions.py
 	- [x] four_quaternions.py
-	- [ ] geom_generators.py
+	- [x] geom_generators.py
 	- [ ] multivector.py
-	- [ ] operators.py
-	- [ ] permutations.py
+	- [x] operators.py
 	- [x] random.py
 - [ ] Maybe document helper functions
 - [ ] Write README
