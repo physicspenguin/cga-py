@@ -70,7 +70,6 @@ def rotor_to_quat(rot):
     q1 = coeff[11] + q_i * coeff[3] + q_j * coeff[6] + q_k * coeff[8]
     q2 = coeff[12] + q_i * coeff[4] + q_j * coeff[7] + q_k * coeff[9]
     q3 = coeff[10] + q_i * (-coeff[15]) + q_j * coeff[14] + q_k * (-coeff[13])
-    # q0 = p0 - q3
     return q0, q1, q2, q3
 
 
