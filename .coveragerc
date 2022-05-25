@@ -1,5 +1,8 @@
 [report]
 exclude_lines =
-	out =
-	return out
-	pass
+	def point_cube_gen_help
+	def _mul
+	def _invert
+	def _inner
+	def _wedge
+	pragma: no cover

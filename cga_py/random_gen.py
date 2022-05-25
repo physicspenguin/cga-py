@@ -182,7 +182,9 @@ def rand_rot_poly(maximum=10, tol=0):
             ]
         )
 
-        if a[10] == 0:
+        if (
+            a[10] == 0
+        ):  # pragma: no cover (because it is impossible to test this consistently)
             continue
         a[1] = (a[3] * a[7] - a[4] * a[6]) / a[10]
         a[2] = (a[3] * a[9] - a[4] * a[8]) / a[10]

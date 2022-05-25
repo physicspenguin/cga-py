@@ -8,7 +8,7 @@ class GeometryError(Exception):
         else:
             self.error_message = None
 
-    def __str__(self):
+    def __str__(self):  # pragma: no cover
 
         if self.error_message:
             return "GeometryError , {0} ".format(self.error_message)

@@ -65,7 +65,9 @@ def test_cube_gen():
             [1.0, 1.0, 1.0, 1.0],
         ]
     )
-    y, yc = ga.point_cube_gen([1, 1, 1], [2, 2, 2], [3, 3, 3])
+    y, yc = ga.point_cube_gen(
+        np.array([1, 1, 1]), np.array([2, 2, 2]), np.array([3, 3, 3])
+    )
 
     np.testing.assert_array_equal(x, y)
     np.testing.assert_array_equal(xc, yc)
