@@ -2170,9 +2170,13 @@ class cga_object:
 
         """
         if isinstance(other, cga_object):
-            raise TypeError("Division of cga_objects not allowed")
+            raise TypeError("Division of cga_objects not supported")
+        elif np.linalg.norm(np.imag(self.coeff)) == 0:
+            return cga_object(np.real(self.coeff) // other)
         else:
-            return cga_object(self.coeff // other)
+            raise TypeError(
+                "Division of Object with complex coefficients not supported."
+            )
 
     def __xor__(self, other):
         """outer / wedge product

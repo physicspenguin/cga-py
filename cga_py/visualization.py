@@ -4,6 +4,7 @@ import numpy as np
 import multiprocessing as mp
 from functools import partial
 from numba import njit
+import pyqtgraph.opengl as gl
 
 
 def point_p_act_helper(i, points, param, poly):
@@ -96,3 +97,45 @@ def point_cube_gen_help(pointsx, pointsy, pointsz, center, length, subd):
                 colors[lx * ly * x + lx * y + z, 1] = pointsy[y] / length[1]
                 colors[lx * ly * x + lx * y + z, 2] = pointsz[z] / length[2]
     return (plot_points + center_off), colors
+
+
+def sphere_gen(
+    center=np.array([0, 0, 0]),
+    radius=1,
+    rows=10,
+    cols=20,
+    color=(0.5, 0.5, 0.5, 0.5),
+    smooth=True,
+):
+    """TODO: Docstring for sphere_gen.
+
+    Parameters
+    ----------
+    center : ndarray (3), optional
+        Center of sphere
+    radius : float, optional
+        Radius of sphere
+    rows : int, optional
+        Number of rows in sphere
+    cols : int, optional
+        Number of columns in sphere
+    color: tuple (4), optional
+        Default face colors
+    smooth : boolean, optional
+        Sould be shaded smooth
+
+    Returns
+    -------
+    GLMeshItem
+        Mesh of sphere
+
+
+    """
+    md = gl.MeshData.sphere(rows=rows, cols=cols)
+    colors = np.ones((md.faceCount(), 4), dtype=float)
+    md.setFaceColors(colors)
+    m3 = gl.GLMeshItem(meshdata=md, smooth=smooth, shader="balloon")
+    m3.translate(center[0], center[1], center[2])
+    m3.scale(radius, radius, radius)
+    m3.setColor(color)
+    return m3
