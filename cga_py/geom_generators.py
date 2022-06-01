@@ -53,10 +53,10 @@ def normalize_point(point):
 
     """
     if not np.isclose(point.coeff[0], 0):
-        raise ValueError("Object is not a cga representation of a point")
+        raise ValueError(str(point) + " is not a cga representation of a point")
 
-    if not np.allclose(point.coeff[6:-1], np.zeros_like(point.coeff[6:-1])):
-        raise ValueError("Object is not a cga representation of a point")
+    if not np.allclose(point.coeff[6:-1], np.zeros_like(point.coeff[6:-1]), atol=1e-7):
+        raise ValueError(str(point) + " is not a cga representation of a point")
 
     return cga_object(1 / point.coeff[5] * point.coeff)
 
@@ -131,7 +131,9 @@ def normalize_sphere(sphere):
     if not np.isclose(sphere.coeff[0], 0):
         raise ValueError("Object is not a cga representation of a sphere")
 
-    if not np.allclose(sphere.coeff[6:-1], np.zeros_like(sphere.coeff[6:-1])):
+    if not np.allclose(
+        sphere.coeff[6:-1], np.zeros_like(sphere.coeff[6:-1]), atol=1e-7
+    ):
         raise ValueError("Object is not a cga representation of a sphere")
     return cga_object(1 / sphere.coeff[5] * sphere.coeff)
 
@@ -196,7 +198,7 @@ def normalize_plane(plane):
     if not np.isclose(plane.coeff[0], 0):
         raise ValueError("Object is not a cga representation of a plane")
 
-    if not np.allclose(plane.coeff[5:-1], np.zeros_like(plane.coeff[5:-1])):
+    if not np.allclose(plane.coeff[6:-1], np.zeros_like(plane.coeff[6:-1]), atol=1e-7):
         raise ValueError("Object is not a cga representation of a plane")
 
     norm = 1 / np.sqrt(plane.coeff[1] ** 2 + plane.coeff[2] ** 2 + plane.coeff[3] ** 2)

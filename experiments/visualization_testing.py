@@ -72,17 +72,16 @@ time_paramtree.setWindowTitle("pyqtgraph example: Parameter Tree")
 general_params = Parameter.create(name="params", type="group")
 
 # Add Spinbox
-subd_slider = general_params.addChild(
-    pTypes.SimpleParameter(name="subdivisions", type="int")
-)
-subd_slider.setOpts(step=1)
-subd_slider.setValue(10)
+subds = general_params.addChild(pTypes.SimpleParameter(name="subdivisions", type="str"))
+subds.setOpts(step=1)
+subds.setValue("[10, 10, 10]")
+subds.setDefault("[10, 10, 10]")
 # What happens at update of parameter
 def update_subd():
     global plot_points
     global cols
     plot_points, cols = point_cube_gen(
-        [0, 0, 0], [2, 2, 2], np.ones(3) * subd_slider.value()
+        [0, 0, 0], [2, 2, 2], np.array(eval(subds.value()))
     )
     full_update()
 
@@ -110,9 +109,7 @@ a = [0, 0, 0]
 scale = transv([0, 0, 0], [1, 2, 3])
 poly_coeff = [0.5 * e_123o - e_123i, e_12 - e_3i + 0.5 * e_3o, 1]
 
-plot_points, cols = point_cube_gen(
-    [0, 0, 0], [2, 2, 2], np.ones(3) * subd_slider.value()
-)
+plot_points, cols = point_cube_gen([0, 0, 0], [2, 2, 2], np.array(eval(subds.value())))
 
 ########################################
 # Create the view and setup parameters
@@ -143,7 +140,7 @@ view.addItem(scatter)
 
 # Connect the slider change signals to the update functions
 t_slider.sigValueChanged.connect(update_t)
-subd_slider.sigValueChanged.connect(update_subd)
+subds.sigValueChanged.connect(update_subd)
 poly_box.sigValueChanged.connect(update_poly_box)
 
 # show the window

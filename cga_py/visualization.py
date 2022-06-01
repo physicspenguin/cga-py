@@ -60,6 +60,7 @@ def point_cube_gen(
 
     """
     subd = np.array(subd, dtype=int)
+    center = np.array(center)
     pointsx = np.linspace(0, length[0], subd[0])
     pointsy = np.linspace(0, length[1], subd[1])
     pointsz = np.linspace(0, length[2], subd[2])
@@ -90,12 +91,12 @@ def point_cube_gen_help(pointsx, pointsy, pointsz, center, length, subd):
     for x in range(lx):
         for y in range(ly):
             for z in range(lz):
-                plot_points[lx * ly * x + lx * y + z, 0] = pointsx[x]
-                plot_points[lx * ly * x + lx * y + z, 1] = pointsy[y]
-                plot_points[lx * ly * x + lx * y + z, 2] = pointsz[z]
-                colors[lx * ly * x + lx * y + z, 0] = pointsx[x] / length[0]
-                colors[lx * ly * x + lx * y + z, 1] = pointsy[y] / length[1]
-                colors[lx * ly * x + lx * y + z, 2] = pointsz[z] / length[2]
+                plot_points[lz * ly * x + lz * y + z, 0] = pointsx[x]
+                plot_points[lz * ly * x + lz * y + z, 1] = pointsy[y]
+                plot_points[lz * ly * x + lz * y + z, 2] = pointsz[z]
+                colors[lz * ly * x + lz * y + z, 0] = pointsx[x] / length[0]
+                colors[lz * ly * x + lz * y + z, 1] = pointsy[y] / length[1]
+                colors[lz * ly * x + lz * y + z, 2] = pointsz[z] / length[2]
     return (plot_points + center_off), colors
 
 
