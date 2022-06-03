@@ -53,13 +53,13 @@ t_slider.setValue(np.pi / 2 + 0.001)
 t_slider.setDefault(np.pi / 2 + 0.001)
 # Add a slider
 t_value = time_parameters.addChild(
-    pTypes.SimpleParameter(type="str", name="Time String")
+    pTypes.SimpleParameter(type="str", name="Time Input")
 )
 t_value.setValue(t_slider.value())
 t_value.setDefault(t_slider.value())
 # What happens at update of parameter
 def update_t_slide():
-    t_value.setValue(t_slider.value())
+    # t_value.setValue(t_slider.value())
     full_update()
 
 
@@ -80,9 +80,8 @@ general_params = Parameter.create(name="params", type="group")
 
 
 # Polynomial input
-poly_box = general_params.addChild(
-    pTypes.SimpleParameter(type="str", name="Coefficients")
-)
+poly_tree = general_params.addChild(Parameter.create(name="Polynomial", type="group"))
+poly_box = poly_tree.addChild(pTypes.SimpleParameter(type="str", name="Coefficients"))
 poly_box.setValue("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
 poly_box.setDefault("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
 
@@ -90,42 +89,43 @@ poly_box.setDefault("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
 ####################
 # Trajectory Parameters
 ####################
-
-display_tajectory = general_params.addChild(
+traj_tree = general_params.addChild(Parameter.create(name="Trajectories", type="group"))
+display_tajectory = traj_tree.addChild(
     pTypes.SimpleParameter(name="Display Trajectories", type="bool")
 )
 display_tajectory.setValue(False)
 
-p_traj_subds = general_params.addChild(
-    pTypes.SimpleParameter(type="int", name="Trajectory Subdivisions")
-)
-p_traj_subds.setValue(200)
-p_traj_subds.setDefault(200)
-
-p_traj_points = general_params.addChild(
+p_traj_points = traj_tree.addChild(
     pTypes.SimpleParameter(type="str", name="Trajectory Points")
 )
 p_traj_points.setValue("[[0,0,0],[1,1,1]]")
 p_traj_points.setDefault("[[0,0,0],[1,1,1]]")
+
+p_traj_subds = traj_tree.addChild(
+    pTypes.SimpleParameter(type="int", name="Trajectory Subdivisions")
+)
+p_traj_subds.setValue(200)
+p_traj_subds.setDefault(200)
 
 ####################
 # Cube Parameters
 ####################
 
 
-display_cube = general_params.addChild(
+cube_tree = general_params.addChild(Parameter.create(name="Cube", type="group"))
+display_cube = cube_tree.addChild(
     pTypes.SimpleParameter(name="Display Cube", type="bool")
 )
 display_cube.setValue(True)
-subds = general_params.addChild(pTypes.SimpleParameter(name="Subdivisions", type="str"))
+subds = cube_tree.addChild(pTypes.SimpleParameter(name="Subdivisions", type="str"))
 subds.setOpts(step=1)
 subds.setValue("[10, 10, 10]")
 subds.setDefault("[10, 10, 10]")
-center = general_params.addChild(pTypes.SimpleParameter(name="Center", type="str"))
+center = cube_tree.addChild(pTypes.SimpleParameter(name="Center", type="str"))
 center.setOpts(step=1)
 center.setValue("[0, 0, 0]")
 center.setDefault("[0, 0, 0]")
-length = general_params.addChild(pTypes.SimpleParameter(name="Lengths", type="str"))
+length = cube_tree.addChild(pTypes.SimpleParameter(name="Lengths", type="str"))
 length.setOpts(step=1)
 length.setValue("[2, 2, 2]")
 length.setDefault("[2, 2, 2]")
