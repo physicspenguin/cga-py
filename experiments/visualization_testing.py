@@ -60,12 +60,12 @@ t_value.setDefault(t_slider.value())
 # What happens at update of parameter
 def update_t_slide():
     # t_value.setValue(t_slider.value())
-    full_update()
+    full_time_update()
 
 
 def update_t_val():
     t_slider.setValue(eval(t_value.value()))
-    full_update()
+    full_time_update()
 
 
 # Create a parameter tree for displaying the slider
@@ -107,6 +107,12 @@ p_traj_subds = traj_tree.addChild(
 p_traj_subds.setValue(200)
 p_traj_subds.setDefault(200)
 
+p_traj_width = traj_tree.addChild(
+    pTypes.SimpleParameter(type="float", name="Trajectory width")
+)
+p_traj_width.setValue(2)
+p_traj_width.setDefault(2)
+
 ####################
 # Cube Parameters
 ####################
@@ -137,7 +143,7 @@ general_paramtree.setParameters(general_params, showTop=False)
 
 a = [0, 0, 0]
 poly_coeff = [0.5 * e_123o - e_123i, e_12 - e_3i + 0.5 * e_3o, 1]
-plot_points, cols = point_cube_gen(
+cube_points, cols = point_cube_gen(
     eval(center.value()), eval(length.value()), eval(subds.value())
 )
 traj_points = eval(p_traj_points.value())
@@ -159,13 +165,13 @@ d2.addWidget(view)
 d3.addWidget(general_paramtree)
 
 # Plot them as scatter
-scatter = gl.GLScatterPlotItem(pos=plot_points, color=cols)
+scatter = gl.GLScatterPlotItem(pos=cube_points, color=cols)
 
 
-def full_update():
+def full_time_update():
     if display_cube.value():
         scatter.setData(
-            pos=point_p_act(plot_points, np.tan(t_slider.value()), poly_coeff),
+            pos=point_p_act(cube_points, np.tan(t_slider.value()), poly_coeff),
             color=cols,
         )
 
@@ -175,7 +181,7 @@ def update_display_cube():
         view.addItem(scatter)
     else:
         view.removeItem(scatter)
-    full_update()
+    full_time_update()
 
 
 def generatre_trajectory_points(start_point):
@@ -190,7 +196,9 @@ def generatre_trajectory_points(start_point):
     return points
 
 
-traj_plots = [gl.GLLinePlotItem(width=5) for i in range(len(traj_points))]
+traj_plots = [
+    gl.GLLinePlotItem(width=p_traj_width.value()) for i in range(len(traj_points))
+]
 traj_plots[0].setData(pos=generatre_trajectory_points(traj_points[0]))
 traj_plots[1].setData(pos=generatre_trajectory_points(traj_points[1]))
 
@@ -220,6 +228,11 @@ def update_trajectories():
             view.addItem(traj_plots[i])
 
 
+def update_trajectory_width():
+    for i in range(len(traj_plots)):
+        traj_plots[i].setData(width=p_traj_width.value())
+
+
 def update_display_trajectory():
     if display_tajectory.value():
         add_traj_plots()
@@ -228,9 +241,9 @@ def update_display_trajectory():
 
 
 def update_cube():
-    global plot_points
+    global cube_points
     global cols
-    plot_points, cols = point_cube_gen(
+    cube_points, cols = point_cube_gen(
         eval(center.value()), eval(length.value()), np.array(eval(subds.value()))
     )
     full_update()
@@ -239,8 +252,12 @@ def update_cube():
 def update_poly_box():
     global poly_coeff
     poly_coeff = eval(poly_box.value())
-    update_trajectories()
     full_update()
+
+
+def full_update():
+    update_trajectories()
+    full_time_update()
 
 
 view.addItem(scatter)
@@ -257,6 +274,7 @@ poly_box.sigValueChanged.connect(update_poly_box)
 display_tajectory.sigValueChanged.connect(update_display_trajectory)
 p_traj_points.sigValueChanged.connect(update_trajectories)
 p_traj_subds.sigValueChanged.connect(update_trajectories)
+p_traj_width.sigValueChanged.connect(update_trajectory_width)
 
 # show the window
 win.show()

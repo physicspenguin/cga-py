@@ -80,6 +80,13 @@ def point_cube_gen_help(pointsx, pointsy, pointsz, center, length, subd):
     lx = subd[0]
     ly = subd[1]
     lz = subd[2]
+    # set length to 0 if there is only one subdivision to assure correct center
+    if subd[0] == 1:
+        length[0] = 0
+    if subd[1] == 1:
+        length[1] = 0
+    if subd[3] == 1:
+        length[2] = 0
     plot_points = np.zeros((lx * ly * lz, 3))
     colors = np.ones((lx * ly * lz, 4))
     center_off = np.array(
@@ -89,6 +96,13 @@ def point_cube_gen_help(pointsx, pointsy, pointsz, center, length, subd):
             center[2] - length[2] / 2,
         ]
     )
+    if length[0] == 0:
+        length[0] = 1
+    if length[1] == 0:
+        length[1] = 1
+    if length[3] == 0:
+        length[2] = 1
+    # set length to 1 if it is zero to avoid division by zero
     for x in range(lx):
         for y in range(ly):
             for z in range(lz):
@@ -108,7 +122,7 @@ def sphere_gen(
     cols=20,
     color=(0.5, 0.5, 0.5, 0.5),
     smooth=True,
-):
+):  # pragma: no cover
     """TODO: Docstring for sphere_gen.
 
     Parameters
