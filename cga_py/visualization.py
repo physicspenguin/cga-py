@@ -66,7 +66,7 @@ def point_cube_gen(
     for i in range(3):
         if subd[i] == 1:
             length[i] = 0
-        if len_div[i] == 0:
+        if length[i] == 0:
             len_div[i] = 1
     pointsx = np.linspace(0, length[0], subd[0])
     pointsy = np.linspace(0, length[1], subd[1])

@@ -16,7 +16,7 @@ from time import sleep
 # View generation
 ########################################
 # Generate the App
-app = pg.mkQApp("Testing Docking with sliders")
+app = pg.mkQApp("CGA-Py Visualizer")
 # Make the window in which the app is running
 win = QtWidgets.QMainWindow()
 # Make the are in which docking is posible and then set it as the central widget

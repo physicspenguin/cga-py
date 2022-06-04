@@ -3,7 +3,7 @@ import numba as nb
 
 
 @nb.njit(cache=True)
-def _mul(firstcoeff, othercoeff):
+def _mul(firstcoeff, othercoeff):  # pragma: no cover
     """CGA multiplication of two cga_object
 
     Parameters
@@ -984,7 +984,7 @@ def _mul(firstcoeff, othercoeff):
 
 
 @nb.njit(cache=True)
-def _invert(objcoeff):
+def _invert(objcoeff):  # pragma: no cover
     """Generates inverse of cga_object"""
     out = np.array(
         [
@@ -1026,7 +1026,7 @@ def _invert(objcoeff):
 
 
 @nb.njit(cache=True)
-def _inner(firstcoeff, othercoeff):
+def _inner(firstcoeff, othercoeff):  # pragma: no cover
     """inner product
 
     Parameters
@@ -1519,7 +1519,7 @@ def _inner(firstcoeff, othercoeff):
 
 
 @nb.njit(cache=True)
-def _wedge(firstcoeff, othercoeff):
+def _wedge(firstcoeff, othercoeff):  # pragma: no cover
     """outer / wedge product
 
     Parameters

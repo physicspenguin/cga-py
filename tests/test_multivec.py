@@ -664,3 +664,8 @@ def test_get_even():
         ],
         even=True,
     )
+
+
+def test_complex_floordiv():
+    with nt.assert_raises(TypeError):
+        cg(1j * np.random.rand(32)) // (4)
