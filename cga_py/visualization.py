@@ -62,33 +62,33 @@ def point_cube_gen(
     subd = np.array(subd, dtype=int)
     center = np.array(center)
     length = np.array(length)
+    len_div = np.array(length)
+    for i in range(3):
+        if subd[i] == 1:
+            length[i] = 0
+        if len_div[i] == 0:
+            len_div[i] = 1
     pointsx = np.linspace(0, length[0], subd[0])
     pointsy = np.linspace(0, length[1], subd[1])
     pointsz = np.linspace(0, length[2], subd[2])
 
-    return point_cube_gen_help(pointsx, pointsy, pointsz, center, length, subd)
+    return point_cube_gen_help(pointsx, pointsy, pointsz, center, length, len_div, subd)
 
 
 @njit(parallel=True, cache=True)
-def point_cube_gen_help(pointsx, pointsy, pointsz, center, length, subd):
+def point_cube_gen_help(pointsx, pointsy, pointsz, center, length, len_div, subd):
     """TODO: Docstring for point_cube_gen_help.
     Returns
     -------
     TODO
 
     """
-    lx = subd[0]
-    ly = subd[1]
-    lz = subd[2]
+    sx = subd[0]
+    sy = subd[1]
+    sz = subd[2]
     # set length to 0 if there is only one subdivision to assure correct center
-    if subd[0] == 1:
-        length[0] = 0
-    if subd[1] == 1:
-        length[1] = 0
-    if subd[3] == 1:
-        length[2] = 0
-    plot_points = np.zeros((lx * ly * lz, 3))
-    colors = np.ones((lx * ly * lz, 4))
+    plot_points = np.zeros((sx * sy * sz, 3))
+    colors = np.ones((sx * sy * sz, 4))
     center_off = np.array(
         [
             center[0] - length[0] / 2,
@@ -96,22 +96,16 @@ def point_cube_gen_help(pointsx, pointsy, pointsz, center, length, subd):
             center[2] - length[2] / 2,
         ]
     )
-    if length[0] == 0:
-        length[0] = 1
-    if length[1] == 0:
-        length[1] = 1
-    if length[3] == 0:
-        length[2] = 1
     # set length to 1 if it is zero to avoid division by zero
-    for x in range(lx):
-        for y in range(ly):
-            for z in range(lz):
-                plot_points[lz * ly * x + lz * y + z, 0] = pointsx[x]
-                plot_points[lz * ly * x + lz * y + z, 1] = pointsy[y]
-                plot_points[lz * ly * x + lz * y + z, 2] = pointsz[z]
-                colors[lz * ly * x + lz * y + z, 0] = 1 - (pointsx[x] / length[0])
-                colors[lz * ly * x + lz * y + z, 1] = 1 - (pointsy[y] / length[1])
-                colors[lz * ly * x + lz * y + z, 2] = 1 - (pointsz[z] / length[2])
+    for x in range(sx):
+        for y in range(sy):
+            for z in range(sz):
+                plot_points[sz * sy * x + sz * y + z, 0] = pointsx[x]
+                plot_points[sz * sy * x + sz * y + z, 1] = pointsy[y]
+                plot_points[sz * sy * x + sz * y + z, 2] = pointsz[z]
+                colors[sz * sy * x + sz * y + z, 0] = 1 - (pointsx[x] / len_div[0])
+                colors[sz * sy * x + sz * y + z, 1] = 1 - (pointsy[y] / len_div[1])
+                colors[sz * sy * x + sz * y + z, 2] = 1 - (pointsz[z] / len_div[2])
     return (plot_points + center_off), colors
 
 
