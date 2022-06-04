@@ -81,9 +81,30 @@ general_params = Parameter.create(name="params", type="group")
 
 # Polynomial input
 poly_tree = general_params.addChild(Parameter.create(name="Polynomial", type="group"))
-poly_box = poly_tree.addChild(pTypes.SimpleParameter(type="str", name="Coefficients"))
-poly_box.setValue("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
-poly_box.setDefault("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
+
+p_use_main_coeff = poly_tree.addChild(
+    pTypes.SimpleParameter(name="Use Main Polynomial", type="bool")
+)
+p_use_main_coeff.setValue(True)
+
+
+p_main_poly_coeff = poly_tree.addChild(
+    pTypes.SimpleParameter(type="str", name="Main Coeff")
+)
+p_main_poly_coeff.setValue("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
+p_main_poly_coeff.setDefault("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
+
+p_first_poly_coeff = poly_tree.addChild(
+    pTypes.SimpleParameter(type="str", name="First Coeff")
+)
+p_first_poly_coeff.setValue("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
+p_first_poly_coeff.setDefault("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
+
+p_second_poly_coeff = poly_tree.addChild(
+    pTypes.SimpleParameter(type="str", name="Second Coeff")
+)
+p_second_poly_coeff.setValue("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
+p_second_poly_coeff.setDefault("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
 
 
 ####################
@@ -112,6 +133,9 @@ p_traj_width = traj_tree.addChild(
 )
 p_traj_width.setValue(2)
 p_traj_width.setDefault(2)
+
+
+p_traj_c_map = traj_tree.addChild(pTypes.ColorMapParameter(name="Trajectory Colors"))
 
 ####################
 # Cube Parameters
@@ -142,11 +166,17 @@ general_paramtree = ParameterTree()
 general_paramtree.setParameters(general_params, showTop=False)
 
 a = [0, 0, 0]
-poly_coeff = [0.5 * e_123o - e_123i, e_12 - e_3i + 0.5 * e_3o, 1]
+main_poly_coeff = eval(p_main_poly_coeff.value())
+first_poly_coeff = eval(p_first_poly_coeff.value())
+second_poly_coeff = eval(p_second_poly_coeff.value())
 cube_points, cols = point_cube_gen(
     eval(center.value()), eval(length.value()), eval(subds.value())
 )
 traj_points = eval(p_traj_points.value())
+traj_plots = [gl.GLLinePlotItem(), gl.GLLinePlotItem()]
+traj_colors = p_traj_c_map.value().getLookupTable(
+    nPts=len(traj_plots), mode=pg.ColorMap.QCOLOR
+)
 
 ########################################
 # Create the view and setup parameters
@@ -168,12 +198,50 @@ d3.addWidget(general_paramtree)
 scatter = gl.GLScatterPlotItem(pos=cube_points, color=cols)
 
 
+def point_p_act_main_on_points(point_arr):
+    return point_p_act(np.tan(t_slider.value()), main_poly_coeff, point_arr)
+
+
+def point_p_act_factorization_on_points(point_arr):
+    return point_p_act(
+        np.tan(t_slider.value()),
+        second_poly_coeff,
+        point_p_act(np.tan(t_slider.value()), first_poly_coeff, point_arr),
+    )
+
+
+def act_main_on_points(param, actpoint):
+    return poly_act(np.tan(param), main_poly_coeff, actpoint)
+
+
+def act_factorization_on_points(param, actpoint):
+    return poly_act(
+        np.tan(param),
+        second_poly_coeff,
+        poly_act(np.tan(param), first_poly_coeff, actpoint),
+    )
+
+
+def update_scatter_with_main():
+    scatter.setData(
+        pos=point_p_act_main_on_points(cube_points),
+        color=cols,
+    )
+
+
+def update_scatter_with_factorization():
+    scatter.setData(
+        pos=point_p_act_factorization_on_points(cube_points),
+        color=cols,
+    )
+
+
 def full_time_update():
     if display_cube.value():
-        scatter.setData(
-            pos=point_p_act(cube_points, np.tan(t_slider.value()), poly_coeff),
-            color=cols,
-        )
+        if p_use_main_coeff.value():
+            update_scatter_with_main()
+        else:
+            update_scatter_with_factorization()
 
 
 def update_display_cube():
@@ -187,20 +255,23 @@ def update_display_cube():
 def generatre_trajectory_points(start_point):
     time = np.linspace(0, np.pi, p_traj_subds.value())
     points = np.empty((len(time), 3))
-    for i in range(len(time)):
-        points[i] = np.real(
-            point_to_cartesian(
-                poly_act(np.tan(time[i]), poly_coeff, point(start_point))
+    if p_use_main_coeff.value():
+        for i in range(len(time)):
+            points[i] = np.real(
+                point_to_cartesian(
+                    act_main_on_points(time[i], point(start_point))
+                    # poly_act(np.tan(time[i]), main_poly_coeff, point(start_point))
+                )
             )
-        )
+    else:
+        for i in range(len(time)):
+            points[i] = np.real(
+                point_to_cartesian(
+                    act_factorization_on_points(time[i], point(start_point))
+                )
+            )
+
     return points
-
-
-traj_plots = [
-    gl.GLLinePlotItem(width=p_traj_width.value()) for i in range(len(traj_points))
-]
-traj_plots[0].setData(pos=generatre_trajectory_points(traj_points[0]))
-traj_plots[1].setData(pos=generatre_trajectory_points(traj_points[1]))
 
 
 def clear_traj_plots():
@@ -224,8 +295,7 @@ def update_trajectories():
     traj_plots = [gl.GLLinePlotItem(width=5) for i in range(len(traj_points))]
     for i in range(len(traj_plots)):
         traj_plots[i].setData(pos=generatre_trajectory_points(traj_points[i]))
-        if display_tajectory.value():
-            view.addItem(traj_plots[i])
+    update_display_trajectory()
 
 
 def update_trajectory_width():
@@ -233,9 +303,20 @@ def update_trajectory_width():
         traj_plots[i].setData(width=p_traj_width.value())
 
 
+def update_trajectory_colors():
+    global traj_colors
+    traj_colors = p_traj_c_map.value().getLookupTable(
+        nPts=len(traj_plots), mode=pg.ColorMap.QCOLOR
+    )
+    for i in range(len(traj_plots)):
+        traj_plots[i].setData(color=traj_colors[i])
+
+
 def update_display_trajectory():
     if display_tajectory.value():
         add_traj_plots()
+        update_trajectory_width()
+        update_trajectory_colors()
     else:
         clear_traj_plots()
 
@@ -249,9 +330,25 @@ def update_cube():
     full_update()
 
 
-def update_poly_box():
-    global poly_coeff
-    poly_coeff = eval(poly_box.value())
+def update_coeff_set():
+    full_update()
+
+
+def update_main_poly_coeff():
+    global main_poly_coeff
+    main_poly_coeff = eval(p_main_poly_coeff.value())
+    full_update()
+
+
+def update_first_poly_coeff():
+    global first_poly_coeff
+    first_poly_coeff = eval(p_first_poly_coeff.value())
+    full_update()
+
+
+def update_second_poly_coeff():
+    global second_poly_coeff
+    second_poly_coeff = eval(p_second_poly_coeff.value())
     full_update()
 
 
@@ -266,15 +363,28 @@ view.addItem(scatter)
 # Connect the slider change signals to the update functions
 t_slider.sigValueChanged.connect(update_t_slide)
 t_value.sigValueChanged.connect(update_t_val)
+
+
+p_use_main_coeff.sigValueChanged.connect(update_coeff_set)
+p_main_poly_coeff.sigValueChanged.connect(update_main_poly_coeff)
+p_first_poly_coeff.sigValueChanged.connect(update_first_poly_coeff)
+p_second_poly_coeff.sigValueChanged.connect(update_second_poly_coeff)
+
+
 display_cube.sigValueChanged.connect(update_display_cube)
 subds.sigValueChanged.connect(update_cube)
 center.sigValueChanged.connect(update_cube)
 length.sigValueChanged.connect(update_cube)
-poly_box.sigValueChanged.connect(update_poly_box)
+
+
 display_tajectory.sigValueChanged.connect(update_display_trajectory)
 p_traj_points.sigValueChanged.connect(update_trajectories)
 p_traj_subds.sigValueChanged.connect(update_trajectories)
 p_traj_width.sigValueChanged.connect(update_trajectory_width)
+p_traj_c_map.sigValueChanged.connect(update_trajectory_colors)
+
+# Update all parameters before first view
+full_update()
 
 # show the window
 win.show()

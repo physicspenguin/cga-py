@@ -7,21 +7,21 @@ from numba import njit
 import pyqtgraph.opengl as gl
 
 
-def point_p_act_helper(i, points, param, poly):
+def point_p_act_helper(i, param, poly, points):
     return point_to_cartesian(poly_act(param, poly, point(points[i])))
 
 
-def point_p_act(points, param, poly):
+def point_p_act(param, poly, points):
     """Use poly_act on an array of points given in cartesian coordinates.
 
     Parameters
     ----------
-    points : ndarray (N,3)
-        Cartesian coordinates of points to act upon
     param: float
         parameter of polynomial
     poly: ndarray
         polynomial given as coefficient list with increasing degree
+    points : ndarray (N,3)
+        Cartesian coordinates of points to act upon
 
     Returns
     -------

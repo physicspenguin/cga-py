@@ -112,7 +112,7 @@ def test_point_pact():
     x = np.array([[0, 0, 0], [1, 2, 3], [4, -3, 4.6]])
     r = ga.rand_rot_poly()
     t = np.random.rand()
-    y = ga.point_p_act(x, t, [r, 1])
+    y = ga.point_p_act(t, [r, 1], x)
     y1 = np.array(
         [
             ga.point_to_cartesian(ga.poly_act(t, [r, 1], ga.point(x[i])))
