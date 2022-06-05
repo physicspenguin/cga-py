@@ -45,26 +45,26 @@ area.addDock(d1, "bottom")
 time_parameters = Parameter.create(name="params", type="group")
 
 # Add a slider
-t_slider = time_parameters.addChild(pTypes.SliderParameter(name="Time Slider"))
+p_t_slider = time_parameters.addChild(pTypes.SliderParameter(name="Time Slider"))
 # change settings
-t_slider.setLimits([-np.pi, np.pi])
-t_slider.setOpts(step=np.pi / 300)
-t_slider.setValue(np.pi / 2 + 0.001)
-t_slider.setDefault(np.pi / 2 + 0.001)
+p_t_slider.setLimits([-np.pi, np.pi])
+p_t_slider.setOpts(step=np.pi / 300)
+p_t_slider.setValue(np.pi / 2 + 0.001)
+p_t_slider.setDefault(np.pi / 2 + 0.001)
 # Add a slider
-t_value = time_parameters.addChild(
+p_t_value = time_parameters.addChild(
     pTypes.SimpleParameter(type="str", name="Time Input")
 )
-t_value.setValue(t_slider.value())
-t_value.setDefault(t_slider.value())
+p_t_value.setValue(p_t_slider.value())
+p_t_value.setDefault(p_t_slider.value())
 # What happens at update of parameter
 def update_t_slide():
-    # t_value.setValue(t_slider.value())
+    # p_t_value.setValue(p_t_slider.value())
     full_time_update()
 
 
 def update_t_val():
-    t_slider.setValue(eval(t_value.value()))
+    p_t_slider.setValue(eval(p_t_value.value()))
     full_time_update()
 
 
@@ -82,27 +82,24 @@ general_params = Parameter.create(name="params", type="group")
 # Polynomial input
 poly_tree = general_params.addChild(Parameter.create(name="Polynomial", type="group"))
 
+p_update_coeff = poly_tree.addChild(pTypes.ActionParameter(name="Update Coefficients"))
+
+
 p_use_main_coeff = poly_tree.addChild(
     pTypes.SimpleParameter(name="Use Main Polynomial", type="bool")
 )
 p_use_main_coeff.setValue(True)
 
 
-p_main_poly_coeff = poly_tree.addChild(
-    pTypes.SimpleParameter(type="str", name="Main Coeff")
-)
+p_main_poly_coeff = poly_tree.addChild(pTypes.TextParameter(name="Main Coeff"))
 p_main_poly_coeff.setValue("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
 p_main_poly_coeff.setDefault("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
 
-p_first_poly_coeff = poly_tree.addChild(
-    pTypes.SimpleParameter(type="str", name="First Coeff")
-)
+p_first_poly_coeff = poly_tree.addChild(pTypes.TextParameter(name="First Coeff"))
 p_first_poly_coeff.setValue("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
 p_first_poly_coeff.setDefault("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
 
-p_second_poly_coeff = poly_tree.addChild(
-    pTypes.SimpleParameter(type="str", name="Second Coeff")
-)
+p_second_poly_coeff = poly_tree.addChild(pTypes.TextParameter(name="Second Coeff"))
 p_second_poly_coeff.setValue("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
 p_second_poly_coeff.setDefault("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
 
@@ -111,22 +108,25 @@ p_second_poly_coeff.setDefault("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]
 # Trajectory Parameters
 ####################
 traj_tree = general_params.addChild(Parameter.create(name="Trajectories", type="group"))
-display_tajectory = traj_tree.addChild(
+
+p_traj_points_update = traj_tree.addChild(
+    pTypes.ActionParameter(name="Update Trajectories")
+)
+
+p_display_tajectory = traj_tree.addChild(
     pTypes.SimpleParameter(name="Display Trajectories", type="bool")
 )
-display_tajectory.setValue(False)
+p_display_tajectory.setValue(False)
 
-p_traj_points = traj_tree.addChild(
-    pTypes.SimpleParameter(type="str", name="Trajectory Points")
-)
-p_traj_points.setValue("[[0,0,0],[1,1,1]]")
-p_traj_points.setDefault("[[0,0,0],[1,1,1]]")
+p_traj_points = traj_tree.addChild(pTypes.TextParameter(name="Trajectory Points"))
+p_traj_points.setValue("[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,20)]")
+p_traj_points.setDefault("[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,20)]")
 
 p_traj_subds = traj_tree.addChild(
     pTypes.SimpleParameter(type="int", name="Trajectory Subdivisions")
 )
-p_traj_subds.setValue(200)
-p_traj_subds.setDefault(200)
+p_traj_subds.setValue(100)
+p_traj_subds.setDefault(100)
 
 p_traj_width = traj_tree.addChild(
     pTypes.SimpleParameter(type="float", name="Trajectory width")
@@ -140,42 +140,67 @@ p_traj_c_map = traj_tree.addChild(pTypes.ColorMapParameter(name="Trajectory Colo
 ####################
 # Cube Parameters
 ####################
-
-
 cube_tree = general_params.addChild(Parameter.create(name="Cube", type="group"))
-display_cube = cube_tree.addChild(
+p_display_cube = cube_tree.addChild(
     pTypes.SimpleParameter(name="Display Cube", type="bool")
 )
-display_cube.setValue(True)
-subds = cube_tree.addChild(pTypes.SimpleParameter(name="Subdivisions", type="str"))
-subds.setOpts(step=1)
-subds.setValue("[10, 10, 10]")
-subds.setDefault("[10, 10, 10]")
-center = cube_tree.addChild(pTypes.SimpleParameter(name="Center", type="str"))
-center.setOpts(step=1)
-center.setValue("[0, 0, 0]")
-center.setDefault("[0, 0, 0]")
-length = cube_tree.addChild(pTypes.SimpleParameter(name="Lengths", type="str"))
-length.setOpts(step=1)
-length.setValue("[2, 2, 2]")
-length.setDefault("[2, 2, 2]")
+p_display_cube.setValue(True)
+p_cube_subds = cube_tree.addChild(
+    pTypes.SimpleParameter(name="Subdivisions", type="str")
+)
+p_cube_subds.setOpts(step=1)
+p_cube_subds.setValue("[10, 10, 10]")
+p_cube_subds.setDefault("[10, 10, 10]")
+p_cube_center = cube_tree.addChild(pTypes.SimpleParameter(name="Center", type="str"))
+p_cube_center.setOpts(step=1)
+p_cube_center.setValue("[0, 0, 0]")
+p_cube_center.setDefault("[0, 0, 0]")
+p_cube_length = cube_tree.addChild(pTypes.SimpleParameter(name="Lengths", type="str"))
+p_cube_length.setOpts(step=1)
+p_cube_length.setValue("[2, 2, 2]")
+p_cube_length.setDefault("[2, 2, 2]")
+
+####################
+# Sphere Parameters
+####################
+sphere_tree = general_params.addChild(Parameter.create(name="Sphere", type="group"))
+p_update_spheres = sphere_tree.addChild(pTypes.ActionParameter(name="Update Spheres"))
+p_display_sphere = sphere_tree.addChild(
+    pTypes.SimpleParameter(name="Display Sphere", type="bool")
+)
+p_display_sphere.setValue(False)
+p_sphere_params = sphere_tree.addChild(pTypes.TextParameter(name="Center"))
+p_sphere_params.setValue(
+    "[[[1, 0, 0],0.5],[[0, -1, 0],0.5],[[-1, 0, 0],0.5],[[0, 1, 0],0.5]]"
+)
+p_sphere_params.setDefault(
+    "[[[1, 0, 0],0.5],[[0, -1, 0],0.5],[[-1, 0, 0],0.5],[[0, 1, 0],0.5]]"
+)
+p_sphere_c_map = sphere_tree.addChild(pTypes.ColorMapParameter(name="Sphere Colors"))
 
 
 # Create a parameter tree for displaying the slider
 general_paramtree = ParameterTree()
 general_paramtree.setParameters(general_params, showTop=False)
 
-a = [0, 0, 0]
 main_poly_coeff = eval(p_main_poly_coeff.value())
 first_poly_coeff = eval(p_first_poly_coeff.value())
 second_poly_coeff = eval(p_second_poly_coeff.value())
 cube_points, cols = point_cube_gen(
-    eval(center.value()), eval(length.value()), eval(subds.value())
+    eval(p_cube_center.value()), eval(p_cube_length.value()), eval(p_cube_subds.value())
 )
 traj_points = eval(p_traj_points.value())
 traj_plots = [gl.GLLinePlotItem(), gl.GLLinePlotItem()]
 traj_colors = p_traj_c_map.value().getLookupTable(
     nPts=len(traj_plots), mode=pg.ColorMap.QCOLOR
+)
+unit_sphere = gl.MeshData.sphere(20, 20)
+sphere_params = eval(p_sphere_params.value())
+sphere_centers = [sphere_params[i][0] for i in range(len(sphere_params))]
+sphere_radii = [sphere_params[i][1] for i in range(len(sphere_params))]
+view_spheres = [gl.GLMeshItem(meshdata=unit_sphere, color=(0.5, 0.5, 0.5, 1))]
+sphere_colors = p_sphere_c_map.value().getLookupTable(
+    nPts=len(view_spheres), mode=pg.ColorMap.QCOLOR
 )
 
 ########################################
@@ -199,14 +224,14 @@ scatter = gl.GLScatterPlotItem(pos=cube_points, color=cols)
 
 
 def point_p_act_main_on_points(point_arr):
-    return point_p_act(np.tan(t_slider.value()), main_poly_coeff, point_arr)
+    return point_p_act(np.tan(p_t_slider.value()), main_poly_coeff, point_arr)
 
 
 def point_p_act_factorization_on_points(point_arr):
     return point_p_act(
-        np.tan(t_slider.value()),
+        np.tan(p_t_slider.value()),
         second_poly_coeff,
-        point_p_act(np.tan(t_slider.value()), first_poly_coeff, point_arr),
+        point_p_act(np.tan(p_t_slider.value()), first_poly_coeff, point_arr),
     )
 
 
@@ -237,15 +262,17 @@ def update_scatter_with_factorization():
 
 
 def full_time_update():
-    if display_cube.value():
+    if p_display_cube.value():
         if p_use_main_coeff.value():
             update_scatter_with_main()
         else:
             update_scatter_with_factorization()
+    if p_display_sphere.value():
+        update_spheres()
 
 
 def update_display_cube():
-    if display_cube.value():
+    if p_display_cube.value():
         view.addItem(scatter)
     else:
         view.removeItem(scatter)
@@ -253,15 +280,12 @@ def update_display_cube():
 
 
 def generatre_trajectory_points(start_point):
-    time = np.linspace(0, np.pi, p_traj_subds.value())
+    time = np.linspace(0.01, np.pi + 0.01, p_traj_subds.value())
     points = np.empty((len(time), 3))
     if p_use_main_coeff.value():
         for i in range(len(time)):
             points[i] = np.real(
-                point_to_cartesian(
-                    act_main_on_points(time[i], point(start_point))
-                    # poly_act(np.tan(time[i]), main_poly_coeff, point(start_point))
-                )
+                point_to_cartesian(act_main_on_points(time[i], point(start_point)))
             )
     else:
         for i in range(len(time)):
@@ -270,7 +294,6 @@ def generatre_trajectory_points(start_point):
                     act_factorization_on_points(time[i], point(start_point))
                 )
             )
-
     return points
 
 
@@ -313,7 +336,7 @@ def update_trajectory_colors():
 
 
 def update_display_trajectory():
-    if display_tajectory.value():
+    if p_display_tajectory.value():
         add_traj_plots()
         update_trajectory_width()
         update_trajectory_colors()
@@ -325,7 +348,9 @@ def update_cube():
     global cube_points
     global cols
     cube_points, cols = point_cube_gen(
-        eval(center.value()), eval(length.value()), np.array(eval(subds.value()))
+        eval(p_cube_center.value()),
+        eval(p_cube_length.value()),
+        np.array(eval(p_cube_subds.value())),
     )
     full_update()
 
@@ -352,8 +377,75 @@ def update_second_poly_coeff():
     full_update()
 
 
+def add_spheres():
+    for sphere in view_spheres:
+        view.addItem(sphere)
+
+
+def remove_spheres():
+    for sphere in view_spheres:
+        try:
+            view.removeItem(sphere)
+        except ValueError:
+            continue
+
+
+def update_display_sphere():
+    if p_display_sphere.value():
+        add_spheres()
+    else:
+        remove_spheres()
+
+
+def update_spheres():
+    global view_spheres
+    if p_display_sphere.value():
+        remove_spheres()
+    view_spheres = [
+        gl.GLMeshItem(meshdata=unit_sphere, color=(0.5, 0.5, 0.5, 1))
+        for i in range(len(sphere_centers))
+    ]
+    update_sphere_colors()
+    for i in range(len(sphere_centers)):
+        if p_use_main_coeff.value():
+            new_sphere = act_main_on_points(
+                p_t_slider.value(), sphere(sphere_centers[i], sphere_radii[i])
+            )
+        else:
+            new_sphere = act_factorization_on_points(
+                p_t_slider.value(), sphere(sphere_centers[i], sphere_radii[i])
+            )
+        cent, rad = sphere_to_cartesian(new_sphere)
+        cent = np.real(cent)
+        rad = np.real(rad)
+        view_spheres[i].resetTransform()
+        view_spheres[i].setMeshData(meshdata=unit_sphere)
+        view_spheres[i].translate(cent[0], cent[1], cent[2])
+        view_spheres[i].scale(rad, rad, rad)
+    if p_display_sphere.value():
+        add_spheres()
+
+
+def update_sphere_params():
+    global sphere_params
+    global sphere_centers
+    global sphere_radii
+    sphere_params = eval(p_sphere_params.value())
+    sphere_centers = [sphere_params[i][0] for i in range(len(sphere_params))]
+    sphere_radii = [sphere_params[i][1] for i in range(len(sphere_params))]
+    update_spheres()
+
+
+def update_sphere_colors():
+    global sphere_colors
+    sphere_colors = p_sphere_c_map.value().getLookupTable(
+        nPts=len(view_spheres), mode=pg.ColorMap.QCOLOR
+    )
+    for i in range(len(view_spheres)):
+        view_spheres[i].setColor(sphere_colors[i])
+
+
 def full_update():
-    update_trajectories()
     full_time_update()
 
 
@@ -361,27 +453,34 @@ view.addItem(scatter)
 # view.addItem(sphere)
 
 # Connect the slider change signals to the update functions
-t_slider.sigValueChanged.connect(update_t_slide)
-t_value.sigValueChanged.connect(update_t_val)
+p_t_slider.sigValueChanged.connect(update_t_slide)
+p_t_value.sigValueChanged.connect(update_t_val)
 
 
 p_use_main_coeff.sigValueChanged.connect(update_coeff_set)
-p_main_poly_coeff.sigValueChanged.connect(update_main_poly_coeff)
-p_first_poly_coeff.sigValueChanged.connect(update_first_poly_coeff)
-p_second_poly_coeff.sigValueChanged.connect(update_second_poly_coeff)
+p_update_coeff.sigActivated.connect(update_main_poly_coeff)
+p_update_coeff.sigActivated.connect(update_first_poly_coeff)
+p_update_coeff.sigActivated.connect(update_second_poly_coeff)
+# p_main_poly_coeff.sigValueChanged.connect(update_main_poly_coeff)
+# p_first_poly_coeff.sigValueChanged.connect(update_first_poly_coeff)
+# p_second_poly_coeff.sigValueChanged.connect(update_second_poly_coeff)
 
 
-display_cube.sigValueChanged.connect(update_display_cube)
-subds.sigValueChanged.connect(update_cube)
-center.sigValueChanged.connect(update_cube)
-length.sigValueChanged.connect(update_cube)
+p_display_cube.sigValueChanged.connect(update_display_cube)
+p_cube_subds.sigValueChanged.connect(update_cube)
+p_cube_center.sigValueChanged.connect(update_cube)
+p_cube_length.sigValueChanged.connect(update_cube)
 
 
-display_tajectory.sigValueChanged.connect(update_display_trajectory)
-p_traj_points.sigValueChanged.connect(update_trajectories)
-p_traj_subds.sigValueChanged.connect(update_trajectories)
+p_display_tajectory.sigValueChanged.connect(update_display_trajectory)
+p_traj_points_update.sigActivated.connect(update_trajectories)
 p_traj_width.sigValueChanged.connect(update_trajectory_width)
 p_traj_c_map.sigValueChanged.connect(update_trajectory_colors)
+
+p_display_sphere.sigValueChanged.connect(update_display_sphere)
+p_update_spheres.sigActivated.connect(update_sphere_params)
+p_sphere_c_map.sigValueChanged.connect(update_sphere_colors)
+
 
 # Update all parameters before first view
 full_update()
