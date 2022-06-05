@@ -8,6 +8,7 @@ setup(
     packages=[
         "cga_py",
     ],
+    scripts=["cga_py/bin/cga_py_vis.py"],
     license="BSD-3-Clause License",
     author=me,
     author_email=my_email,

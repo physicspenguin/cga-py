@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+
+from cga_py import *
 import pyqtgraph as pg
 from pyqtgraph.Qt import QtWidgets
 import pyqtgraph.opengl as gl
@@ -5,7 +8,6 @@ import pyqtgraph.parametertree.parameterTypes as pTypes
 from pyqtgraph.parametertree import Parameter, ParameterTree
 from pyqtgraph.dockarea.Dock import Dock
 from pyqtgraph.dockarea.DockArea import DockArea
-from cga_py import *
 import numpy as np
 
 
@@ -495,6 +497,7 @@ full_update()
 
 # show the window
 win.show()
+
 
 # The typical stuff for standalone execution
 if __name__ == "__main__":

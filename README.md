@@ -13,4 +13,19 @@ pip install cga-py
 ```
 
 ## Usage
+### As Package
 See tutorial.py
+
+A full documentation is still in progress.
+
+### As Visualization Tool
+In your console execute the following command.
+```
+cga_py_vis.py
+```
+This will open the visualization interface.
+All relevant parameters can be adjusted.
+After adjustment of the parameters do not forget to update the specific parameter groups
+or best the whole application.
+
+A full documentation of this tool and its capabilities will follow.

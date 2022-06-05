@@ -6,3 +6,5 @@ exclude_lines =
 	def _inner
 	def _wedge
 	pragma: no cover
+omit =
+	cga_py_vis.py
