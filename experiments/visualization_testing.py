@@ -77,7 +77,7 @@ time_paramtree.setParameters(time_parameters, showTop=False)
 ####################
 
 general_params = Parameter.create(name="params", type="group")
-
+p_update_all = general_params.addChild(pTypes.ActionParameter(name="Update All"))
 
 # Polynomial input
 poly_tree = general_params.addChild(Parameter.create(name="Polynomial", type="group"))
@@ -136,6 +136,7 @@ p_traj_width.setDefault(2)
 
 
 p_traj_c_map = traj_tree.addChild(pTypes.ColorMapParameter(name="Trajectory Colors"))
+
 
 ####################
 # Cube Parameters
@@ -449,10 +450,20 @@ def full_update():
     full_time_update()
 
 
+def update_all_params():
+    update_sphere_params()
+    update_main_poly_coeff()
+    update_first_poly_coeff()
+    update_second_poly_coeff()
+    update_trajectories()
+
+
 view.addItem(scatter)
 # view.addItem(sphere)
 
 # Connect the slider change signals to the update functions
+p_update_all.sigActivated.connect(update_all_params)
+
 p_t_slider.sigValueChanged.connect(update_t_slide)
 p_t_value.sigValueChanged.connect(update_t_val)
 
@@ -461,9 +472,6 @@ p_use_main_coeff.sigValueChanged.connect(update_coeff_set)
 p_update_coeff.sigActivated.connect(update_main_poly_coeff)
 p_update_coeff.sigActivated.connect(update_first_poly_coeff)
 p_update_coeff.sigActivated.connect(update_second_poly_coeff)
-# p_main_poly_coeff.sigValueChanged.connect(update_main_poly_coeff)
-# p_first_poly_coeff.sigValueChanged.connect(update_first_poly_coeff)
-# p_second_poly_coeff.sigValueChanged.connect(update_second_poly_coeff)
 
 
 p_display_cube.sigValueChanged.connect(update_display_cube)
@@ -483,6 +491,7 @@ p_sphere_c_map.sigValueChanged.connect(update_sphere_colors)
 
 
 # Update all parameters before first view
+update_all_params()
 full_update()
 
 # show the window
