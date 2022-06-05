@@ -10,6 +10,7 @@ setup(
     ],
     scripts=["cga_py/bin/cga_py_vis.py"],
     license="BSD-3-Clause License",
+    url="https://github.com/physicspenguin/cga-py",
     author=me,
     author_email=my_email,
     maintainer=me,
