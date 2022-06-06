@@ -79,6 +79,22 @@ time_paramtree.setParameters(time_parameters, showTop=False)
 
 general_params = Parameter.create(name="params", type="group")
 p_update_all = general_params.addChild(pTypes.ActionParameter(name="Update All"))
+p_execute_code = general_params.addChild(pTypes.ActionParameter(name="Execute Code"))
+p_shell_interface = general_params.addChild(pTypes.TextParameter(name="Custom Code"))
+p_shell_interface.setValue(
+    "This Field can execute custom code. Variables must be declared with the global keyword!"
+)
+
+axes_tree = general_params.addChild(Parameter.create(name="Axes", type="group"))
+p_show_axes = axes_tree.addChild(pTypes.SimpleParameter(name="Show Axes", type="bool"))
+p_show_axes.setValue(True)
+p_show_axes.setDefault(True)
+p_axes_size = axes_tree.addChild(
+    pTypes.SimpleParameter(name="Axes Lengths", type="str")
+)
+p_axes_size.setValue("[3,3,3]")
+p_axes_size.setDefault("[3,3,3]")
+
 
 # Polynomial input
 poly_tree = general_params.addChild(Parameter.create(name="Polynomial", type="group"))
@@ -96,13 +112,22 @@ p_main_poly_coeff = poly_tree.addChild(pTypes.TextParameter(name="Main Coeff"))
 p_main_poly_coeff.setValue("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
 p_main_poly_coeff.setDefault("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
 
+x = 1
+y = 1
+z = 100
+
 p_first_poly_coeff = poly_tree.addChild(pTypes.TextParameter(name="First Coeff"))
-p_first_poly_coeff.setValue("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
-p_first_poly_coeff.setDefault("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
+p_first_poly_coeff.setValue(
+    "[-1/2*(2*x**4*e_3i-x**4*e_3o+4*x**2*y**2*e_3i-2*x**2*y**2*e_3o+4*x**2*z**2*e_3i-2*x**2*z**2*e_3o+2*y**4*e_3i-y**4*e_3o+4*y**2*z**2*e_3i-2*y**2*z**2*e_3o+2*z**4*e_3i-z**4*e_3o-8*x**3*e_13+8*x**3*e_2i-4*x**3*e_2o-8*x**2*y*e_1i+4*x**2*y*e_1o-8*x**2*y*e_23-8*x*y**2*e_13+8*x*y**2*e_2i-4*x*y**2*e_2o-8*x*z**2*e_13+8*x*z**2*e_2i-4*x*z**2*e_2o-8*y**3*e_1i+4*y**3*e_1o-8*y**3*e_23-8*y*z**2*e_1i+4*y*z**2*e_1o-8*y*z**2*e_23-32*x**2*e_12-16*x**2*e_3i+8*x**2*e_3o+32*x*z*e_1i-16*x*z*e_1o+32*x*z*e_23-32*y**2*e_12-16*y**2*e_3i+8*y**2*e_3o-32*y*z*e_13+32*y*z*e_2i-16*y*z*e_2o+16*z**2*e_3i-8*z**2*e_3o+32*x*e_13-32*x*e_2i+16*x*e_2o+32*y*e_1i-16*y*e_1o+32*y*e_23+32*e_3i-16*e_3o)/(x**2+y**2+z**2+4)**2, 1]"
+)
+p_first_poly_coeff.setDefault(
+    "[-1/2*(2*x**4*e_3i-x**4*e_3o+4*x**2*y**2*e_3i-2*x**2*y**2*e_3o+4*x**2*z**2*e_3i-2*x**2*z**2*e_3o+2*y**4*e_3i-y**4*e_3o+4*y**2*z**2*e_3i-2*y**2*z**2*e_3o+2*z**4*e_3i-z**4*e_3o-8*x**3*e_13+8*x**3*e_2i-4*x**3*e_2o-8*x**2*y*e_1i+4*x**2*y*e_1o-8*x**2*y*e_23-8*x*y**2*e_13+8*x*y**2*e_2i-4*x*y**2*e_2o-8*x*z**2*e_13+8*x*z**2*e_2i-4*x*z**2*e_2o-8*y**3*e_1i+4*y**3*e_1o-8*y**3*e_23-8*y*z**2*e_1i+4*y*z**2*e_1o-8*y*z**2*e_23-32*x**2*e_12-16*x**2*e_3i+8*x**2*e_3o+32*x*z*e_1i-16*x*z*e_1o+32*x*z*e_23-32*y**2*e_12-16*y**2*e_3i+8*y**2*e_3o-32*y*z*e_13+32*y*z*e_2i-16*y*z*e_2o+16*z**2*e_3i-8*z**2*e_3o+32*x*e_13-32*x*e_2i+16*x*e_2o+32*y*e_1i-16*y*e_1o+32*y*e_23+32*e_3i-16*e_3o)/(x**2+y**2+z**2+4)**2, 1]"
+)
 
 p_second_poly_coeff = poly_tree.addChild(pTypes.TextParameter(name="Second Coeff"))
-p_second_poly_coeff.setValue("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
-p_second_poly_coeff.setDefault("[0.5*e_123o - e_123i, e_12 - e_3i + 0.5*e_3o, 1]")
+p_second_poly_coeff.setValue(
+    "[-16/(x**2+y**2+z**2+4)**2*e_12*x**2-16/(x**2+y**2+z**2+4)**2*e_12*y**2-4/(x**2+y**2+z**2+4)**2*e_13*x**3+16/(x**2+y**2+z**2+4)**2*e_13*x-4/(x**2+y**2+z**2+4)**2*e_1i*y**3+16/(x**2+y**2+z**2+4)**2*e_1i*y+2/(x**2+y**2+z**2+4)**2*e_1o*y**3-8/(x**2+y**2+z**2+4)**2*e_1o*y-4/(x**2+y**2+z**2+4)**2*e_23*y**3+16/(x**2+y**2+z**2+4)**2*e_23*y+4/(x**2+y**2+z**2+4)**2*e_2i*x**3-16/(x**2+y**2+z**2+4)**2*e_2i*x-2/(x**2+y**2+z**2+4)**2*e_2o*x**3+8/(x**2+y**2+z**2+4)**2*e_2o*x+16/(x**2+y**2+z**2+4)**2*e_3i+1/(x**2+y**2+z**2+4)**2*e_3i*x**4+1/(x**2+y**2+z**2+4)**2*e_3i*y**4+1/(x**2+y**2+z**2+4)**2*e_3i*z**4-8/(x**2+y**2+z**2+4)**2*e_3i*x**2-8/(x**2+y**2+z**2+4)**2*e_3i*y**2+8/(x**2+y**2+z**2+4)**2*e_3i*z**2-8/(x**2+y**2+z**2+4)**2*e_3o-1/2/(x**2+y**2+z**2+4)**2*e_3o*x**4-1/2/(x**2+y**2+z**2+4)**2*e_3o*y**4-1/2/(x**2+y**2+z**2+4)**2*e_3o*z**4+4/(x**2+y**2+z**2+4)**2*e_3o*x**2+4/(x**2+y**2+z**2+4)**2*e_3o*y**2-4/(x**2+y**2+z**2+4)**2*e_3o*z**2+2/(x**2+y**2+z**2+4)**2*e_3i*x**2*y**2+2/(x**2+y**2+z**2+4)**2*e_3i*x**2*z**2+2/(x**2+y**2+z**2+4)**2*e_3i*z**2*y**2-1/(x**2+y**2+z**2+4)**2*e_3o*x**2*y**2-1/(x**2+y**2+z**2+4)**2*e_3o*x**2*z**2-1/(x**2+y**2+z**2+4)**2*e_3o*z**2*y**2-4/(x**2+y**2+z**2+4)**2*e_13*x*y**2-4/(x**2+y**2+z**2+4)**2*e_13*x*z**2-16/(x**2+y**2+z**2+4)**2*e_13*y*z-4/(x**2+y**2+z**2+4)**2*e_1i*x**2*y-4/(x**2+y**2+z**2+4)**2*e_1i*y*z**2+16/(x**2+y**2+z**2+4)**2*e_1i*x*z+2/(x**2+y**2+z**2+4)**2*e_1o*x**2*y+2/(x**2+y**2+z**2+4)**2*e_1o*y*z**2-8/(x**2+y**2+z**2+4)**2*e_1o*x*z-4/(x**2+y**2+z**2+4)**2*e_23*x**2*y-4/(x**2+y**2+z**2+4)**2*e_23*y*z**2+16/(x**2+y**2+z**2+4)**2*e_23*x*z+4/(x**2+y**2+z**2+4)**2*e_2i*x*y**2+4/(x**2+y**2+z**2+4)**2*e_2i*x*z**2+16/(x**2+y**2+z**2+4)**2*e_2i*y*z-2/(x**2+y**2+z**2+4)**2*e_2o*x*y**2-2/(x**2+y**2+z**2+4)**2*e_2o*x*z**2-8/(x**2+y**2+z**2+4)**2*e_2o*y*z+e_12-e_3i+1/2*e_3o, 1]"
+)
 
 
 ####################
@@ -225,6 +250,18 @@ d3.addWidget(general_paramtree)
 scatter = gl.GLScatterPlotItem(pos=cube_points, color=cols)
 
 
+def update_show_axes():
+    if p_show_axes.value():
+        axes.setVisible(True)
+    else:
+        axes.setVisible(False)
+
+
+def update_axes_size():
+    scale = eval(p_axes_size.value())
+    axes.setSize(scale[0], scale[1], scale[2])
+
+
 def point_p_act_main_on_points(point_arr):
     return point_p_act(np.tan(p_t_slider.value()), main_poly_coeff, point_arr)
 
@@ -275,9 +312,9 @@ def full_time_update():
 
 def update_display_cube():
     if p_display_cube.value():
-        view.addItem(scatter)
+        scatter.setVisible(True)
     else:
-        view.removeItem(scatter)
+        scatter.setVisible(False)
     full_time_update()
 
 
@@ -447,6 +484,11 @@ def update_sphere_colors():
         view_spheres[i].setColor(sphere_colors[i])
 
 
+def execute_custom_code():
+    # Here it is NECESSARY for variables to be declared globally
+    exec(p_shell_interface.value())
+
+
 def full_update():
     full_time_update()
 
@@ -460,7 +502,6 @@ def update_all_params():
 
 
 view.addItem(scatter)
-# view.addItem(sphere)
 
 # Connect the slider change signals to the update functions
 p_update_all.sigActivated.connect(update_all_params)
@@ -468,6 +509,10 @@ p_update_all.sigActivated.connect(update_all_params)
 p_t_slider.sigValueChanged.connect(update_t_slide)
 p_t_value.sigValueChanged.connect(update_t_val)
 
+p_execute_code.sigActivated.connect(execute_custom_code)
+
+p_show_axes.sigValueChanged.connect(update_show_axes)
+p_axes_size.sigValueChanged.connect(update_axes_size)
 
 p_use_main_coeff.sigValueChanged.connect(update_coeff_set)
 p_update_coeff.sigActivated.connect(update_main_poly_coeff)
