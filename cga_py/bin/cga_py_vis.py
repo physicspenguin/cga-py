@@ -82,7 +82,7 @@ p_update_all = general_params.addChild(pTypes.ActionParameter(name="Update All")
 p_execute_code = general_params.addChild(pTypes.ActionParameter(name="Execute Code"))
 p_shell_interface = general_params.addChild(pTypes.TextParameter(name="Custom Code"))
 p_shell_interface.setValue(
-    "This Field can execute custom code. Variables must be declared with the global keyword!"
+    "#This Field can execute custom code. Variables must be declared with the global keyword!"
 )
 
 axes_tree = general_params.addChild(Parameter.create(name="Axes", type="group"))
