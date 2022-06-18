@@ -191,10 +191,10 @@ p_traj_main_points = traj_main_tree.addChild(
     pTypes.TextParameter(name="Trajectory Points", expanded=False)
 )
 p_traj_main_points.setValue(
-    "[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,20)]"
+    "[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,21)]"
 )
 p_traj_main_points.setDefault(
-    "[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,20)]"
+    "[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,21)]"
 )
 
 p_traj_main_subds = traj_main_tree.addChild(
@@ -206,8 +206,8 @@ p_traj_main_subds.setDefault(100)
 p_traj_main_width = traj_main_tree.addChild(
     pTypes.SimpleParameter(type="float", name="Trajectory width")
 )
-p_traj_main_width.setValue(2)
-p_traj_main_width.setDefault(2)
+p_traj_main_width.setValue(1)
+p_traj_main_width.setDefault(1)
 p_traj_main_c_map = traj_main_tree.addChild(
     pTypes.ColorMapParameter(name="Trajectory Colors")
 )
@@ -244,10 +244,10 @@ p_traj_first_points = traj_first_tree.addChild(
     pTypes.TextParameter(name="Trajectory Points", expanded=False)
 )
 p_traj_first_points.setValue(
-    "[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,20)]"
+    "[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,21)]"
 )
 p_traj_first_points.setDefault(
-    "[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,20)]"
+    "[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,21)]"
 )
 
 p_traj_first_subds = traj_first_tree.addChild(
@@ -259,8 +259,8 @@ p_traj_first_subds.setDefault(100)
 p_traj_first_width = traj_first_tree.addChild(
     pTypes.SimpleParameter(type="float", name="Trajectory width")
 )
-p_traj_first_width.setValue(2)
-p_traj_first_width.setDefault(2)
+p_traj_first_width.setValue(1)
+p_traj_first_width.setDefault(1)
 p_traj_first_c_map = traj_first_tree.addChild(
     pTypes.ColorMapParameter(name="Trajectory Colors")
 )
@@ -312,8 +312,8 @@ p_traj_second_subds.setDefault(100)
 p_traj_second_width = traj_second_tree.addChild(
     pTypes.SimpleParameter(type="float", name="Trajectory width")
 )
-p_traj_second_width.setValue(2)
-p_traj_second_width.setDefault(2)
+p_traj_second_width.setValue(1)
+p_traj_second_width.setDefault(1)
 p_traj_second_c_map = traj_second_tree.addChild(
     pTypes.ColorMapParameter(name="Trajectory Colors")
 )
@@ -548,12 +548,15 @@ def add_traj_main_plots():
 def update_traj_main():
     global traj_main_points
     global traj_main_plots
+    global traj_main_points_updated
     traj_main_points = eval(p_traj_main_points.value())
+    traj_main_points_updated = eval(p_traj_main_points.value())
     clear_traj_main_plots()
     traj_main_plots = [gl.GLLinePlotItem(width=5) for i in range(len(traj_main_points))]
     for i in range(len(traj_main_plots)):
         traj_main_plots[i].setData(pos=generate_traj_main_points(traj_main_points[i]))
     update_display_traj_main()
+    update_display_traj_points_main()
 
 
 def update_traj_main_width():
@@ -651,7 +654,9 @@ def add_traj_first_plots():
 def update_traj_first():
     global traj_first_points
     global traj_first_plots
+    global traj_first_points_updated
     traj_first_points = eval(p_traj_first_points.value())
+    traj_first_points_updated = eval(p_traj_first_points.value())
     clear_traj_first_plots()
     traj_first_plots = [
         gl.GLLinePlotItem(width=5) for i in range(len(traj_first_points))
@@ -661,6 +666,7 @@ def update_traj_first():
             pos=generate_traj_first_points(traj_first_points[i])
         )
     update_display_traj_first()
+    update_display_traj_points_first()
 
 
 def update_traj_first_width():
@@ -758,7 +764,9 @@ def add_traj_second_plots():
 def update_traj_second():
     global traj_second_points
     global traj_second_plots
+    global traj_second_points_updated
     traj_second_points = eval(p_traj_second_points.value())
+    traj_second_points_updated = eval(p_traj_second_points.value())
     clear_traj_second_plots()
     traj_second_plots = [
         gl.GLLinePlotItem(width=5) for i in range(len(traj_second_points))
@@ -768,6 +776,7 @@ def update_traj_second():
             pos=generate_traj_second_points(traj_second_points[i])
         )
     update_display_traj_second()
+    update_display_traj_points_second()
 
 
 def update_traj_second_width():
