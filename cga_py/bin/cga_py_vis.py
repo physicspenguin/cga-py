@@ -233,6 +233,12 @@ p_display_traj_points_first = traj_first_tree.addChild(
     pTypes.SimpleParameter(name="Display Points", type="bool")
 )
 p_display_traj_points_first.setValue(False)
+p_display_traj_points_first.setValue(False)
+p_traj_first_point_width = traj_first_tree.addChild(
+    pTypes.SimpleParameter(type="float", name="Point Size")
+)
+p_traj_first_point_width.setValue(10)
+p_traj_first_point_width.setDefault(10)
 
 p_traj_first_points = traj_first_tree.addChild(
     pTypes.TextParameter(name="Trajectory Points", expanded=False)
@@ -280,6 +286,12 @@ p_display_traj_points_second = traj_second_tree.addChild(
     pTypes.SimpleParameter(name="Display Points", type="bool")
 )
 p_display_traj_points_second.setValue(False)
+p_display_traj_points_second.setValue(False)
+p_traj_second_point_width = traj_second_tree.addChild(
+    pTypes.SimpleParameter(type="float", name="Point Size")
+)
+p_traj_second_point_width.setValue(10)
+p_traj_second_point_width.setDefault(10)
 
 p_traj_second_points = traj_second_tree.addChild(
     pTypes.TextParameter(name="Trajectory Points", expanded=False)
@@ -384,10 +396,16 @@ traj_main_plots = [gl.GLLinePlotItem(), gl.GLLinePlotItem()]
 traj_main_colors = p_traj_main_c_map.value().getLookupTable(
     nPts=len(traj_main_plots), mode=pg.ColorMap.QCOLOR
 )
-
 traj_first_points = eval(p_traj_first_points.value())
 traj_first_points_updated = eval(p_traj_first_points.value())
-traj_first_scatter = gl.GLScatterPlotItem()
+traj_first_point_colors = p_traj_first_c_map.value().getLookupTable(
+    nPts=len(traj_first_points), mode=pg.ColorMap.FLOAT
+)
+traj_first_scatter = gl.GLScatterPlotItem(
+    pos=traj_first_points_updated,
+    color=traj_first_point_colors,
+    size=p_traj_first_point_width.value(),
+)
 traj_first_plots = [gl.GLLinePlotItem(), gl.GLLinePlotItem()]
 traj_first_colors = p_traj_first_c_map.value().getLookupTable(
     nPts=len(traj_first_plots), mode=pg.ColorMap.QCOLOR
@@ -395,7 +413,14 @@ traj_first_colors = p_traj_first_c_map.value().getLookupTable(
 
 traj_second_points = eval(p_traj_second_points.value())
 traj_second_points_updated = eval(p_traj_second_points.value())
-traj_second_scatter = gl.GLScatterPlotItem()
+traj_second_point_colors = p_traj_second_c_map.value().getLookupTable(
+    nPts=len(traj_second_points), mode=pg.ColorMap.FLOAT
+)
+traj_second_scatter = gl.GLScatterPlotItem(
+    pos=traj_second_points_updated,
+    color=traj_second_point_colors,
+    size=p_traj_second_point_width.value(),
+)
 traj_second_plots = [gl.GLLinePlotItem(), gl.GLLinePlotItem()]
 traj_second_colors = p_traj_second_c_map.value().getLookupTable(
     nPts=len(traj_second_plots), mode=pg.ColorMap.QCOLOR
@@ -661,6 +686,47 @@ def update_display_traj_first():
         clear_traj_first_plots()
 
 
+def update_traj_first_point_width():
+    traj_first_scatter.setData(
+        pos=traj_first_points_updated, size=p_traj_first_point_width.value()
+    )
+
+
+def update_traj_first_point_colors():
+    global traj_first_point_colors
+    traj_first_point_colors = p_traj_first_c_map.value().getLookupTable(
+        nPts=len(traj_first_points), mode=pg.ColorMap.FLOAT
+    )
+    traj_first_scatter.setData(
+        pos=traj_first_points_updated,
+        color=traj_first_point_colors,
+        size=p_traj_first_point_width.value(),
+    )
+
+
+def update_time_traj_first_points():
+    if p_display_traj_points_first.value():
+        for i in range(len(traj_first_points_updated)):
+            traj_first_points_updated[i] = point_to_cartesian(
+                act_first_on_points(p_t_slider.value(), point(traj_first_points[i]))
+            )
+        traj_first_scatter.setData(
+            pos=traj_first_points_updated,
+            color=traj_first_point_colors,
+            size=p_traj_first_point_width.value(),
+        )
+
+
+def update_display_traj_points_first():
+    if p_display_traj_points_first.value():
+        update_traj_first_point_width()
+        update_traj_first_point_colors()
+        update_time_traj_first_points()
+        traj_first_scatter.setVisible(True)
+    else:
+        traj_first_scatter.setVisible(False)
+
+
 ####################
 # second
 ####################
@@ -725,6 +791,47 @@ def update_display_traj_second():
         update_traj_second_colors()
     else:
         clear_traj_second_plots()
+
+
+def update_traj_second_point_width():
+    traj_second_scatter.setData(
+        pos=traj_second_points_updated, size=p_traj_second_point_width.value()
+    )
+
+
+def update_traj_second_point_colors():
+    global traj_second_point_colors
+    traj_second_point_colors = p_traj_second_c_map.value().getLookupTable(
+        nPts=len(traj_second_points), mode=pg.ColorMap.FLOAT
+    )
+    traj_second_scatter.setData(
+        pos=traj_second_points_updated,
+        color=traj_second_point_colors,
+        size=p_traj_second_point_width.value(),
+    )
+
+
+def update_time_traj_second_points():
+    if p_display_traj_points_second.value():
+        for i in range(len(traj_second_points_updated)):
+            traj_second_points_updated[i] = point_to_cartesian(
+                act_second_on_points(p_t_slider.value(), point(traj_second_points[i]))
+            )
+        traj_second_scatter.setData(
+            pos=traj_second_points_updated,
+            color=traj_second_point_colors,
+            size=p_traj_second_point_width.value(),
+        )
+
+
+def update_display_traj_points_second():
+    if p_display_traj_points_second.value():
+        update_traj_second_point_width()
+        update_traj_second_point_colors()
+        update_time_traj_second_points()
+        traj_second_scatter.setVisible(True)
+    else:
+        traj_second_scatter.setVisible(False)
 
 
 ####################
@@ -890,6 +997,8 @@ def full_time_update():
         update_spheres()
 
     update_time_traj_main_points()
+    update_time_traj_first_points()
+    update_time_traj_second_points()
 
 
 def full_update():
@@ -909,6 +1018,10 @@ def update_all_params():
 view.addItem(cube_plot)
 view.addItem(traj_main_scatter)
 traj_main_scatter.setVisible(False)
+view.addItem(traj_first_scatter)
+traj_first_scatter.setVisible(False)
+view.addItem(traj_second_scatter)
+traj_second_scatter.setVisible(False)
 
 # Connect the slider change signals to the update functions
 p_update_all.sigActivated.connect(update_all_params)
@@ -942,14 +1055,22 @@ p_traj_main_c_map.sigValueChanged.connect(update_traj_main_colors)
 p_traj_main_c_map.sigValueChanged.connect(update_traj_main_point_colors)
 
 p_display_traj_first.sigValueChanged.connect(update_display_traj_first)
+p_display_traj_points_first.sigValueChanged.connect(update_display_traj_points_first)
+p_traj_first_point_width.sigValueChanged.connect(update_traj_first_point_width)
+p_traj_first_points_update.sigActivated.connect(update_traj_first)
 p_traj_first_points_update.sigActivated.connect(update_traj_first)
 p_traj_first_width.sigValueChanged.connect(update_traj_first_width)
 p_traj_first_c_map.sigValueChanged.connect(update_traj_first_colors)
+p_traj_first_c_map.sigValueChanged.connect(update_traj_first_point_colors)
 
 p_display_traj_second.sigValueChanged.connect(update_display_traj_second)
 p_traj_second_points_update.sigActivated.connect(update_traj_second)
+p_display_traj_points_second.sigValueChanged.connect(update_display_traj_points_second)
+p_traj_second_point_width.sigValueChanged.connect(update_traj_second_point_width)
+p_traj_second_points_update.sigActivated.connect(update_traj_second)
 p_traj_second_width.sigValueChanged.connect(update_traj_second_width)
 p_traj_second_c_map.sigValueChanged.connect(update_traj_second_colors)
+p_traj_second_c_map.sigValueChanged.connect(update_traj_second_point_colors)
 
 p_display_sphere.sigValueChanged.connect(update_display_sphere)
 p_update_spheres.sigActivated.connect(update_sphere_params)
