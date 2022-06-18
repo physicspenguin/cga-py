@@ -106,7 +106,7 @@ p_axes_size.setDefault("[3,3,3]")
 
 
 ####################
-# Medium Section
+# Polynomial coefficients
 ####################
 poly_tree = general_params.addChild(
     Parameter.create(name="Polynomial", type="group", expanded=False)
@@ -177,6 +177,16 @@ p_display_traj_main = traj_main_tree.addChild(
 )
 p_display_traj_main.setValue(False)
 
+p_display_traj_points_main = traj_main_tree.addChild(
+    pTypes.SimpleParameter(name="Display Points", type="bool")
+)
+p_display_traj_points_main.setValue(False)
+p_traj_main_point_width = traj_main_tree.addChild(
+    pTypes.SimpleParameter(type="float", name="Point Size")
+)
+p_traj_main_point_width.setValue(10)
+p_traj_main_point_width.setDefault(10)
+
 p_traj_main_points = traj_main_tree.addChild(
     pTypes.TextParameter(name="Trajectory Points", expanded=False)
 )
@@ -219,6 +229,11 @@ p_display_traj_first = traj_first_tree.addChild(
 )
 p_display_traj_first.setValue(False)
 
+p_display_traj_points_first = traj_first_tree.addChild(
+    pTypes.SimpleParameter(name="Display Points", type="bool")
+)
+p_display_traj_points_first.setValue(False)
+
 p_traj_first_points = traj_first_tree.addChild(
     pTypes.TextParameter(name="Trajectory Points", expanded=False)
 )
@@ -260,6 +275,11 @@ p_display_traj_second = traj_second_tree.addChild(
     pTypes.SimpleParameter(name="Display Trajectories", type="bool")
 )
 p_display_traj_second.setValue(False)
+
+p_display_traj_points_second = traj_second_tree.addChild(
+    pTypes.SimpleParameter(name="Display Points", type="bool")
+)
+p_display_traj_points_second.setValue(False)
 
 p_traj_second_points = traj_second_tree.addChild(
     pTypes.TextParameter(name="Trajectory Points", expanded=False)
@@ -351,16 +371,31 @@ cube_points, cols = point_cube_gen(
 
 
 traj_main_points = eval(p_traj_main_points.value())
+traj_main_points_updated = eval(p_traj_main_points.value())
+traj_main_point_colors = p_traj_main_c_map.value().getLookupTable(
+    nPts=len(traj_main_points), mode=pg.ColorMap.FLOAT
+)
+traj_main_scatter = gl.GLScatterPlotItem(
+    pos=traj_main_points_updated,
+    color=traj_main_point_colors,
+    size=p_traj_main_point_width.value(),
+)
 traj_main_plots = [gl.GLLinePlotItem(), gl.GLLinePlotItem()]
 traj_main_colors = p_traj_main_c_map.value().getLookupTable(
     nPts=len(traj_main_plots), mode=pg.ColorMap.QCOLOR
 )
+
 traj_first_points = eval(p_traj_first_points.value())
+traj_first_points_updated = eval(p_traj_first_points.value())
+traj_first_scatter = gl.GLScatterPlotItem()
 traj_first_plots = [gl.GLLinePlotItem(), gl.GLLinePlotItem()]
 traj_first_colors = p_traj_first_c_map.value().getLookupTable(
     nPts=len(traj_first_plots), mode=pg.ColorMap.QCOLOR
 )
+
 traj_second_points = eval(p_traj_second_points.value())
+traj_second_points_updated = eval(p_traj_second_points.value())
+traj_second_scatter = gl.GLScatterPlotItem()
 traj_second_plots = [gl.GLLinePlotItem(), gl.GLLinePlotItem()]
 traj_second_colors = p_traj_second_c_map.value().getLookupTable(
     nPts=len(traj_second_plots), mode=pg.ColorMap.QCOLOR
@@ -517,6 +552,47 @@ def update_display_traj_main():
         update_traj_main_colors()
     else:
         clear_traj_main_plots()
+
+
+def update_traj_main_point_width():
+    traj_main_scatter.setData(
+        pos=traj_main_points_updated, size=p_traj_main_point_width.value()
+    )
+
+
+def update_traj_main_point_colors():
+    global traj_main_point_colors
+    traj_main_point_colors = p_traj_main_c_map.value().getLookupTable(
+        nPts=len(traj_main_points), mode=pg.ColorMap.FLOAT
+    )
+    traj_main_scatter.setData(
+        pos=traj_main_points_updated,
+        color=traj_main_point_colors,
+        size=p_traj_main_point_width.value(),
+    )
+
+
+def update_time_traj_main_points():
+    if p_display_traj_points_main.value():
+        for i in range(len(traj_main_points_updated)):
+            traj_main_points_updated[i] = point_to_cartesian(
+                act_main_on_points(p_t_slider.value(), point(traj_main_points[i]))
+            )
+        traj_main_scatter.setData(
+            pos=traj_main_points_updated,
+            color=traj_main_point_colors,
+            size=p_traj_main_point_width.value(),
+        )
+
+
+def update_display_traj_points_main():
+    if p_display_traj_points_main.value():
+        update_traj_main_point_width()
+        update_traj_main_point_colors()
+        update_time_traj_main_points()
+        traj_main_scatter.setVisible(True)
+    else:
+        traj_main_scatter.setVisible(False)
 
 
 ####################
@@ -813,6 +889,8 @@ def full_time_update():
     if p_display_sphere.value():
         update_spheres()
 
+    update_time_traj_main_points()
+
 
 def full_update():
     full_time_update()
@@ -829,6 +907,8 @@ def update_all_params():
 
 
 view.addItem(cube_plot)
+view.addItem(traj_main_scatter)
+traj_main_scatter.setVisible(False)
 
 # Connect the slider change signals to the update functions
 p_update_all.sigActivated.connect(update_all_params)
@@ -854,9 +934,12 @@ p_cube_length.sigValueChanged.connect(update_cube)
 
 
 p_display_traj_main.sigValueChanged.connect(update_display_traj_main)
+p_display_traj_points_main.sigValueChanged.connect(update_display_traj_points_main)
+p_traj_main_point_width.sigValueChanged.connect(update_traj_main_point_width)
 p_traj_main_points_update.sigActivated.connect(update_traj_main)
 p_traj_main_width.sigValueChanged.connect(update_traj_main_width)
 p_traj_main_c_map.sigValueChanged.connect(update_traj_main_colors)
+p_traj_main_c_map.sigValueChanged.connect(update_traj_main_point_colors)
 
 p_display_traj_first.sigValueChanged.connect(update_display_traj_first)
 p_traj_first_points_update.sigActivated.connect(update_traj_first)
