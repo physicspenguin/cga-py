@@ -19,6 +19,8 @@ def act(rotator, obj):
         Rotated object
 
     """
+    if not isinstance(rotator, cga_object):
+        rotator = cga_object(rotator)
     return rotator * obj * (~rotator)
 
 
