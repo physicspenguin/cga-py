@@ -56,7 +56,7 @@ def normalize_point(point):
     if not np.isclose(point.coeff[0] / num_max, 0):
         raise ValueError(str(point) + " is not a cga representation of a point")
 
-    if not np.allclose(point.coeff[5:-1] / num_max, np.zeros_like(point.coeff[7:-1])):
+    if not np.allclose(point.coeff[6:-1] / num_max, np.zeros_like(point.coeff[6:-1])):
         raise ValueError(str(point) + " is not a cga representation of a point")
 
     return cga_object(1 / point.coeff[5] * point.coeff)
@@ -195,11 +195,11 @@ def normalize_plane(plane):
     -------
 
     """
-    num_max = max(abs(plane.coeff[1:6]))
+    num_max = max(abs(plane.coeff[1:5]))
     if not np.isclose(plane.coeff[0] / num_max, 0):
         raise ValueError("Object is not a cga representation of a plane")
 
-    if not np.allclose(plane.coeff[6:-1] / num_max, np.zeros_like(plane.coeff[6:-1])):
+    if not np.allclose(plane.coeff[5:-1] / num_max, np.zeros_like(plane.coeff[5:-1])):
         raise ValueError("Object is not a cga representation of a plane")
 
     norm = 1 / np.sqrt(plane.coeff[1] ** 2 + plane.coeff[2] ** 2 + plane.coeff[3] ** 2)
