@@ -89,16 +89,21 @@ p_shell_interface.setValue(
     "#This Field can execute custom code. Variables must be declared with the global keyword!"
 )
 
-# Axes Tree
-axes_tree = general_params.addChild(
-    Parameter.create(name="Axes", type="group", expanded=False)
+# View Tree
+view_tree = general_params.addChild(
+    Parameter.create(name="View Box Settings", type="group", expanded=False)
 )
 
-p_show_axes = axes_tree.addChild(pTypes.SimpleParameter(name="Show Axes", type="bool"))
+p_background_color = view_tree.addChild(pTypes.ColorParameter(name="Backgroung Color"))
+p_background_color.setValue(pg.mkColor(0.0))
+p_background_color.setDefault(pg.mkColor(0.0))
+
+
+p_show_axes = view_tree.addChild(pTypes.SimpleParameter(name="Show Axes", type="bool"))
 p_show_axes.setValue(True)
 p_show_axes.setDefault(True)
 
-p_axes_size = axes_tree.addChild(
+p_axes_size = view_tree.addChild(
     pTypes.SimpleParameter(name="Axes Lengths", type="str")
 )
 p_axes_size.setValue("[3,3,3]")
@@ -191,17 +196,17 @@ p_traj_main_points = traj_main_tree.addChild(
     pTypes.TextParameter(name="Trajectory Points", expanded=False)
 )
 p_traj_main_points.setValue(
-    "[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,21)]"
+    "[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,20, endpoint=False)]"
 )
 p_traj_main_points.setDefault(
-    "[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,21)]"
+    "[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,20, endpoint=False)]"
 )
 
 p_traj_main_subds = traj_main_tree.addChild(
     pTypes.SimpleParameter(type="int", name="Trajectory Subdivisions")
 )
-p_traj_main_subds.setValue(100)
-p_traj_main_subds.setDefault(100)
+p_traj_main_subds.setValue(50)
+p_traj_main_subds.setDefault(50)
 
 p_traj_main_width = traj_main_tree.addChild(
     pTypes.SimpleParameter(type="float", name="Trajectory width")
@@ -244,17 +249,17 @@ p_traj_first_points = traj_first_tree.addChild(
     pTypes.TextParameter(name="Trajectory Points", expanded=False)
 )
 p_traj_first_points.setValue(
-    "[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,21)]"
+    "[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,20, endpoint=False)]"
 )
 p_traj_first_points.setDefault(
-    "[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,21)]"
+    "[[np.sin(t),np.cos(t),0] for t in np.linspace(0,2*np.pi,20, endpoint=False)]"
 )
 
 p_traj_first_subds = traj_first_tree.addChild(
     pTypes.SimpleParameter(type="int", name="Trajectory Subdivisions")
 )
-p_traj_first_subds.setValue(100)
-p_traj_first_subds.setDefault(100)
+p_traj_first_subds.setValue(50)
+p_traj_first_subds.setDefault(50)
 
 p_traj_first_width = traj_first_tree.addChild(
     pTypes.SimpleParameter(type="float", name="Trajectory width")
@@ -297,17 +302,17 @@ p_traj_second_points = traj_second_tree.addChild(
     pTypes.TextParameter(name="Trajectory Points", expanded=False)
 )
 p_traj_second_points.setValue(
-    "np.array([[np.sin(t),0,np.cos(t)] for t in np.linspace(0,2*np.pi,20)])*1.5+np.array([2.5,0,0])"
+    "np.array([[np.sin(t),0,np.cos(t)] for t in np.linspace(0,2*np.pi,20,endpoint=False)])*1.5+np.array([2.5,0,0])"
 )
 p_traj_second_points.setDefault(
-    "np.array([[np.sin(t),0,np.cos(t)] for t in np.linspace(0,2*np.pi,20)])*1.5+np.array([2.5,0,0])"
+    "np.array([[np.sin(t),0,np.cos(t)] for t in np.linspace(0,2*np.pi,20,endpoint=False)])*1.5+np.array([2.5,0,0])"
 )
 
 p_traj_second_subds = traj_second_tree.addChild(
     pTypes.SimpleParameter(type="int", name="Trajectory Subdivisions")
 )
-p_traj_second_subds.setValue(100)
-p_traj_second_subds.setDefault(100)
+p_traj_second_subds.setValue(50)
+p_traj_second_subds.setDefault(50)
 
 p_traj_second_width = traj_second_tree.addChild(
     pTypes.SimpleParameter(type="float", name="Trajectory width")
@@ -344,15 +349,42 @@ p_cube_length.setOpts(step=1)
 p_cube_length.setValue("[2, 2, 2]")
 p_cube_length.setDefault("[2, 2, 2]")
 
+
+####################
+# Point Parameters
+####################
+points_tree = general_params.addChild(
+    Parameter.create(name="Points", type="group", expanded=False)
+)
+p_update_points = points_tree.addChild(pTypes.ActionParameter(name="Update Points"))
+p_display_points = points_tree.addChild(
+    pTypes.SimpleParameter(name="Display Points", type="bool")
+)
+p_display_points.setValue(False)
+p_points_width = points_tree.addChild(
+    pTypes.SimpleParameter(type="float", name="Point Size")
+)
+p_points_width.setValue(10)
+p_points_width.setDefault(10)
+p_points_params = points_tree.addChild(
+    pTypes.TextParameter(name="Point Coordinates", expanded=False)
+)
+p_points_params.setValue("[[1, 0, 0],[0, -1, 0],[-1, 0, 0],[0, 1, 0],[0,0,1],[0,0,-1]]")
+p_points_params.setDefault(
+    "[[1, 0, 0],[0, -1, 0],[-1, 0, 0],[0, 1, 0],[0,0,1],[0,0,-1]]"
+)
+p_points_c_map = points_tree.addChild(pTypes.ColorMapParameter(name="Point Colors"))
+
+
 ####################
 # Sphere Parameters
 ####################
 sphere_tree = general_params.addChild(
-    Parameter.create(name="Sphere", type="group", expanded=False)
+    Parameter.create(name="Spheres", type="group", expanded=False)
 )
 p_update_spheres = sphere_tree.addChild(pTypes.ActionParameter(name="Update Spheres"))
 p_display_sphere = sphere_tree.addChild(
-    pTypes.SimpleParameter(name="Display Sphere", type="bool")
+    pTypes.SimpleParameter(name="Display Spheres", type="bool")
 )
 p_display_sphere.setValue(False)
 p_sphere_params = sphere_tree.addChild(
@@ -365,6 +397,41 @@ p_sphere_params.setDefault(
     "[[[1, 0, 0],0.5],[[0, -1, 0],0.5],[[-1, 0, 0],0.5],[[0, 1, 0],0.5],[[0,0,1],0.5],[[0,0,-1],0.5]]"
 )
 p_sphere_c_map = sphere_tree.addChild(pTypes.ColorMapParameter(name="Sphere Colors"))
+
+
+####################
+# Generated Cyclic Parameters
+####################
+
+cyclic_tree = general_params.addChild(
+    Parameter.create(name="Generated Cyclic", type="group", expanded=False)
+)
+p_update_cyclics = cyclic_tree.addChild(pTypes.ActionParameter(name="Update Cyclic"))
+p_display_cyclic = cyclic_tree.addChild(
+    pTypes.SimpleParameter(name="Display Generated Cyclic", type="bool")
+)
+p_display_cyclic.setValue(False)
+p_cyclic_params = cyclic_tree.addChild(
+    pTypes.SimpleParameter(name="Generating Point", type="str")
+)
+p_cyclic_params.setValue("[1,0,0]")
+p_cyclic_params.setDefault("[1,0,0]")
+p_cyclic_mesh = cyclic_tree.addChild(
+    pTypes.SimpleParameter(name="Surface Subdivisions", type="int")
+)
+p_cyclic_mesh.setValue(20)
+p_cyclic_mesh.setDefault(20)
+p_cyclic_subd = cyclic_tree.addChild(
+    pTypes.SimpleParameter(name="Line Subdivisions", type="int")
+)
+p_cyclic_subd.setValue(50)
+p_cyclic_subd.setDefault(50)
+p_cyclic_width = cyclic_tree.addChild(
+    pTypes.SimpleParameter(name="Linewidth", type="int")
+)
+p_cyclic_width.setValue(1)
+p_cyclic_width.setDefault(1)
+p_cyclic_c_map = cyclic_tree.addChild(pTypes.ColorMapParameter(name="Factor Colors"))
 
 
 ####################
@@ -427,6 +494,13 @@ traj_second_colors = p_traj_second_c_map.value().getLookupTable(
 )
 
 
+points_coordinates = eval(p_points_params.value())
+points_current_coordinates = eval(p_points_params.value())
+points_colors = p_points_c_map.value().getLookupTable(
+    nPts=len(points_coordinates), mode=pg.ColorMap.FLOAT
+)
+points_scatter = gl.GLScatterPlotItem(pos=points_coordinates, color=points_colors)
+
 unit_sphere = gl.MeshData.sphere(20, 20)
 sphere_params = eval(p_sphere_params.value())
 sphere_centers = [sphere_params[i][0] for i in range(len(sphere_params))]
@@ -435,6 +509,14 @@ view_spheres = [gl.GLMeshItem(meshdata=unit_sphere, color=(0.5, 0.5, 0.5, 1))]
 sphere_colors = p_sphere_c_map.value().getLookupTable(
     nPts=len(view_spheres), mode=pg.ColorMap.QCOLOR
 )
+
+
+cyclic_gen_point = eval(p_cyclic_params.value())
+cyclic_colors = p_cyclic_c_map.value().getLookupTable(nPts=2, mode=pg.ColorMap.QCOLOR)
+cyclic_points = [eval(p_cyclic_params.value()) for i in range(p_cyclic_mesh.value())]
+cyclic_first_plots = [gl.GLLinePlotItem()]
+cyclic_second_plots = [gl.GLLinePlotItem()]
+
 
 ########################################
 # Create the view and setup parameters
@@ -454,6 +536,10 @@ d3.addWidget(general_paramtree)
 
 # Plot them as cube_plot
 cube_plot = gl.GLScatterPlotItem(pos=cube_points, color=cols)
+
+
+def update_bg_color():
+    view.setBackgroundColor(p_background_color.value())
 
 
 def update_show_axes():
@@ -552,7 +638,7 @@ def update_traj_main():
     traj_main_points = eval(p_traj_main_points.value())
     traj_main_points_updated = eval(p_traj_main_points.value())
     clear_traj_main_plots()
-    traj_main_plots = [gl.GLLinePlotItem(width=5) for i in range(len(traj_main_points))]
+    traj_main_plots = [gl.GLLinePlotItem() for i in range(len(traj_main_points))]
     for i in range(len(traj_main_plots)):
         traj_main_plots[i].setData(pos=generate_traj_main_points(traj_main_points[i]))
     update_display_traj_main()
@@ -658,9 +744,7 @@ def update_traj_first():
     traj_first_points = eval(p_traj_first_points.value())
     traj_first_points_updated = eval(p_traj_first_points.value())
     clear_traj_first_plots()
-    traj_first_plots = [
-        gl.GLLinePlotItem(width=5) for i in range(len(traj_first_points))
-    ]
+    traj_first_plots = [gl.GLLinePlotItem() for i in range(len(traj_first_points))]
     for i in range(len(traj_first_plots)):
         traj_first_plots[i].setData(
             pos=generate_traj_first_points(traj_first_points[i])
@@ -768,9 +852,7 @@ def update_traj_second():
     traj_second_points = eval(p_traj_second_points.value())
     traj_second_points_updated = eval(p_traj_second_points.value())
     clear_traj_second_plots()
-    traj_second_plots = [
-        gl.GLLinePlotItem(width=5) for i in range(len(traj_second_points))
-    ]
+    traj_second_plots = [gl.GLLinePlotItem() for i in range(len(traj_second_points))]
     for i in range(len(traj_second_plots)):
         traj_second_plots[i].setData(
             pos=generate_traj_second_points(traj_second_points[i])
@@ -860,10 +942,7 @@ def update_cube():
 
 
 def update_display_cube():
-    if p_display_cube.value():
-        cube_plot.setVisible(True)
-    else:
-        cube_plot.setVisible(False)
+    cube_plot.setVisible(p_display_cube.value())
     full_time_update()
 
 
@@ -892,6 +971,60 @@ def update_second_poly_coeff():
     global second_poly_coeff
     second_poly_coeff = eval(p_second_poly_coeff.value())
     full_update()
+
+
+####################
+# Points
+####################
+
+
+def update_display_points():
+    points_scatter.setVisible(p_display_points.value())
+
+
+def update_time_points():
+    if p_display_points.value():
+        if p_use_main_coeff.value():
+            for i in range(len(points_coordinates)):
+                points_current_coordinates[i] = point_to_cartesian(
+                    act_main_on_points(p_t_slider.value(), point(points_coordinates[i]))
+                )
+        else:
+            for i in range(len(points_coordinates)):
+                points_current_coordinates[i] = point_to_cartesian(
+                    act_factorization_on_points(
+                        p_t_slider.value(), point(points_coordinates[i])
+                    )
+                )
+        update_points_data()
+
+
+def update_points_data():
+    points_scatter.setData(
+        pos=points_current_coordinates,
+        color=points_colors,
+        size=p_points_width.value(),
+    )
+
+
+def update_points_coordinates():
+    global points_coordinates
+    global points_current_coordinates
+    points_coordinates = eval(p_points_params.value())
+    points_current_coordinates = eval(p_points_params.value())
+    update_time_points()
+
+
+def update_points_colors():
+    global points_colors
+    points_colors = p_points_c_map.value().getLookupTable(
+        nPts=len(points_coordinates), mode=pg.ColorMap.FLOAT
+    )
+    update_points_data()
+
+
+def update_points_width():
+    update_points_data()
 
 
 ####################
@@ -968,6 +1101,99 @@ def update_sphere_colors():
 
 
 ####################
+# Generated Cyclic
+####################
+
+
+def clear_cyclic_plots():
+    for i in range(len(cyclic_first_plots)):
+        try:
+            view.removeItem(cyclic_first_plots[i])
+            view.removeItem(cyclic_second_plots[i])
+        except ValueError:
+            pass
+
+
+def add_cyclic_plots():
+    for i in range(len(cyclic_first_plots)):
+        view.addItem(cyclic_first_plots[i])
+        view.addItem(cyclic_second_plots[i])
+
+
+def update_cyclic_width():
+    for i in range(len(cyclic_first_plots)):
+        cyclic_first_plots[i].setData(width=p_cyclic_width.value())
+        cyclic_second_plots[i].setData(width=p_cyclic_width.value())
+
+
+def update_cyclic_colors():
+    global cyclic_colors
+    cyclic_colors = p_cyclic_c_map.value().getLookupTable(
+        nPts=2, mode=pg.ColorMap.QCOLOR
+    )
+    for i in range(len(cyclic_first_plots)):
+        cyclic_first_plots[i].setData(color=cyclic_colors[0])
+        cyclic_second_plots[i].setData(color=cyclic_colors[1])
+
+
+def update_display_cyclic():
+    if p_display_cyclic.value():
+        add_cyclic_plots()
+        update_cyclic_width()
+        update_cyclic_colors()
+    else:
+        clear_cyclic_plots()
+
+
+def generate_cyclic_points(start_point):
+    time = np.linspace(0.00, np.pi + 0.00, p_cyclic_mesh.value(), endpoint=False)
+    points = np.empty((len(time), 3))
+    for i in range(len(time)):
+        points[i] = np.real(
+            point_to_cartesian(act_main_on_points(time[i], point(start_point)))
+        )
+    return points
+
+
+def generate_cyclic_first_traj(start_point):
+    time = np.linspace(0.01, np.pi + 0.01, p_cyclic_subd.value())
+    points = np.empty((len(time), 3))
+    for i in range(len(time)):
+        points[i] = np.real(
+            point_to_cartesian(act_first_on_points(time[i], point(start_point)))
+        )
+    return points
+
+
+def generate_cyclic_second_traj(start_point):
+    time = np.linspace(0.01, np.pi + 0.01, p_cyclic_subd.value())
+    points = np.empty((len(time), 3))
+    for i in range(len(time)):
+        points[i] = np.real(
+            point_to_cartesian(act_second_on_points(time[i], point(start_point)))
+        )
+    return points
+
+
+def update_cyclic():
+    global cyclic_gen_point
+    global cyclic_points
+    global cyclic_first_plots
+    global cyclic_second_plots
+    cyclic_gen_point = eval(p_cyclic_params.value())
+    cyclic_points = generate_cyclic_points(cyclic_gen_point)
+    clear_cyclic_plots()
+    cyclic_first_plots = [gl.GLLinePlotItem() for i in range(len(cyclic_points))]
+    cyclic_second_plots = [gl.GLLinePlotItem() for i in range(len(cyclic_points))]
+    for i in range(len(cyclic_points)):
+        cyclic_first_plots[i].setData(pos=generate_cyclic_first_traj(cyclic_points[i]))
+        cyclic_second_plots[i].setData(
+            pos=generate_cyclic_second_traj(cyclic_points[i])
+        )
+    update_display_cyclic()
+
+
+####################
 # Custom Code
 ####################
 
@@ -1008,6 +1234,7 @@ def full_time_update():
     update_time_traj_main_points()
     update_time_traj_first_points()
     update_time_traj_second_points()
+    update_time_points()
 
 
 def full_update():
@@ -1022,6 +1249,8 @@ def update_all_params():
     update_traj_main()
     update_traj_first()
     update_traj_second()
+    update_points_coordinates()
+    update_cyclic()
 
 
 view.addItem(cube_plot)
@@ -1031,6 +1260,8 @@ view.addItem(traj_first_scatter)
 traj_first_scatter.setVisible(False)
 view.addItem(traj_second_scatter)
 traj_second_scatter.setVisible(False)
+view.addItem(points_scatter)
+points_scatter.setVisible(False)
 
 # Connect the slider change signals to the update functions
 p_update_all.sigActivated.connect(update_all_params)
@@ -1039,6 +1270,8 @@ p_t_slider.sigValueChanged.connect(update_t_slide)
 p_t_value.sigValueChanged.connect(update_t_val)
 
 p_execute_code.sigActivated.connect(execute_custom_code)
+
+p_background_color.sigValueChanged.connect(update_bg_color)
 
 p_show_axes.sigValueChanged.connect(update_show_axes)
 p_axes_size.sigValueChanged.connect(update_axes_size)
@@ -1081,10 +1314,24 @@ p_traj_second_width.sigValueChanged.connect(update_traj_second_width)
 p_traj_second_c_map.sigValueChanged.connect(update_traj_second_colors)
 p_traj_second_c_map.sigValueChanged.connect(update_traj_second_point_colors)
 
+p_display_points.sigValueChanged.connect(update_display_points)
+p_update_points.sigActivated.connect(update_points_coordinates)
+p_points_c_map.sigValueChanged.connect(update_points_colors)
+p_points_width.sigValueChanged.connect(update_points_width)
+
+
 p_display_sphere.sigValueChanged.connect(update_display_sphere)
 p_update_spheres.sigActivated.connect(update_sphere_params)
 p_sphere_c_map.sigValueChanged.connect(update_sphere_colors)
 
+
+p_display_cyclic.sigValueChanged.connect(update_display_cyclic)
+p_update_cyclics.sigActivated.connect(update_cyclic)
+p_cyclic_width.sigValueChanged.connect(update_cyclic_width)
+p_cyclic_c_map.sigValueChanged.connect(update_cyclic_colors)
+# p_cyclic_params.sigValueChanged.connect(update_cyclic)
+# p_cyclic_subd.sigValueChanged.connect(update_cyclic)
+# p_cyclic_mesh.sigValueChanged.connect(update_cyclic)
 
 # Update all parameters before first view
 update_all_params()
