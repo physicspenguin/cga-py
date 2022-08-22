@@ -10,6 +10,8 @@ from pyqtgraph.dockarea.Dock import Dock
 from pyqtgraph.dockarea.DockArea import DockArea
 import numpy as np
 
+pg.setConfigOption("useOpenGL", True)
+
 
 ########################################
 # View generation
@@ -108,6 +110,11 @@ p_axes_size = view_tree.addChild(
 )
 p_axes_size.setValue("[3,3,3]")
 p_axes_size.setDefault("[3,3,3]")
+
+p_blend = view_tree.addChild(pTypes.ListParameter(name="Blend Method"))
+p_blend.setLimits(["additive", "translucent", "opaque"])
+p_blend.setValue("additive")
+p_blend.setDefault("additive")
 
 
 ####################
@@ -441,6 +448,8 @@ p_cyclic_c_map = cyclic_tree.addChild(pTypes.ColorMapParameter(name="Factor Colo
 general_paramtree = ParameterTree()
 general_paramtree.setParameters(general_params, showTop=False)
 
+blend = p_blend.value()
+
 main_poly_coeff = eval(p_main_poly_coeff.value())
 first_poly_coeff = eval(p_first_poly_coeff.value())
 second_poly_coeff = eval(p_second_poly_coeff.value())
@@ -459,6 +468,7 @@ traj_main_scatter = gl.GLScatterPlotItem(
     color=traj_main_point_colors,
     size=p_traj_main_point_width.value(),
 )
+traj_main_scatter.setGLOptions(blend)
 traj_main_plots = [gl.GLLinePlotItem(), gl.GLLinePlotItem()]
 traj_main_colors = p_traj_main_c_map.value().getLookupTable(
     nPts=len(traj_main_plots), mode=pg.ColorMap.QCOLOR
@@ -473,6 +483,7 @@ traj_first_scatter = gl.GLScatterPlotItem(
     color=traj_first_point_colors,
     size=p_traj_first_point_width.value(),
 )
+traj_first_scatter.setGLOptions(blend)
 traj_first_plots = [gl.GLLinePlotItem(), gl.GLLinePlotItem()]
 traj_first_colors = p_traj_first_c_map.value().getLookupTable(
     nPts=len(traj_first_plots), mode=pg.ColorMap.QCOLOR
@@ -488,6 +499,7 @@ traj_second_scatter = gl.GLScatterPlotItem(
     color=traj_second_point_colors,
     size=p_traj_second_point_width.value(),
 )
+traj_second_scatter.setGLOptions(blend)
 traj_second_plots = [gl.GLLinePlotItem(), gl.GLLinePlotItem()]
 traj_second_colors = p_traj_second_c_map.value().getLookupTable(
     nPts=len(traj_second_plots), mode=pg.ColorMap.QCOLOR
@@ -500,6 +512,7 @@ points_colors = p_points_c_map.value().getLookupTable(
     nPts=len(points_coordinates), mode=pg.ColorMap.FLOAT
 )
 points_scatter = gl.GLScatterPlotItem(pos=points_coordinates, color=points_colors)
+points_scatter.setGLOptions("translucent")
 
 unit_sphere = gl.MeshData.sphere(20, 20)
 sphere_params = eval(p_sphere_params.value())
@@ -536,6 +549,7 @@ d3.addWidget(general_paramtree)
 
 # Plot them as cube_plot
 cube_plot = gl.GLScatterPlotItem(pos=cube_points, color=cols)
+cube_plot.setGLOptions(blend)
 
 
 def update_bg_color():
@@ -629,6 +643,7 @@ def clear_traj_main_plots():
 def add_traj_main_plots():
     for plot in traj_main_plots:
         view.addItem(plot)
+        plot.setGLOptions(blend)
 
 
 def update_traj_main():
@@ -735,6 +750,7 @@ def clear_traj_first_plots():
 def add_traj_first_plots():
     for plot in traj_first_plots:
         view.addItem(plot)
+        plot.setGLOptions(blend)
 
 
 def update_traj_first():
@@ -843,6 +859,7 @@ def clear_traj_second_plots():
 def add_traj_second_plots():
     for plot in traj_second_plots:
         view.addItem(plot)
+        plot.setGLOptions(blend)
 
 
 def update_traj_second():
@@ -1118,6 +1135,8 @@ def add_cyclic_plots():
     for i in range(len(cyclic_first_plots)):
         view.addItem(cyclic_first_plots[i])
         view.addItem(cyclic_second_plots[i])
+        cyclic_first_plots[i].setGLOptions(blend)
+        cyclic_second_plots[i].setGLOptions(blend)
 
 
 def update_cyclic_width():
@@ -1201,6 +1220,15 @@ def update_cyclic():
 def execute_custom_code():
     # Here it is NECESSARY for variables to be declared globally
     exec(p_shell_interface.value())
+
+
+def update_blend():
+    blend = p_blend.value()
+    traj_main_scatter.setGLOptions(blend)
+    traj_first_scatter.setGLOptions(blend)
+    traj_second_scatter.setGLOptions(blend)
+    cube_plot.setGLOptions(blend)
+    update_all_params()
 
 
 ####################
@@ -1333,6 +1361,7 @@ p_cyclic_c_map.sigValueChanged.connect(update_cyclic_colors)
 # p_cyclic_subd.sigValueChanged.connect(update_cyclic)
 # p_cyclic_mesh.sigValueChanged.connect(update_cyclic)
 
+p_blend.sigValueChanged.connect(update_blend)
 # Update all parameters before first view
 update_all_params()
 full_update()
