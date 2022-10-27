@@ -1,11 +1,14 @@
 from sympy.combinatorics.partitions import Partition
 from sympy.combinatorics.permutations import Permutation
 import itertools as it
+from cga_py import *
+
 
 if __name__ == "__main__":
     file = open("../cga_py/permutations.py", "w")
     # generate File header
-    file.write("from multivector import *\n\n")
+    file.write("from .multivector import *\n\n")
+    file.write("from .base_objects import *\n\n")
 
     base2 = [
         "e_12",
@@ -44,95 +47,45 @@ if __name__ == "__main__":
 
         """
         indices = string.split("_")
-        index_num = len(indices[1])
         permutated = indices[0] + "_"
+        perm_prod = "1 "
         for i in permut:
             permutated += indices[1][i]
-        return permutated
+            perm_prod += " * " + indices[0] + "_" + indices[1][i]
+        return permutated, perm_prod
 
     file.write("# Permutations of order 2 elements\n")
     for x in perm2:
         sig = Permutation(x).signature()
-        if int(sig) == 1:
-            for base in base2:
-                if base == base2[-1]:
-                    new = index_permutator(base, x)
-                    file.write(new + " =  " + base)
-                else:
-                    new = index_permutator(base, x)
-                    file.write(new + " =  " + base + "; ")
-        else:
-            for base in base2:
-                if base == base2[-1]:
-                    new = index_permutator(base, x)
-                    file.write(new + " = -" + base)
-                else:
-                    new = index_permutator(base, x)
-                    file.write(new + " = -" + base + "; ")
-        file.write("\n")
+        for base in base2:
+            new, prod = index_permutator(base, x)
+            file.write(new + " = " + repr(eval(prod)))
+            file.write("\n")
     file.write("\n\n")
 
     file.write("# Permutations of order 3 elements\n")
     for x in perm3:
         sig = Permutation(x).signature()
-        if int(sig) == 1:
-            for base in base3:
-                if base == base3[-1]:
-                    new = index_permutator(base, x)
-                    file.write(new + " =  " + base)
-                else:
-                    new = index_permutator(base, x)
-                    file.write(new + " =  " + base + "; ")
-        else:
-            for base in base3:
-                if base == base3[-1]:
-                    new = index_permutator(base, x)
-                    file.write(new + " = -" + base)
-                else:
-                    new = index_permutator(base, x)
-                    file.write(new + " = -" + base + "; ")
-        file.write("\n")
+        for base in base3:
+            new, prod = index_permutator(base, x)
+            file.write(new + " = " + repr(eval(prod)))
+            file.write("\n")
     file.write("\n\n")
 
     file.write("# Permutations of order 4 elements\n")
     for x in perm4:
         sig = Permutation(x).signature()
-        if int(sig) == 1:
-            for base in base4:
-                if base == base4[-1]:
-                    new = index_permutator(base, x)
-                    file.write(new + " =  " + base)
-                else:
-                    new = index_permutator(base, x)
-                    file.write(new + " =  " + base + "; ")
-        else:
-            for base in base4:
-                if base == base4[-1]:
-                    new = index_permutator(base, x)
-                    file.write(new + " = -" + base)
-                else:
-                    new = index_permutator(base, x)
-                    file.write(new + " = -" + base + "; ")
-        file.write("\n")
+        for base in base4:
+            new, prod = index_permutator(base, x)
+            file.write(new + " = " + repr(eval(prod)))
+            file.write("\n")
     file.write("\n\n")
 
     file.write("# Permutations of order 5 elements\n")
     for x in perm5:
         sig = Permutation(x).signature()
-        if int(sig) == 1:
-            for base in base5:
-                if base == base5[-1]:
-                    new = index_permutator(base, x)
-                    file.write(new + " =  " + base)
-                else:
-                    new = index_permutator(base, x)
-                    file.write(new + " =  " + base + "; ")
-        else:
-            for base in base5:
-                if base == base5[-1]:
-                    new = index_permutator(base, x)
-                    file.write(new + " = -" + base)
-                else:
-                    new = index_permutator(base, x)
-                    file.write(new + " = -" + base + "; ")
-        file.write("\n")
+        for base in base5:
+            new, prod = index_permutator(base, x)
+            file.write(new + " = " + repr(eval(prod)))
+            file.write("\n")
+    file.write("\n\n")
