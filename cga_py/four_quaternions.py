@@ -153,6 +153,6 @@ def scalar(quat):
 
     """
     if isinstance(quat, cga_object):
-        return quat - 1 / 2 * (quat - (~quat))
+        return 1 / 2 * (quat + (~quat))
     else:
         return quat[0]
