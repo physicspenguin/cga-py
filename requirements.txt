@@ -1,6 +1,6 @@
 setuptools>=42
 numba>=0.55.2
-numpy>=1.18,<1.24
+numpy>=1.18,<1.25
 pyqtgraph>=0.12.4
 PyQt5>=5.15.6
 PyQt6>=6.3.0
