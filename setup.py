@@ -4,7 +4,7 @@ me = "Daren Thimm"
 my_email = "daren.thimm@gmx.at"
 setup(
     name="cga-py",
-    version="1.2.3",
+    version="1.3.0",
     packages=[
         "cga_py",
     ],
