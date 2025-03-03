@@ -602,7 +602,7 @@ def test_str():
     a = cg(np.arange(32))
     assert (
         str(a)
-        == "(1+0j)e_1 + (2+0j)e_2 + (3+0j)e_3 + (4+0j)e_i + (5+0j)e_o + (6+0j)e_12 + (7+0j)e_13 + (8+0j)e_1i + (9+0j)e_1o + (10+0j)e_23 + (11+0j)e_2i + (12+0j)e_2o + (13+0j)e_3i + (14+0j)e_3o + (15+0j)e_io + (16+0j)e_123 + (17+0j)e_12i + (18+0j)e_12o + (19+0j)e_13i + (20+0j)e_13o + (21+0j)e_1io + (22+0j)e_23i + (23+0j)e_23o + (24+0j)e_2io + (25+0j)e_3io + (26+0j)e_123i + (27+0j)e_123o + (28+0j)e_12io + (29+0j)e_13io + (30+0j)e_23io + (31+0j)e_123io"
+        == "np.complex128(1+0j)e_1 + np.complex128(2+0j)e_2 + np.complex128(3+0j)e_3 + np.complex128(4+0j)e_i + np.complex128(5+0j)e_o + np.complex128(6+0j)e_12 + np.complex128(7+0j)e_13 + np.complex128(8+0j)e_1i + np.complex128(9+0j)e_1o + np.complex128(10+0j)e_23 + np.complex128(11+0j)e_2i + np.complex128(12+0j)e_2o + np.complex128(13+0j)e_3i + np.complex128(14+0j)e_3o + np.complex128(15+0j)e_io + np.complex128(16+0j)e_123 + np.complex128(17+0j)e_12i + np.complex128(18+0j)e_12o + np.complex128(19+0j)e_13i + np.complex128(20+0j)e_13o + np.complex128(21+0j)e_1io + np.complex128(22+0j)e_23i + np.complex128(23+0j)e_23o + np.complex128(24+0j)e_2io + np.complex128(25+0j)e_3io + np.complex128(26+0j)e_123i + np.complex128(27+0j)e_123o + np.complex128(28+0j)e_12io + np.complex128(29+0j)e_13io + np.complex128(30+0j)e_23io + np.complex128(31+0j)e_123io"
     )
     assert str(cg()) == "0"
 
@@ -611,7 +611,7 @@ def test_repr():
     a = cg(np.arange(32))
     assert (
         repr(a)
-        == "(1+0j)*e_1 + (2+0j)*e_2 + (3+0j)*e_3 + (4+0j)*e_i + (5+0j)*e_o + (6+0j)*e_12 + (7+0j)*e_13 + (8+0j)*e_1i + (9+0j)*e_1o + (10+0j)*e_23 + (11+0j)*e_2i + (12+0j)*e_2o + (13+0j)*e_3i + (14+0j)*e_3o + (15+0j)*e_io + (16+0j)*e_123 + (17+0j)*e_12i + (18+0j)*e_12o + (19+0j)*e_13i + (20+0j)*e_13o + (21+0j)*e_1io + (22+0j)*e_23i + (23+0j)*e_23o + (24+0j)*e_2io + (25+0j)*e_3io + (26+0j)*e_123i + (27+0j)*e_123o + (28+0j)*e_12io + (29+0j)*e_13io + (30+0j)*e_23io + (31+0j)*e_123io"
+        == "np.complex128(1+0j)*e_1 + np.complex128(2+0j)*e_2 + np.complex128(3+0j)*e_3 + np.complex128(4+0j)*e_i + np.complex128(5+0j)*e_o + np.complex128(6+0j)*e_12 + np.complex128(7+0j)*e_13 + np.complex128(8+0j)*e_1i + np.complex128(9+0j)*e_1o + np.complex128(10+0j)*e_23 + np.complex128(11+0j)*e_2i + np.complex128(12+0j)*e_2o + np.complex128(13+0j)*e_3i + np.complex128(14+0j)*e_3o + np.complex128(15+0j)*e_io + np.complex128(16+0j)*e_123 + np.complex128(17+0j)*e_12i + np.complex128(18+0j)*e_12o + np.complex128(19+0j)*e_13i + np.complex128(20+0j)*e_13o + np.complex128(21+0j)*e_1io + np.complex128(22+0j)*e_23i + np.complex128(23+0j)*e_23o + np.complex128(24+0j)*e_2io + np.complex128(25+0j)*e_3io + np.complex128(26+0j)*e_123i + np.complex128(27+0j)*e_123o + np.complex128(28+0j)*e_12io + np.complex128(29+0j)*e_13io + np.complex128(30+0j)*e_23io + np.complex128(31+0j)*e_123io"
     )
     assert repr(cg()) == "0"
 
