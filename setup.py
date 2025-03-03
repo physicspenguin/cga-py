@@ -4,7 +4,7 @@ me = "Daren Thimm"
 my_email = "daren.thimm@gmx.at"
 setup(
     name="cga-py",
-    version="1.3.0",
+    version="1.3.1",
     packages=[
         "cga_py",
     ],
@@ -18,4 +18,13 @@ setup(
     description="Implementation of CGA for python",
     long_description=open("./README.md").read(),
     long_description_content_type="text/markdown",
+    install_requires=[
+        "setuptools>=42",
+        "numba>=0.55.2,<1.0.0",
+        "numpy>=1.21,<1.25",
+        "pyqtgraph>=0.12.4",
+        "PyQt5>=5.15.6",
+        "PyQt6>=6.3.0",
+        "PyOpenGL==3.1.6",
+    ],
 )
