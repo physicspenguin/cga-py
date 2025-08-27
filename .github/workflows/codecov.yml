@@ -16,10 +16,17 @@ jobs:
     - uses: actions/setup-python@v2
       with:
         python-version: '3.13'
-    - name: Install requirements
+    - name: update pip
       run: 
         python -m pip install --upgrade pip
+    - name: Install tox
+      run: 
         pip install tox tox-gh-actions
+    - name: Install package
+      run: 
+        pip install -e . 
+    - name: Install dev requirements
+      run: 
         pip install -e ".[dev]"
         
     - name: Run tests and collect coverage
