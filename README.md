@@ -9,21 +9,27 @@ cga_py is an implementation of conformal geometric algebra (CGA) for python.
 Currently still in heavy development.
 
 ## Install
+
 ```
 pip install cga-py
 ```
 
 ## Usage
+
 ### As Package
+
 See tutorial.py
 
 A full documentation is still in progress.
 
 ### As Visualization Tool
+
 In your console execute the following command.
+
 ```
-cga_py_vis.py
+cga_viewer
 ```
+
 This will open the visualization interface.
 All relevant parameters can be adjusted.
 After adjustment of the parameters do not forget to update the specific parameter groups

@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cga-py"
-version = "1.3.2"
+version = "1.3.3"
 authors = [
     {name = "Daren Thimm", email = "daren.thimm@gmx.at"},
 ]
@@ -58,4 +58,7 @@ publish =[
 
 [project.urls]
 Source  = "https://github.com/physicspenguin/cga-py"
+
+[project.gui-scripts]
+cga_viewer = "cga_py.bin.cga_py_vis:main"
 
