@@ -59,3 +59,6 @@ publish =[
 [project.urls]
 Source  = "https://github.com/physicspenguin/cga-py"
 
+[project.gui-scripts]
+cga_viewer = "cga_py.bin.cga_py_vis:main"
+
