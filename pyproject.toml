@@ -38,7 +38,7 @@ packages = ["cga_py"]
 
 [project.optional-dependencies]
 doc = [
-    "sphinx ~= 8.2.3",
+    "sphinx >= 8.2.3,< 8.2.0",
     "myst-parser",
     "sphinx-rtd-theme",
     "nbsphinx",
